@@ -1,11 +1,12 @@
 import "./App.css";
+import Login from "./screens/authentication";
 
-function hello() {
-  console.log("dcm");
-}
 function App() {
-  hello();
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Login />;
+    </div>
+  );
 }
 
 export default App;
