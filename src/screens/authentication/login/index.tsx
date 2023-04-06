@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
-import TextInput from "../../components/input/text-input/TextInput";
-import Button from "../../components/button/Button";
+import TextInput from "../../../components/input/text-input/TextInput";
+import Button from "../../../components/button/Button";
 import CSS from "csstype";
 import { display, height } from "@mui/system";
 function Login() {
