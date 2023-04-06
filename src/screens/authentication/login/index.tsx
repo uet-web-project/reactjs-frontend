@@ -7,13 +7,13 @@ import { display, height } from "@mui/system";
 function Login() {
   let signInButtonStyle: CSS.Properties = {
     width: "20vw",
-    height: "10vh",
+    height: "36px",
     marginTop: "20px",
     boxSizing: "border-box",
   };
   let inputStyle: CSS.Properties = {
     width: "20vw",
-    height: "10vh",
+    height: "36px",
     boxSizing: "border-box",
     marginBottom: "10px",
   };
