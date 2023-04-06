@@ -1,0 +1,20 @@
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ede9d5;
+
+}
+.login-container{
+  position: relative;
+}
+.login-section{
+  position: absolute;
+  width: 60vw;
+  right:0px;
+}
+.login-input{
+  text-align: center;
+}
+.login-header{
+  text-align: center;
+}

@@ -1,0 +1,14 @@
+.input-container {
+  margin: 0px;
+}
+.fieldName {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-align: left;
+  position: relative;
+  left: 20vw;
+}
+.inputPlace {
+  border-radius: 5px;
+}

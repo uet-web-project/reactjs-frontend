@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface Task {
   id: number;
@@ -7,9 +7,11 @@ interface Task {
 }
 function index() {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTaskTitle, setNewTaskTitle] = useState('');
+  const [newTaskTitle, setNewTaskTitle] = useState("");
 
-  const handleNewTaskTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNewTaskTitleChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setNewTaskTitle(event.target.value);
   };
 
@@ -21,7 +23,7 @@ function index() {
         completed: false,
       };
       setTasks([...tasks, newTask]);
-      setNewTaskTitle('');
+      setNewTaskTitle("");
     }
   };
 
@@ -46,14 +48,28 @@ function index() {
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            <input type="checkbox" checked={task.completed} onChange={() => handleToggleTaskCompletion(task.id)} />
-            <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>{task.title}</span>
+            <input
+              type="checkbox"
+              checked={task.completed}
+              onChange={() => handleToggleTaskCompletion(task.id)}
+            />
+            <span
+              style={{
+                textDecoration: task.completed ? "line-through" : "none",
+              }}
+            >
+              {task.title}
+            </span>
             <button onClick={() => handleRemoveTask(task.id)}>Remove</button>
           </li>
         ))}
       </ul>
       <div>
-        <input type="text" value={newTaskTitle} onChange={handleNewTaskTitleChange} />
+        <input
+          type="text"
+          value={newTaskTitle}
+          onChange={handleNewTaskTitleChange}
+        />
         <button onClick={handleAddTask}>Add Task</button>
       </div>
     </div>

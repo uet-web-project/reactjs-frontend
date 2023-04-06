@@ -1,10 +1,9 @@
 import "./App.css";
-import Login from "./screens/authentication";
-
+import Login from "./screens/authentication/login";
 function App() {
   return (
-    <div className="App">
-      <Login />;
+    <div className="App primary-font">
+      <Login />
     </div>
   );
 }
