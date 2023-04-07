@@ -7,7 +7,7 @@ import Button from "../../../components/button/Button";
 import CSS from "csstype";
 function Login() {
   const [loginData, changeLoginData] = useState({
-    username: "",
+    name: "",
     password: "",
   });
 
@@ -65,12 +65,12 @@ function Login() {
         </div>
         <div className="login-input">
           <TextInput
-            value={loginData.username}
+            value={loginData.name}
             fieldName="Account"
             style={inputStyle}
             type="text"
             onChange={(event) => {
-              onLoginChange(event, "username");
+              onLoginChange(event, "name");
             }}
           />
           <TextInput
