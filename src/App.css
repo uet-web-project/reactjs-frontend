@@ -1,9 +1,9 @@
-.primary-font{
-    font-family: 'Roboto Mono', monospace;
+.primary-font {
+  font-family: "Roboto Mono", monospace;
 }
 
-*{
-    margin:0px;
-    padding:0px;
-    
+* {
+  margin: 0px;
+  padding: 0px;
+  background-color: #0b2447;
 }

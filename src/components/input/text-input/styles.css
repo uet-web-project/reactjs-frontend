@@ -9,7 +9,8 @@
   font-weight: 600;
   font-size: 0.8rem;
   position: relative;
+  color: white;
 }
 .inputPlace {
-  border-radius: 5px;
+  border-radius: 8px;
 }
