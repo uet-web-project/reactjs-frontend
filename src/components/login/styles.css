@@ -1,6 +1,9 @@
 .login-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 60%;
-  align-items: flex-end;
   height: 100%;
 }
 
@@ -8,12 +11,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .login-header {
   color: white;
   text-align: center;
-  margin-top: 17%;
   font-weight: 600;
 }
 
@@ -24,18 +27,4 @@
 .login {
   margin-top: 30px;
   margin-bottom: 20px;
-}
-
-@media (max-width: 750px) {
-  p {
-    font-size: 0.8rem;
-  }
-
-  .welcome-back {
-    font-size: 1.7rem;
-  }
-
-  .login {
-    font-size: 1.5rem;
-  }
 }
