@@ -11,20 +11,23 @@
 
 .login-section {
     width: 60%;
-    align-items: flex-end;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .login-input {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .login-header {
     color: white;
     text-align: center;
-    margin-top: 17%;
     font-weight: 600;
 }
 
@@ -37,33 +40,13 @@
     margin-bottom: 20px;
 }
 
-@media (max-width: 750px) {
-    p {
-        font-size: 0.8rem;
-    }
-
-    .welcome-back {
-        font-size: 1.7rem;
-    }
-
-    .login {
-        font-size: 1.5rem;
-    }
-
-    .quote {
-        font-size: 0.8rem;
-    }
-
-    .logo-name {
-        font-size: 1.7rem;
-    }
-}
-
 .logo-side {
     height: 100%;
     flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40%;
-    align-items: flex-start;
     color: white;
     background-color: #40513b !important;
     border-radius: 8px;
@@ -90,8 +73,34 @@
 
 .logo {
     background-color: inherit;
-    width: 50%;
-    height: auto;
+    height: 30%;
+    width: auto;
     display: block;
     margin: 30px auto 30px;
+}
+
+@media (max-width: 750px) {
+    p {
+        font-size: 0.8rem;
+    }
+
+    .welcome-back {
+        font-size: 1.7rem;
+    }
+
+    .login {
+        font-size: 1.5rem;
+    }
+
+    .quote {
+        font-size: 0.8rem;
+    }
+
+    .logo-name {
+        font-size: 1.7rem;
+    }
+
+    .logo-side {
+        display: none;
+    }
 }
