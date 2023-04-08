@@ -1,11 +1,8 @@
 import "./App.css";
 import Login from "./screens/authentication/login";
+
 function App() {
-  return (
-    <div className="App primary-font">
-      <Login />
-    </div>
-  );
+  return <Login />;
 }
 
 export default App;
