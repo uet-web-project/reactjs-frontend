@@ -39,7 +39,6 @@ function Login() {
       loginData
     );
     console.log(res);
-    
   }
   return (
     <div className="login-container">
@@ -82,7 +81,7 @@ function Login() {
               onLoginChange(event, "password");
             }}
           />
-          <Button onClick = {login} content="Sign in" style={signInButtonStyle} />
+          <Button onClick={login} content="Sign in" style={signInButtonStyle} />
         </div>
       </div>
     </div>

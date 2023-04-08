@@ -37,15 +37,15 @@
   .login {
     font-size: 1.5rem;
   }
-  .quote{
+  .quote {
     font-size: 0.8rem;
   }
-  .logo-name{
+  .logo-name {
     font-size: 1.7rem;
   }
 }
 .logo-side {
-  flex-direction : column;
+  flex-direction: column;
   flex: 2;
   align-items: flex-start;
   color: white;
