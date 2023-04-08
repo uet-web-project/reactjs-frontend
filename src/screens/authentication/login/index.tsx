@@ -1,16 +1,8 @@
 import React, { useState } from "react";
-import { post } from "../../../api/post";
 import "./styles.css";
-import TextInput from "../../../components/input/text-input/TextInput";
-import axiosInstance from "../../../utils/axios";
-import Button from "../../../components/button/Button";
-import CSS from "csstype";
-import LoginInformation from "../../../components/login/LoginInformation";
+import SignUpInformation from "../../../components/sign-up/SignUpInformation";
+import {Outlet} from "react-router-dom"
 function Login() {
-  const [loginData, changeLoginData] = useState({
-    name: "",
-    password: "",
-  });
   return (
     <div className="login-container">
       <div className="logo-side">
@@ -23,11 +15,12 @@ function Login() {
         </div>
         <img
           className="logo"
-          src="src\assets\icons\My project 1.png"
+          src={"src/assets/icons/My project 1.png"}
           alt="logo"
         />
       </div>
-      <LoginInformation />
+      {/* <LoginInformation />  */}
+      <Outlet />
     </div>
   );
 }

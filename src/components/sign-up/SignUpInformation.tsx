@@ -10,9 +10,11 @@ function SignUpInformation() {
   const [signUpData, changeSignUpData] = useState({
     centerId: "",
     password: "",
+    name: "Test center",
     location: "",
+    phoneNumber: "",
   });
-  const [repassword, changeRePassword] = useState("")
+  const [repassword, changeRePassword] = useState("");
   function onSignUpChange(event: any, fieldName: string) {
     changeSignUpData((prev) => ({
       ...prev,
@@ -20,29 +22,63 @@ function SignUpInformation() {
     }));
   }
 
-//   let inputStyle: CSS.Properties = {
-//     width: "20vw",
-//     height: "36px",
-//     boxSizing: "border-box",
-//     marginBottom: "10px",
-//     border: "none",
-//     padding: "10px",
-//     backgroundColor: "white",
-//   };
+  function validateRePassword() {
+    alert("Repassword is not match");
+    return repassword === signUpData.password;
+  }
 
-//   let signInButtonStyle: CSS.Properties = {
-//     width: "20vw",
-//     height: "36px",
-//     marginTop: "20px",
-//     boxSizing: "border-box",
-//   };
+  function validatePassword() {
+    let minNumberofChars = 8;
+    let regularExpression =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,1000}$/;
+    if (signUpData.password.length < minNumberofChars) {
+      alert("password must be more than 8 character");
+      return false;
+    }
+    if (!regularExpression.test(signUpData.password)) {
+      alert(
+        "password should contain atleast one number and one special character"
+      );
+      return false;
+    }
+    return true;
+  }
 
-  async function login() {
-    const res = await axiosInstance.post(
-      post().createRegistrationCenter,
-      signUpData
-    );
-    console.log(res);
+  function validePhoneNumber() {
+    let regularExpression =
+      /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if (signUpData.phoneNumber.match(regularExpression)) {
+      return true;
+    } else {
+      alert("Wrong phone number format");
+      return false;
+    }
+  }
+  let inputStyle: CSS.Properties = {
+    width: "20vw",
+    height: "36px",
+    boxSizing: "border-box",
+    marginBottom: "10px",
+    border: "none",
+    padding: "10px",
+    backgroundColor: "white",
+  };
+
+  let signInButtonStyle: CSS.Properties = {
+    width: "20vw",
+    height: "36px",
+    marginTop: "20px",
+    boxSizing: "border-box",
+  };
+
+  async function signUp() {
+    if (validatePassword() && validateRePassword() && validePhoneNumber()) {
+      const res = await axiosInstance.post(post().createRegistrationCenter, {
+        ...signUpData,
+        registrationDep: "642bf629abc004745c557c56",
+      });
+      console.log(res);
+    }
   }
   return (
     <div className="signUp-section">
@@ -52,23 +88,60 @@ function SignUpInformation() {
       <div className="signUp-input">
         <TextInput
           value={signUpData.centerId}
-          fieldName="Account"
+          fieldName="CenterId"
           style={inputStyle}
           type="text"
           onChange={(event) => {
-            onLoginChange(event, "name");
+            onSignUpChange(event, "centerId");
           }}
         />
         <TextInput
-          value={loginData.password}
+          value={signUpData.password}
           fieldName="Password"
           style={inputStyle}
           type="password"
           onChange={(event) => {
-            onLoginChange(event, "password");
+            onSignUpChange(event, "password");
           }}
         />
-        <Button onClick={login} content="Sign in" style={signInButtonStyle} />
+        <TextInput
+          value={repassword}
+          fieldName="Repassword"
+          style={inputStyle}
+          type="password"
+          onChange={(event) => {
+            let value = event.target.value;
+            changeRePassword(value);
+          }}
+        />
+        <TextInput
+          value={signUpData.name}
+          fieldName="Name"
+          style={inputStyle}
+          type="text"
+          onChange={(event) => {
+            onSignUpChange(event, "name");
+          }}
+        />
+        <TextInput
+          value={signUpData.location}
+          fieldName="Location"
+          style={inputStyle}
+          type="text"
+          onChange={(event) => {
+            onSignUpChange(event, "location");
+          }}
+        />
+        <TextInput
+          value={signUpData.phoneNumber}
+          fieldName="Phone Number"
+          style={inputStyle}
+          type="text"
+          onChange={(event) => {
+            onSignUpChange(event, "phoneNumber");
+          }}
+        />
+        <Button onClick={signUp} content="Sign in" style={signInButtonStyle} />
       </div>
     </div>
   );
