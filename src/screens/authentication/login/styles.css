@@ -57,15 +57,20 @@
     .logo-name {
         font-size: 1.7rem;
     }
+    /* .logo{
+      width:70% !important;
+    } */
 }
+@media (max-width:1200px){
 
+}
 .logo-side {
     height: 100%;
     flex-direction: column;
     width: 40%;
     align-items: flex-start;
     color: white;
-    background-color: #40513b !important;
+    background-color: #1F2937 !important;
     border-radius: 8px;
     border: none;
 }
@@ -90,8 +95,8 @@
 
 .logo {
     background-color: inherit;
-    width: 50%;
-    height: auto;
+    height: 45%;
+    /* height: auto; */
     display: block;
     margin: 30px auto 30px;
 }

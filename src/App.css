@@ -1,17 +1,25 @@
 .primary-font {
-    font-family: "Roboto Mono", monospace;
+  font-family: "Roboto Mono", monospace;
+}
+
+.primary-color{
+ 
+}
+
+.secondary-color{
+
 }
 
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #root {
-    width: 100vw;
-    height: 100vh;
-    font-family: "Roboto Mono", monospace;
-    box-sizing: border-box;
-    background-color: #0b2447;
-    display: flex;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Roboto Mono", monospace;
+  box-sizing: border-box;
+  background-color: #111827;
+  display: flex;
 }
