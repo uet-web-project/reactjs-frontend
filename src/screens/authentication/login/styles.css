@@ -1,0 +1,69 @@
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.logo-side {
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  color: white;
+  background-color: #62b7d3 !important;
+  border: none;
+}
+
+.logo-description {
+  background-color: inherit;
+}
+
+.logo-name {
+  background-color: inherit;
+  text-align: center;
+}
+
+.quote {
+  font-weight: 600;
+  background-color: inherit;
+  align-items: center;
+  margin: 20px 5vw auto 5vw;
+  line-height: 2;
+}
+
+.logo {
+  background-color: inherit;
+  height: 35%;
+  width: auto;
+  display: block;
+  margin: 30px auto 30px;
+}
+
+@media (max-width: 750px) {
+  p {
+    font-size: 0.8rem;
+  }
+
+  .welcome-back {
+    font-size: 1.7rem;
+  }
+
+  .login {
+    font-size: 1.5rem;
+  }
+
+  .logo-side {
+    display: none;
+  }
+  .login-section {
+    width: 100% !important;
+  }
+  .signUp-section {
+    width: 100% !important;
+  }
+}
