@@ -6,7 +6,6 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  padding: 10px;
 }
 .logo-side {
   height: 100%;
@@ -16,8 +15,7 @@
   align-items: center;
   width: 40%;
   color: white;
-  background-color: #1f2937 !important;
-  border-radius: 8px;
+  background-color: #62b7d3 !important;
   border: none;
 }
 
@@ -61,5 +59,11 @@
 
   .logo-side {
     display: none;
+  }
+  .login-section {
+    width: 100% !important;
+  }
+  .signUp-section {
+    width: 100% !important;
   }
 }

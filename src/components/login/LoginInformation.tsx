@@ -19,20 +19,16 @@ function LoginInformation() {
   }
 
   let inputStyle: CSS.Properties = {
-    width: "20vw",
-    height: "36px",
-    boxSizing: "border-box",
-    marginBottom: "10px",
-    border: "none",
-    padding: "10px",
-    backgroundColor: "white",
+    width: "40%",
+    maxWidth: "720px",
   };
 
   let signInButtonStyle: CSS.Properties = {
-    width: "20vw",
+    fontWeight: 400,
+    width: "40%",
     height: "36px",
-    marginTop: "20px",
-    boxSizing: "border-box",
+    marginTop: "30px",
+    maxWidth: "720px",
   };
 
   async function login() {

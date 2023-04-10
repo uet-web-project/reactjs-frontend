@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 import SignUpInformation from "../../../components/sign-up/SignUpInformation";
-import {Outlet} from "react-router-dom"
+import { Outlet } from "react-router-dom";
 function Login() {
   return (
     <div className="login-container">
@@ -15,11 +15,10 @@ function Login() {
         </div>
         <img
           className="logo"
-          src={"src/assets/icons/My project 1.png"}
+          src={"/src/assets/icons/My project 1.png"}
           alt="logo"
         />
       </div>
-      {/* <LoginInformation />  */}
       <Outlet />
     </div>
   );

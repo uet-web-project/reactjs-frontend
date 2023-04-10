@@ -11,16 +11,14 @@ function Button({
   content: string;
 }) {
   return (
-    <div className="button-container">
-      <button
-        onClick={onClick}
-        style={style}
-        className="button-style"
-        type="button"
-      >
-        {content}
-      </button>
-    </div>
+    <button
+      onClick={onClick}
+      className="button-style"
+      type="button"
+      style={style}
+    >
+      {content}
+    </button>
   );
 }
 

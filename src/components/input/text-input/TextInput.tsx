@@ -15,12 +15,12 @@ function TextInput({
   onChange: (event: any) => void;
 }) {
   return (
-    <div className="input-container">
+    <div style={style} className="input-container">
       <p className="fieldName">{fieldName}</p>
       <input
         value={value}
         onChange={onChange}
-        style={style}
+        style={{ width: "100%" }}
         className="inputPlace"
         type={type}
       />
