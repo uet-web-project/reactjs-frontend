@@ -136,7 +136,11 @@ function SignUpInformation() {
             onSignUpChange(event, "phoneNumber");
           }}
         />
-        <Button onClick={signUp} content="Sign in" style={signInButtonStyle} />
+        <Button
+          onClick={signUp}
+          content="Create account"
+          style={signInButtonStyle}
+        />
       </div>
     </div>
   );

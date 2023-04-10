@@ -5,8 +5,10 @@ import Button from "../button/Button";
 import axiosInstance from "../../utils/axios";
 import TextInput from "../input/text-input/TextInput";
 import "./styles.css";
+import { useNavigate } from "react-router-dom";
 
 function LoginInformation() {
+  const navigagte = useNavigate();
   const [loginData, changeLoginData] = useState({
     name: "",
     password: "",
@@ -16,6 +18,20 @@ function LoginInformation() {
       ...prev,
       [fieldName]: event.target.value,
     }));
+  }
+
+  async function login() {
+    const res = await axiosInstance.post(
+      post().registrationDepLogin,
+      loginData
+    );
+
+    if (res.status === 200) {
+      console.log(res);
+      const id = res.data._id;
+      window.localStorage.setItem("id", id);
+      navigagte("/authentication/create-account");
+    }
   }
 
   let inputStyle: CSS.Properties = {
@@ -30,14 +46,6 @@ function LoginInformation() {
     marginTop: "30px",
     maxWidth: "720px",
   };
-
-  async function login() {
-    const res = await axiosInstance.post(
-      post().registrationDepLogin,
-      loginData
-    );
-    console.log(res);
-  }
 
   return (
     <div className="login-section">

@@ -2,12 +2,10 @@
   font-family: "Roboto Mono", monospace;
 }
 
-.primary-color{
- 
+.primary-color {
 }
 
-.secondary-color{
-
+.secondary-color {
 }
 
 body {
@@ -20,6 +18,6 @@ body {
   height: 100vh;
   font-family: "Roboto Mono", monospace;
   box-sizing: border-box;
-  background-color: #EDF2FF;
+  background-color: #edf2ff;
   display: flex;
 }
