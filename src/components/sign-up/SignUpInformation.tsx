@@ -6,8 +6,10 @@ import Button from "../button/Button";
 import axiosInstance from "../../utils/axios";
 import TextInput from "../input/text-input/TextInput";
 import "./styles.css";
+import { useNavigate } from "react-router-dom";
 
 function SignUpInformation() {
+  const navigate = useNavigate();
   const [signUpData, changeSignUpData] = useState({
     centerId: "",
     password: "",
@@ -83,7 +85,9 @@ function SignUpInformation() {
           ...signUpData,
           registrationDep: depID,
         });
-        console.log(res);
+        if (res.status === 200) {
+          navigate(-1);
+        }
       }
     }
   }

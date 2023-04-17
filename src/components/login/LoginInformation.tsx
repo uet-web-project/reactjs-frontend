@@ -30,7 +30,7 @@ function LoginInformation() {
       console.log(res);
       const token = res.data.access_token;
       window.localStorage.setItem("token", token);
-      navigagte("/auth/create-account");
+      navigagte("/landing-page");
     }
   }
 
