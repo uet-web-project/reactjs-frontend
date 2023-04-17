@@ -1,0 +1,20 @@
+.expand {
+  height: 100px;
+}
+.btn:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.collapsed-item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+@media (max-width: 650px) {
+  .menu-box {
+    display: none !important;
+  }
+  .toggle-box {
+    display: block !important;
+  }
+}

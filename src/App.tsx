@@ -1,16 +1,25 @@
 import "./App.css";
+import React, { useEffect } from "react";
 import SignUpInformation from "./components/sign-up/SignUpInformation";
 import Login from "./screens/authentication/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginInformation from "./components/login/LoginInformation";
 import LandingPage from "./screens/landing-page";
+import Main from "./screens/main-screen";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage />,
+    element: <Main />,
+    children: [
+      {
+        path: "landing-page",
+        element: <LandingPage />,
+      },
+    ],
   },
   {
-    path: "/authentication",
+    path: "/auth",
     element: <Login />,
     children: [
       {
