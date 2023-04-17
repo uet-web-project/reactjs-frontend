@@ -1,4 +1,4 @@
-export function get(token?: string) {
+export function getAPI(token?: string) {
   return {
     verifyToken: `auth/${token}`,
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { post } from "../../api/post";
+import { postAPI } from "../../api/postAPI";
 import CSS from "csstype";
 import Button from "../button/Button";
 import axiosInstance from "../../utils/axios";
@@ -13,6 +13,7 @@ function LoginInformation() {
     name: "",
     password: "",
   });
+
   function onLoginChange(event: any, fieldName: string) {
     changeLoginData((prev) => ({
       ...prev,
@@ -22,7 +23,7 @@ function LoginInformation() {
 
   async function login() {
     const res = await axiosInstance.post(
-      post().registrationDepLogin,
+      postAPI().registrationDepLogin,
       loginData
     );
 

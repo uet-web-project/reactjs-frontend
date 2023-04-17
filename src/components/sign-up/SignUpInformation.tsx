@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { post } from "../../api/post";
-import { get } from "../../api/get";
+import { postAPI } from "../../api/postAPI";
+import { getAPI } from "../../api/getAPI";
 import CSS from "csstype";
 import Button from "../button/Button";
 import axiosInstance from "../../utils/axios";
@@ -18,6 +18,7 @@ function SignUpInformation() {
     phoneNumber: "",
   });
   const [repassword, changeRePassword] = useState("");
+
   function onSignUpChange(event: any, fieldName: string) {
     changeSignUpData((prev) => ({
       ...prev,
@@ -61,6 +62,7 @@ function SignUpInformation() {
       return false;
     }
   }
+
   let inputStyle: CSS.Properties = {
     width: "40%",
     maxWidth: "720px",
@@ -75,16 +77,19 @@ function SignUpInformation() {
 
   async function signUp() {
     if (validatePassword() && validateRePassword() && validatePhoneNumber()) {
-      const depProfile = await axiosInstance.get(get().getDepProfile);
+      const depProfile = await axiosInstance.get(getAPI().getDepProfile);
       console.log(depProfile);
       if (depProfile.status === 200) {
         console.log(signUpData);
 
         const depID = depProfile.data._id;
-        const res = await axiosInstance.post(post().createRegistrationCenter, {
-          ...signUpData,
-          registrationDep: depID,
-        });
+        const res = await axiosInstance.post(
+          postAPI().createRegistrationCenter,
+          {
+            ...signUpData,
+            registrationDep: depID,
+          }
+        );
         if (res.status === 200) {
           navigate(-1);
         }
@@ -93,7 +98,7 @@ function SignUpInformation() {
   }
 
   async function getAllDeps() {
-    const res = await axiosInstance.get(get().getAllDeps);
+    const res = await axiosInstance.get(getAPI().getAllDeps);
     console.log(res);
   }
 

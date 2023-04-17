@@ -3,7 +3,7 @@ import Navbar from "../../components/nav-bar/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axios";
 import "./styles.css";
-import { get } from "../../api/get";
+import { getAPI } from "../../api/getAPI";
 
 function Main() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function Main() {
       navigate("/auth/login");
     } else {
       try {
-        const res = await axiosInstance.get(get(token).verifyToken);
+        const res = await axiosInstance.get(getAPI(token).verifyToken);
         console.log(res);
 
         if (res.status === 200) {
