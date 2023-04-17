@@ -28,9 +28,9 @@ function LoginInformation() {
 
     if (res.status === 200) {
       console.log(res);
-      const id = res.data._id;
-      window.localStorage.setItem("id", id);
-      navigagte("/authentication/create-account");
+      const token = res.data.access_token;
+      window.localStorage.setItem("token", token);
+      navigagte("/auth/create-account");
     }
   }
 

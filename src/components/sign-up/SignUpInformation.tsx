@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { post } from "../../api/post";
+import { get } from "../../api/get";
 import CSS from "csstype";
 import Button from "../button/Button";
 import axiosInstance from "../../utils/axios";
@@ -10,7 +11,7 @@ function SignUpInformation() {
   const [signUpData, changeSignUpData] = useState({
     centerId: "",
     password: "",
-    name: "Test center",
+    name: "",
     location: "",
     phoneNumber: "",
   });
@@ -23,8 +24,12 @@ function SignUpInformation() {
   }
 
   function validateRePassword() {
-    alert("Repassword is not match");
-    return repassword === signUpData.password;
+    if (repassword === signUpData.password) {
+      return true;
+    } else {
+      alert("Repassword is not match");
+      return false;
+    }
   }
 
   function validatePassword() {
@@ -44,7 +49,7 @@ function SignUpInformation() {
     return true;
   }
 
-  function validePhoneNumber() {
+  function validatePhoneNumber() {
     let regularExpression =
       /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     if (signUpData.phoneNumber.match(regularExpression)) {
@@ -67,14 +72,27 @@ function SignUpInformation() {
   };
 
   async function signUp() {
-    if (validatePassword() && validateRePassword() && validePhoneNumber()) {
-      const res = await axiosInstance.post(post().createRegistrationCenter, {
-        ...signUpData,
-        registrationDep: "642bf629abc004745c557c56",
-      });
-      console.log(res);
+    if (validatePassword() && validateRePassword() && validatePhoneNumber()) {
+      const depProfile = await axiosInstance.get(get().getDepProfile);
+      console.log(depProfile);
+      if (depProfile.status === 200) {
+        console.log(signUpData);
+
+        const depID = depProfile.data._id;
+        const res = await axiosInstance.post(post().createRegistrationCenter, {
+          ...signUpData,
+          registrationDep: depID,
+        });
+        console.log(res);
+      }
     }
   }
+
+  async function getAllDeps() {
+    const res = await axiosInstance.get(get().getAllDeps);
+    console.log(res);
+  }
+
   return (
     <div className="signUp-section">
       <div className="signUp-header">
