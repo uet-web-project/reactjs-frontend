@@ -1,12 +1,12 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React from "react";
 import SignUpInformation from "./components/sign-up/SignUpInformation";
 import Login from "./screens/authentication/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginInformation from "./components/login/LoginInformation";
 import LandingPage from "./screens/landing-page";
 import Main from "./screens/main-screen";
-
+import CarRegistry from "./screens/car-registry";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +29,16 @@ const router = createBrowserRouter([
       {
         path: "create-account",
         element: <SignUpInformation />,
+      },
+    ],
+  },
+  {
+    path: "/stats",
+    element: <Main />,
+    children: [
+      {
+        path: "cars",
+        element: <CarRegistry />,
       },
     ],
   },

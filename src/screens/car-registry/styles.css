@@ -1,0 +1,12 @@
+.pageContainer {
+  display: flex;
+  flex-direction: row;
+}
+.statsDisplayDiv {
+  order: 0;
+}
+.transitionTabDiv {
+  order: 1;
+  width: 100%;
+  padding: 10px;
+}
