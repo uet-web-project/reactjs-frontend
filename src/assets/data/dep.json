@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Nguyễn Chiến Thắng",
+        "role": "director",
+        "email": "thangnc@vr.org.vn",
+        "education": "ThS., KS. Vỏ tàu thủy.",
+        "img": "http://www.vr.org.vn/contents/News/PublishingImages/z4177462514783_f7de3947811b7d7a9acb8b51ba1f421e.jpg"
+    },
+    {
+        "name": "Vương Đình Huệ",
+        "role": "Sub Director",
+        "email": "huevd@vr.org.vn",
+        "education": "Giáo sư, tiến sĩ kinh tế.",
+        "img": "https://file1.dangcongsan.vn/data/0/images/2023/04/15/upload_114/ctqh.jpeg?dpi=150&quality=100&w=500&mode=crop&anchor=topcenter"
+    },
+    {
+        "name": "Nguyễn Hạnh Phúc",
+        "role": "Sub Director",
+        "email": "phucnh@vr.org.vn",
+        "education": "Cử nhân chính trị.",
+        "img": "https://static-znews.zadn.vn/static/topic/chinhphu/nguyenhanhphuc.jpg"
+    }
+]

@@ -36,7 +36,9 @@ function Main() {
   return (
     <div className="main-container">
       <Navbar />
-      <Outlet />
+      <div className="parent-body">
+        <Outlet />
+      </div>
     </div>
   );
 }
