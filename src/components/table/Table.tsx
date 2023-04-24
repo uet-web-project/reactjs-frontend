@@ -140,7 +140,7 @@ export default function TestTable() {
       >
         <TableContainer
           sx={{
-            maxHeight: "700px", // set max height to fill remaining viewport space
+            maxHeight: "900px", // set max height to fill remaining viewport space
             // add scrollbars when content overflows
             "&::-webkit-scrollbar-track": {
               backgroundColor: "transparent", // set color of scrollbar track
