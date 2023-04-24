@@ -1,15 +1,21 @@
-button {
+.button,
+.selected {
   border: none;
   width: 100px;
   max-width: 200px;
   height: 50px;
   max-height: 50px;
+  background-color: #62b7d3;
 }
-
-button:hover {
+.button:hover {
   background-color: aquamarine;
 }
+.selected {
+  background-color: white;
+  color: black;
+}
 
+/*full div */
 .transitionTab {
   display: flex;
   flex-direction: column;
@@ -17,3 +23,9 @@ button:hover {
   align-items: center;
 }
 
+/*button*/
+/*the Content */
+.content {
+  background-color: white;
+  width: 300px;
+}

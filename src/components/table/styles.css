@@ -1,3 +1,33 @@
-.MuiTableContainer-root{
-    max-height: 1000px;
+.columnInput,
+.generalInput {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.columnInput:focus,
+.generalInput:focus {
+  outline: none;
+  border-color: #62b7d3;
+  box-shadow: 0 0 5px #62b7d3;
+}
+
+/*phan table*/
+.TableContainer{
+    margin-top: 20px;
+    background-color: #62b7d3;
+    padding: 5px;
+    display: block;
+}
+
+.firstPart{
+    margin-bottom: 5px;
+}
+.secondPart{
+}
+/*phan table*/
+#manageColumn{
+  float: right;
 }

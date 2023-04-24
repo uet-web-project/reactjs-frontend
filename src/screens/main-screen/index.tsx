@@ -14,23 +14,6 @@ function Main() {
 
   async function checkToken() {
     const token = localStorage.getItem("token");
-
-    if (!token) {
-      navigate("/auth/login");
-    } else {
-      try {
-        const res = await axiosInstance.get(getAPI(token).verifyToken);
-        console.log(res);
-
-        if (res.status === 200) {
-          navigate("/landing-page");
-        } else {
-          navigate("/auth/login");
-        }
-      } catch (err) {
-        navigate("/auth/login");
-      }
-    }
   }
 
   return (

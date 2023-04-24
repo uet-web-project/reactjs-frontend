@@ -2,11 +2,87 @@
   display: flex;
   flex-direction: row;
 }
+
 .statsDisplayDiv {
+  flex: 4;
   order: 0;
+  width: 100%;
+  flex-shrink: 1;
+  min-width: 0;
+  animation-name: slide-in-left;
+  animation-duration: 1s;
 }
+
 .transitionTabDiv {
+  flex: 1;
   order: 1;
   width: 100%;
+  height: 100%;
   padding: 10px;
+  flex-shrink: 1;
+  animation-name: slide-in-right;
+  animation-duration: 1s;
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.chartUpperButDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.chartUpperBut {
+  margin-top: 10px;
+  border: none;
+  width: 33.3%;
+  height: 110px;
+  max-height: 50px;
+  background-color: #62b7d3;
+}
+.chartUpperBut.active {
+  background-color: blue;
+  color: white;
+}
+
+.chartContainer {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  height: 400px;
+  background-color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+  .pageContainer {
+    flex-direction: column;
+  }
+  .statsDisplayDiv {
+    order: 1;
+    width: 100%;
+    min-width: auto;
+  }
+  .transitionTabDiv {
+    order: 0;
+    padding: 10px;
+    min-width: auto;
+  }
 }

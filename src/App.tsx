@@ -7,6 +7,8 @@ import LoginInformation from "./components/login/LoginInformation";
 import LandingPage from "./screens/landing-page";
 import Main from "./screens/main-screen";
 import CarRegistry from "./screens/car-registry";
+import RegistryCenter from "./screens/registry-center/RegistryCenter";
+import ExpiredCar from "./screens/expired-car/ExpiredCar";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
         path: "cars",
         element: <CarRegistry />,
       },
+      {
+        path: "centers",
+        element: <RegistryCenter />,
+      },
+      {
+        path: "expired",
+        element: <ExpiredCar />,
+      }
     ],
   },
 ]);
