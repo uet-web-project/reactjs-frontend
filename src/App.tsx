@@ -1,5 +1,6 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { deDE } from "@mui/x-date-pickers/locales";
 import SignUpInformation from "./components/sign-up/SignUpInformation";
 import Login from "./screens/authentication/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";

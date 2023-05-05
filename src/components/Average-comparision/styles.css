@@ -1,0 +1,19 @@
+.monthly-descripsion {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.monthly-average-text{
+    margin-right: 20px;
+}
+
+.monthly-date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 20px;
+  padding: 8px;
+  color: white;
+  font-size: 12px;
+}

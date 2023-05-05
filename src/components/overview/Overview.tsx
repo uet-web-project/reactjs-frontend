@@ -9,8 +9,8 @@ function Overview() {
     <div className="overview-container">
       <div className="overview-title">
         <div className="overview-text-containner">
-          <h3 className="overview-text"> Overview </h3>
-          <p className="overview-description">
+          <h3 className="overview-text secondary-font"> Overview </h3>
+          <p className="overview-description secondary-font">
             {" "}
             View all car registry and expired cars.
           </p>
@@ -23,10 +23,39 @@ function Overview() {
       </div>
       <div className="chart-container">
         <div className="barchart">
-          <Barchart />
+          <Barchart
+            data={[
+              { name: "Jan", cars: 4000 },
+              { name: "Feb", cars: 3000 },
+              { name: "Mar", cars: 2000 },
+              { name: "Apr", cars: 2780 },
+              { name: "May", cars: 1890 },
+              { name: "Jun", cars: 2390 },
+              { name: "Jul", cars: 3490 },
+            ]}
+          />
+          <p className="chart-description">The number of car registry </p>
         </div>
         <div className="vertical-chart">
-          <Verticalchart />
+          <Verticalchart
+            data={[
+              {
+                name: "Car",
+                cars: 800,
+              },
+              {
+                name: "Truck",
+                cars: 967,
+              },
+              {
+                name: "Bus",
+                cars: 1098,
+              },
+            ]}
+          />
+          <p className="chart-description">
+            The number of car expired base on car types
+          </p>
         </div>
       </div>
     </div>

@@ -63,34 +63,43 @@
   margin-top: 20px;
 }
 
-.barchart,.vertical-chart {
+.barchart,
+.vertical-chart {
   background-color: #edf2ff;
   display: inline-block;
   border-radius: 20px;
   padding-top: 25px;
   padding-right: 25px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   font-family: "Roboto-mono";
   width: 45%;
   height: 300px;
 }
 
-@media (max-width:1200px){
-  .chart-container{
+@media (max-width: 1200px) {
+  .chart-container {
     display: block;
   }
-  .barchart,.vertical-chart{
+  .barchart,
+  .vertical-chart {
     display: block;
     width: 80%;
     margin: 0 auto;
   }
-  .barchart{
+  .barchart {
     margin-bottom: 30px;
   }
 }
 
-.recharts-default-legend{
+.recharts-default-legend {
   padding: 0 !important;
   margin-left: 60px !important;
 }
 
+.chart-description{
+  font-style: italic;
+  color: #7f7f7f;
+  text-align: center;
+  margin-left: 60px;
+  margin-top: 15px;
+}

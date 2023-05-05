@@ -1,0 +1,17 @@
+.monthly-registey-car{
+    display: relative;
+}
+
+.monthly-side-information{
+
+}
+
+.monthly-percentage-information{
+    font-size: 50px;
+    font-weight: bolder;
+    margin-bottom: 0px;
+}
+
+.monthly-quantity-information{
+    font-weight: bold;
+}

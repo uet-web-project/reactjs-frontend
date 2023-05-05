@@ -28,6 +28,8 @@ function Main() {
           navigate("/auth/login");
         }
       } catch (err) {
+        console.log(err);
+
         navigate("/auth/login");
       }
     }

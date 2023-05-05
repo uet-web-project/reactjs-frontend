@@ -40,7 +40,7 @@ const data = [
   // },
 ];
 
-export default function Verticalchart() {
+export default function Verticalchart({data}:{data:object[]}) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <ComposedChart
@@ -49,12 +49,12 @@ export default function Verticalchart() {
         margin={{
           top: 20,
           right: 20,
-          bottom: 20,
+          bottom: 10,
           left: 20,
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis type="number" label={{ value: 'The number of car expired base on car types', position: 'bottom', offset: +25 }}/>
+        <XAxis type="number"/>
         <YAxis dataKey="name" type="category" scale="band" />
         <Tooltip />
         <Legend />
