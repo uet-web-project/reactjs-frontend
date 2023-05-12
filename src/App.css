@@ -21,6 +21,7 @@ body {
   font-family: "Roboto Mono", monospace;
   box-sizing: border-box;
   display: flex;
+  overflow-x: hidden;
 }
 .css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper{
   background-color: #62b7d3 !important;

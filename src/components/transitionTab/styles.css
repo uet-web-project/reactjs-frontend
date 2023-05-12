@@ -6,6 +6,7 @@
   height: 50px;
   max-height: 50px;
   background-color: #62b7d3;
+  color: white;
 }
 .button:hover {
   background-color: aquamarine;
