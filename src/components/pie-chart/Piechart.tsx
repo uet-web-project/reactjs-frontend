@@ -1,59 +1,99 @@
-import "./styles.css";
-import React, { useCallback, useState } from "react";
-import { PieChart, Pie, Cell } from "recharts";
+import React, { CSSProperties, useState } from "react";
+import {
+  PieChart,
+  Pie,
+  Legend,
+  Sector,
+  Cell,
+  ResponsiveContainer,
+} from "recharts";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
+const current = new Date();
+const currentMonth = current.toLocaleString("default", { month: "long" });
+current.setMonth(current.getMonth() - 1);
+const previousMonth = current.toLocaleString("default", { month: "long" });
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const Piechart = () => {
+  const data = [
+    { name: previousMonth, value: 400 },
+    { name: currentMonth, value: 300 },
+  ];
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}: any) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+  const RADIAN = Math.PI / 180;
+
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }: {
+    cx: number;
+    cy: number;
+    midAngle: number;
+    innerRadius: number;
+    outerRadius: number;
+    percent: number;
+    index: number;
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
   return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
+    <div className="pie-chart-container" style={{ width: "100%", height: 200 }}>
+      <ResponsiveContainer>
+        <PieChart className="pie-chart">
+          <Legend
+            className="legend-pie"
+            margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+            wrapperStyle={{
+              position: "absolute",
+              right: "25px",
+              top: "190px",
+            }}
+            align="center"
+            verticalAlign="bottom"
+            layout="horizontal"
+          />
+
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={renderCustomizedLabel}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
-export default function Piechart() {
-  return (
-    <PieChart width={200} height={200}>
-      <Pie
-        data={data}
-        cx={100}
-        cy={100}
-        labelLine={false}
-        label={renderCustomizedLabel}
-        outerRadius={80}
-        fill="#8884d8"
-        dataKey="value"
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-    </PieChart>
-  );
-}
+export default Piechart;

@@ -13,7 +13,7 @@ function MonthlyComparision() {
     new Date()
   ).format("Do MMMM YYYY")}`;
   return (
-    <div>
+    <div className="average-comparision">
       <div className="monthly-descripsion">
         <h3 className="secondary-font monthly-average-text">
           {" "}
@@ -24,7 +24,9 @@ function MonthlyComparision() {
           {dateRange}
         </div>
       </div>
-      {/* <MonthlySideInformation/> */}
+      <div style={{width:"100%", height:"100%"}}>
+        <MonthlySideInformation title="Car Registry" />
+      </div>
     </div>
   );
 }
