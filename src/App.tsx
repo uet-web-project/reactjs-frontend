@@ -7,6 +7,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginInformation from "./components/login/LoginInformation";
 import LandingPage from "./screens/landing-page";
 import Main from "./screens/main-screen";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,11 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+    <RouterProvider router={router} />;
+  </Provider>
+  )
 }
 
 export default App;
