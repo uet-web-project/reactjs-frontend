@@ -8,7 +8,7 @@ import "./styles.css";
 import { useNavigate } from "react-router-dom";
 
 function LoginInformation() {
-  const navigagte = useNavigate();
+  const navigate = useNavigate();
   const [loginData, changeLoginData] = useState({
     depId: "",
     password: "",
@@ -31,7 +31,7 @@ function LoginInformation() {
       console.log(res);
       const token = res.data.access_token;
       window.localStorage.setItem("token", token);
-      navigagte("/landing-page");
+      navigate("/landing-page");
     }
   }
 
