@@ -27,6 +27,8 @@ function Main() {
           navigate("/auth/login");
         }
       } catch (err) {
+        console.log(err);
+
         navigate("/auth/login");
       }
     }
@@ -35,7 +37,9 @@ function Main() {
   return (
     <div className="main-container">
       <Navbar />
-      <Outlet />
+      <div className="parent-body">
+        <Outlet />
+      </div>
     </div>
   );
 }

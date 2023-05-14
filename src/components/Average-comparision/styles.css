@@ -1,0 +1,34 @@
+.average-comparision{
+  width: 20%;
+  display: inline-block;
+  border-radius: 20px;
+  background-color: white !important;
+  padding: 20px;
+  margin-left: 20px;
+  height: 435px;
+  vertical-align:top; 
+}
+
+
+.monthly-descripsion {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.monthly-average-text{
+    margin-right: 30px;
+    margin-left: 20px;
+}
+
+.monthly-date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 20px;
+  padding: 8px;
+  color: white;
+  font-size: 12px;
+}
+
+
