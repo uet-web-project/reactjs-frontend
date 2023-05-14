@@ -1,4 +1,3 @@
-import red from "@mui/material/colors/red";
 import {
   BarChart,
   Bar,
