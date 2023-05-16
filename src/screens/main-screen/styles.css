@@ -1,3 +1,7 @@
 .main-container {
   width: 100%;
 }
+
+.parent-body {
+  padding: 20px;
+}
