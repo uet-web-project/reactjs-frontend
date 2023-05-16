@@ -1,4 +1,4 @@
-import Barchart from "../../components/bar-chart/BarChart";
+import Barchart from "../../components/bar-chart/TestBarChart";
 import SearchIcon from "@mui/icons-material/Search";
 import "./styles.css";
 import TestTable from "../../components/table/Table";

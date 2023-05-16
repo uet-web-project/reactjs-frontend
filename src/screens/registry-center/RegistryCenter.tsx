@@ -1,5 +1,5 @@
 import React from "react";
-import Barchart from "../../components/bar-chart/BarChart";
+import Barchart from "../../components/bar-chart/TestBarChart";
 import "./styles.css";
 import TestTable from "../../components/table/Table";
 import TransitionTab from "../../components/transitionTab/TransitionTab";
