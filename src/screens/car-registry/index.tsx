@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axios";
 import { getAPI } from "../../api/getAPI";
 import { Box, TextField } from "@mui/material";
-import Filter from "../../components/filter/Filter";
+import FilterCar from "../../components/filter/FilterCar";
 
 const GraphData = [
   { name: "Jan", uv: 4000, pv: 2400, amt: 2400 },
@@ -84,7 +84,7 @@ function CarRegistry() {
       </div>
       <div className="tableContainer">
         <div className="firstPart">
-          <Filter />
+          <FilterCar />
           <div className="generalInputContainer">
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <SearchIcon sx={{ color: "white", mr: 1, my: 0.5 }} />

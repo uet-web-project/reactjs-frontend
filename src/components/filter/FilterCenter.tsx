@@ -18,7 +18,7 @@ interface Props {
   onContentChange(event: any): void;
 }
 
-export default function Filter(props: Props) {
+export default function FilterCenter(props: Props) {
   const rows = props.row;
   const [data, setData] = React.useState(rows);
   const [open, setOpen] = React.useState(false);
