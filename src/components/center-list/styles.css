@@ -1,0 +1,12 @@
+.center-list-container{
+    width: 20%;
+    display: inline-block;
+    margin-left: 20px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.center-list-header{
+    font-weight: bold;
+    margin: 20px 0 10px 10px;
+}

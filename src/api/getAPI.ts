@@ -5,6 +5,8 @@ export function getAPI(token?: string) {
     // registration dep
     getAllDeps: "registration-dep",
     getDepProfile: "registration-dep/profile",
-    getAllVehicles:"vehicle"
+
+    // vehicle
+    getAllVehicles: "vehicle",
   };
 }

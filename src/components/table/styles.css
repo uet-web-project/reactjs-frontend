@@ -1,0 +1,12 @@
+.recent-registered-table-container{
+    height: 630px;
+    width: 75%;
+    border-radius:20px !important;
+    margin-top: 30px;
+    display: inline-block;
+}
+
+.recent-registered-table{
+    border-radius: 20px !important;
+    background-color: white !important;
+}
