@@ -8,9 +8,9 @@ import "./styles.css";
 import { useNavigate } from "react-router-dom";
 
 function LoginInformation() {
-  const navigate = useNavigate();
+  const navigagte = useNavigate();
   const [loginData, changeLoginData] = useState({
-    name: "",
+    depId: "",
     password: "",
   });
 
@@ -31,7 +31,7 @@ function LoginInformation() {
       console.log(res);
       const token = res.data.access_token;
       window.localStorage.setItem("token", token);
-      navigate("/landing-page");
+      navigagte("/landing-page");
     }
   }
 
@@ -57,12 +57,12 @@ function LoginInformation() {
       </div>
       <div className="login-input">
         <TextInput
-          value={loginData.name}
-          fieldName="Account"
+          value={loginData.depId}
+          fieldName="Department ID"
           style={inputStyle}
           type="text"
           onChange={(event) => {
-            onLoginChange(event, "name");
+            onLoginChange(event, "depId");
           }}
         />
         <TextInput
