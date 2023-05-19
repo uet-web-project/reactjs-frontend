@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 import { Button } from "@mui/material";
 import Barchart from "../bar-chart/Barchart";
 import Verticalchart from "../vertical-composed-chart/Verticalchart";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 
 function Overview() {
+  const {
+    loading,
+    getDataForCarTypeOverview,
+    getDataForTotalOverviewChart,
+  } = chartStatisticHook();
+
+  const [btnState, setBtnState] = useState("week");
+  const changeToWeekData = () => {
+    setBtnState("week");
+    getDataForCarTypeOverview("week");
+    getDataForTotalOverviewChart("week");
+  };
+
+  const changeToMonthData = () => {
+    setBtnState("month");
+    getDataForCarTypeOverview("month");
+    getDataForTotalOverviewChart("month");
+  };
+
+  const changeToYearData = () => {
+    setBtnState("year");
+    getDataForCarTypeOverview("year");
+    getDataForTotalOverviewChart("year");
+  };
   return (
     <div className="overview-container">
       <div className="overview-title">
@@ -16,43 +41,39 @@ function Overview() {
           </p>
         </div>
         <div className="overview-button">
-          <Button className="month-button selected-button"> Month</Button>
-          <Button className="year-button">Year</Button>
-          <Button className="all-time-button">All</Button>
+          <Button
+            className={`week-button ${
+              btnState == "week" ? "selected-button" : ""
+            }`}
+            onClick={changeToWeekData}
+          >
+            Week
+          </Button>
+          <Button
+            className={`month-button ${
+              btnState == "month" ? "selected-button" : ""
+            }`}
+            onClick={changeToMonthData}
+          >
+            Month
+          </Button>
+          <Button
+            className={`year-button ${
+              btnState == "year" ? "selected-button" : ""
+            }`}
+            onClick={changeToYearData}
+          >
+            Year
+          </Button>
         </div>
       </div>
       <div className="chart-container">
         <div className="barchart">
-          <Barchart
-            data={[
-              { name: "Jan", cars: 4000 },
-              { name: "Feb", cars: 3000 },
-              { name: "Mar", cars: 2000 },
-              { name: "Apr", cars: 2780 },
-              { name: "May", cars: 1890 },
-              { name: "Jun", cars: 2390 },
-              { name: "Jul", cars: 3490 },
-            ]}
-          />
+          <Barchart />
           <p className="chart-description">The number of car registry </p>
         </div>
         <div className="vertical-chart">
-          <Verticalchart
-            data={[
-              {
-                name: "Car",
-                cars: 800,
-              },
-              {
-                name: "Truck",
-                cars: 967,
-              },
-              {
-                name: "Bus",
-                cars: 1098,
-              },
-            ]}
-          />
+          <Verticalchart />
           <p className="chart-description">
             The number of car expired base on car types
           </p>

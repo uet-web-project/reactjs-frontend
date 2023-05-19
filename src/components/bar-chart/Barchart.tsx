@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -8,22 +9,26 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
+function Barchart() {
+  const { totalOverviewChartData, loading, getDataForTotalOverviewChart } =
+    chartStatisticHook();
 
-function Barchart({data}:{data:object[]}){
+  useEffect(() => {
+    getDataForTotalOverviewChart("week");
+  }, []);
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={data}>
+      <BarChart data={totalOverviewChartData}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          dataKey="name"
-        />
+        <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="cars" fill="#62b7d3" />
+        <Bar dataKey="vehicles" fill="#62b7d3" />
       </BarChart>
     </ResponsiveContainer>
-  )
-};
+  );
+}
 
 export default Barchart;

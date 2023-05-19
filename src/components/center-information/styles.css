@@ -1,20 +1,12 @@
-.center-information-container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.center-information-container {
+  display: flex;
+  flex-direction: row;
 }
 
-.contact-information{
-    margin-right: 20px;
-}
-
-.center-detail-information{
-    display: inline-block;
-}
-
-.center-information{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.center-detail-information {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }

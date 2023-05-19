@@ -1,5 +1,5 @@
 import "./styles.css";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ComposedChart,
   Line,
@@ -12,40 +12,20 @@ import {
   Area,
   ResponsiveContainer,
 } from "recharts";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 
-const data = [
-  {
-    name: "Car",
-    cars: 800,
-  },
-  {
-    name: "Truck",
-    cars: 967,
-  },
-  {
-    name: "Bus",
-    cars: 1098,
-  },
-  // {
-  //   name: "Page D",
-  //   pv: 1200,
-  // },
-  // {
-  //   name: "Page E",
-  //   pv: 1108,
-  // },
-  // {
-  //   name: "Page F",
-  //   pv: 680,
-  // },
-];
+export default function Verticalchart() {
+  const { loading, carTypeOverviewChart, getDataForCarTypeOverview } =
+    chartStatisticHook();
 
-export default function Verticalchart({data}:{data:object[]}) {
+  useEffect(() => {
+    getDataForCarTypeOverview("week");
+  }, []);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <ComposedChart
         layout="vertical"
-        data={data}
+        data={carTypeOverviewChart}
         margin={{
           top: 20,
           right: 20,
@@ -54,11 +34,11 @@ export default function Verticalchart({data}:{data:object[]}) {
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis type="number"/>
-        <YAxis dataKey="name" type="category" scale="band" />
+        <XAxis type="number" />
+        <YAxis dataKey="vehicleType" type="category" scale="band" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="cars" barSize={40} fill="#62b7d3" />
+        <Bar dataKey="vehicles" barSize={40} fill="#62b7d3" />
       </ComposedChart>
     </ResponsiveContainer>
   );

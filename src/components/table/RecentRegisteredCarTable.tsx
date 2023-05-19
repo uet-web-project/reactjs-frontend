@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import axiosInstance from "../../utils/axios";
 import { getAPI } from "../../api/getAPI";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import moment from "moment";
 import "./styles.css";
 
@@ -20,6 +21,11 @@ function useWindowSize() {
 }
 
 export default function RecentRegisteredCarTable() {
+  const {
+    loading,
+    carInfoOverviewTable,
+    getVehicleTableData,
+  } = chartStatisticHook();
   const [screenWidth, screenHeight] = useWindowSize();
   const rowWidth = (screenWidth * 17) / 100;
   const columns: GridColDef[] = [
@@ -59,34 +65,16 @@ export default function RecentRegisteredCarTable() {
         `${moment(params.value).format("DD/MM/YYYY")}`,
     },
   ];
-  const [data, setData] = useState([]);
 
   useEffect(() => {
-    const getAllVehicles = async () => {
-      const res = await axiosInstance.get(getAPI().getAllVehicles);
-      return res;
-    };
-
-    getAllVehicles()
-      .then((res) => {
-        console.log(res);
-        const moddedData = res.data.map((item: any, index: number) => ({
-          ...item,
-          id: item._id,
-        }));
-        setData(moddedData);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    getVehicleTableData();
   }, []);
 
   return (
     <Box className="recent-registered-table-container">
       <DataGrid
         className="recent-registered-table"
-        rows={data}
+        rows={carInfoOverviewTable}
         columns={columns}
         initialState={{
           pagination: {
@@ -101,4 +89,10 @@ export default function RecentRegisteredCarTable() {
       />
     </Box>
   );
+}
+function getCenterListData() {
+  throw new Error("Function not implemented.");
+}
+function getMonthDataForCarTypeOverview() {
+  throw new Error("Function not implemented.");
 }

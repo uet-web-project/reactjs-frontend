@@ -1,0 +1,7 @@
+.data-group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 20px;
+  height: auto;
+}

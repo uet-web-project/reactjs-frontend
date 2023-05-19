@@ -1,27 +1,29 @@
 import React from "react";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import "./styles.css";
+import { IRegistrationCenter } from "../../interfaces/registrationCenter.interface";
 function CenterInformation({
-  centerIndex,
-  centerName,
-  centerLocation,
-  centerPhoneNumber,
+  centerData,
+  index,
 }: {
-  centerIndex: number;
-  centerName: string;
-  centerLocation: string;
-  centerPhoneNumber: string;
+  centerData: IRegistrationCenter;
+  index: number;
 }) {
   return (
-    <div className="center-information-container">
-      <div className="center-information secondary-font">
-        <div style={{ display: "inline-block" ,marginRight:"8px", marginLeft:"7px"}}>{centerIndex}</div>
+    <div>
+      <div className="center-information-container">
+        <span style={{ fontWeight: "600" }}>{`${index}.`}</span>
         <div className="center-detail-information">
-          <div style={{ marginBottom: "4px" }}>{centerName}</div>
-          <div>{centerLocation}</div>
+          <div>
+            <div style={{ marginBottom: "4px", fontWeight: "600" }}>
+              {centerData.name}
+            </div>
+            <div style={{ fontStyle: "italic" }}>{centerData.location}</div>
+          </div>
+          <div>{centerData.phoneNumber}</div>
         </div>
       </div>
-      <div className="contact-information">{centerPhoneNumber}</div>
+      <hr />
     </div>
   );
 }

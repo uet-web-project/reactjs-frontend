@@ -7,16 +7,21 @@ function TextInput({
   type,
   value,
   onChange,
+  error,
 }: {
   fieldName: string;
   style?: CSS.Properties;
   type: string;
   value: string;
   onChange: (event: any) => void;
+  error?: string;
 }) {
   return (
     <div style={style} className="input-container">
-      <p className="fieldName">{fieldName}</p>
+      <div className="field-name-container">
+        <span className="fieldName">{fieldName}</span>
+        <span className="error-name primary-font">{error}</span>
+      </div>
       <input
         value={value}
         onChange={onChange}
