@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 function Barchart() {
-  const { totalOverviewChartData, loading, getDataForTotalOverviewChart } =
+  const { totalOverviewChartData, getDataForTotalOverviewChart } =
     chartStatisticHook();
 
   useEffect(() => {

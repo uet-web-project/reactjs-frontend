@@ -4,7 +4,7 @@ import {
   setDataForMonthlyComparison,
   setDataForCenterList,
   setDataForTotalOverviewChart,
-  setLoading,
+  clearAllData,
 } from "../slices/chartsSlice";
 import { ICarInfoOverviewTable } from "../slices/chartsSlice";
 import { IVehicle } from "../../interfaces/vehicle.interface";
@@ -12,8 +12,8 @@ import { useAppSelector, RootState } from "../store";
 import { useDispatch } from "react-redux";
 import axiosInstance from "../../utils/axios";
 import { getAPI } from "../../api/getAPI";
-import { IRegistrationCenter } from "../../interfaces/registrationCenter.interface";
 import { IMonthlyComparison } from "../slices/chartsSlice";
+import { setLoading } from "../slices/loadingSlice";
 
 export const chartStatisticHook = () => {
   const dispatch = useDispatch();
@@ -24,8 +24,11 @@ export const chartStatisticHook = () => {
     carRegisteredMonthlyComparison,
     carInfoOverviewTable,
     centerList,
-    loading,
   } = useAppSelector((state: RootState) => state.chartStatistic);
+
+  function callClearAllData() {
+    dispatch(clearAllData());
+  }
 
   async function getDataForTotalOverviewChart(date: string) {
     dispatch(setLoading(true));
@@ -80,7 +83,7 @@ export const chartStatisticHook = () => {
             value: monthRegistered,
           },
         ];
-        dispatch(setDataForMonthlyComparison(pieData))
+        dispatch(setDataForMonthlyComparison(pieData));
       }
     } catch (err) {
       console.log(err);
@@ -157,11 +160,11 @@ export const chartStatisticHook = () => {
     carTypeOverviewChart,
     carRegisteredMonthlyComparison,
     totalOverviewChartData,
-    loading,
     getDataForTotalOverviewChart,
     getVehicleTableData,
     getDataForMonthlyComparison,
     getCenterListData,
     getDataForCarTypeOverview,
+    callClearAllData,
   };
 };

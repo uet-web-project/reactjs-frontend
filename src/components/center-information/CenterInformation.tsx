@@ -1,5 +1,4 @@
 import React from "react";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import "./styles.css";
 import { IRegistrationCenter } from "../../interfaces/registrationCenter.interface";
 function CenterInformation({

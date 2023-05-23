@@ -19,6 +19,10 @@ const router = createBrowserRouter([
         path: "landing-page",
         element: <LandingPage />,
       },
+      {
+        path: "create-account",
+        element: <SignUpInformation />,
+      },
     ],
   },
   {
@@ -26,12 +30,12 @@ const router = createBrowserRouter([
     element: <Login />,
     children: [
       {
-        path: "login",
-        element: <LoginInformation />,
+        path: "department-login",
+        element: <LoginInformation isDepLogin />,
       },
       {
-        path: "create-account",
-        element: <SignUpInformation />,
+        path: "center-login",
+        element: <LoginInformation isDepLogin={false} />,
       },
     ],
   },

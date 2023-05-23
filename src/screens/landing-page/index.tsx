@@ -6,11 +6,16 @@ import Overview from "../../components/overview/Overview";
 import MonthlyComparision from "../../components/average-comparision/AverageComparision";
 import RecentRegisteredCarTable from "../../components/table/RecentRegisteredCarTable";
 import CenterList from "../../components/center-list/CenterList";
+import { accountHook } from "../../redux/hooks/accountHooks";
 
 // style
-import './styles.css'
+import "./styles.css";
 
 function LandingPage() {
+  const { getProfile } = accountHook();
+  useEffect(() => {
+    getProfile();
+  }, []);
   return (
     <div>
       <div className="data-group">

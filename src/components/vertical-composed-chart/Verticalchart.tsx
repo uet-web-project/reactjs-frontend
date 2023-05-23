@@ -1,4 +1,3 @@
-import "./styles.css";
 import React, { useEffect } from "react";
 import {
   ComposedChart,

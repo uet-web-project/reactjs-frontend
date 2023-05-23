@@ -1,5 +1,4 @@
 import * as React from "react";
-import { MouseEventHandler } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,13 +16,15 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import "./styles.css";
-import AdbIcon from "@mui/icons-material/Adb";
 import { ChevronRight } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-const pages = ["Home", "Create account"];
-const settings = ["Profile", "Logout"];
+import { accountHook } from "../../redux/hooks/accountHooks";
+import axiosInstance from "../../utils/axios";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 
 function Navbar() {
+  const { callClearAllData } = chartStatisticHook();
+  const { isDepLogin, setDepLogin } = accountHook();
   const navigagte = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -55,12 +56,15 @@ function Navbar() {
   };
   const createAccountBtnAction = () => {
     handleCloseNavMenu;
-    navigagte("/auth/create-account");
+    navigagte("/create-account");
   };
 
   const handleLogOutEvent = () => {
-    navigagte("/auth/Login");
+    callClearAllData();
+    axiosInstance.defaults.headers.common = {};
     window.localStorage.clear();
+    navigagte("/auth/department-login");
+    setDepLogin(false);
   };
   // for statistics dropdown item and expand item
   const open = Boolean(anchorElStatistic);
@@ -274,6 +278,7 @@ function Navbar() {
               <Typography sx={{ fontWeight: "500" }}>Statistics</Typography>
               <KeyboardArrowDownIcon />
             </MenuItem>
+
             <Menu
               open={open}
               id="Statistics-Menu"

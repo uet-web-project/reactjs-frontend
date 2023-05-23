@@ -31,7 +31,6 @@ export interface ChartState {
   carRegisteredMonthlyComparison: IMonthlyComparison[];
   carInfoOverviewTable: ICarInfoOverviewTable[];
   centerList: IRegistrationCenter[];
-  loading: boolean;
 }
 
 const initialState: ChartState = {
@@ -40,7 +39,6 @@ const initialState: ChartState = {
   carRegisteredMonthlyComparison: [],
   carInfoOverviewTable: [],
   centerList: [],
-  loading: false,
 };
 export const chartStatisticSlice = createSlice({
   name: "chartStatistic",
@@ -59,8 +57,11 @@ export const chartStatisticSlice = createSlice({
     ) {
       state.carTypeOverviewChart = action.payload;
     },
-    setDataForMonthlyComparison(state, action: PayloadAction<IMonthlyComparison[]>) {
-      state.carRegisteredMonthlyComparison = action.payload
+    setDataForMonthlyComparison(
+      state,
+      action: PayloadAction<IMonthlyComparison[]>
+    ) {
+      state.carRegisteredMonthlyComparison = action.payload;
     },
     setDataForCarInfoOverviewTable(
       state,
@@ -71,8 +72,13 @@ export const chartStatisticSlice = createSlice({
     setDataForCenterList(state, action: PayloadAction<IRegistrationCenter[]>) {
       state.centerList = action.payload;
     },
-    setLoading(state, action: PayloadAction<boolean>) {
-      state.loading = action.payload;
+
+    clearAllData(state) {
+      state.totalOverviewChartData = [];
+      state.carTypeOverviewChart = [];
+      state.carRegisteredMonthlyComparison = [];
+      state.carInfoOverviewTable = [];
+      state.centerList = [];
     },
   },
 });
@@ -82,8 +88,8 @@ export const {
   setDataForCarInfoOverviewTable,
   setDataForMonthlyComparison,
   setDataForCenterList,
-  setLoading,
   setDataForCarTypeOverview,
+  clearAllData,
 } = chartStatisticSlice.actions;
 
 export default chartStatisticSlice.reducer;

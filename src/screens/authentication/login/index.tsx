@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./styles.css";
 import SignUpInformation from "../../../components/sign-up/SignUpInformation";
 import { Outlet } from "react-router-dom";
+import LoginInformation from "../../../components/login/LoginInformation";
 function Login() {
   return (
     <div className="login-container">
@@ -19,7 +20,7 @@ function Login() {
           alt="logo"
         />
       </div>
-      <Outlet />
+      <Outlet/>
     </div>
   );
 }

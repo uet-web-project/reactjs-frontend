@@ -15,7 +15,7 @@ current.setMonth(current.getMonth() - 1);
 const previousMonth = current.toLocaleString("default", { month: "long" });
 
 const Piechart = () => {
-  const { carRegisteredMonthlyComparison, loading, getDataForMonthlyComparison } =
+  const { carRegisteredMonthlyComparison, getDataForMonthlyComparison } =
     chartStatisticHook();
 
   useEffect(() => {
