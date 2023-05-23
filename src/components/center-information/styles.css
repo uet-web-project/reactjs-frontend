@@ -1,0 +1,12 @@
+.center-information-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.center-detail-information {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}

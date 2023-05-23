@@ -16,7 +16,7 @@ function Main() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      navigate("/auth/login");
+      navigate("/auth/department-login");
     } else {
       try {
         const res = await axiosInstance.get(getAPI(token).verifyToken);
@@ -25,10 +25,12 @@ function Main() {
         if (res.status === 200) {
           navigate("/landing-page");
         } else {
-          navigate("/auth/login");
+          navigate("/auth/department-login");
         }
       } catch (err) {
-        navigate("/auth/login");
+        console.log(err);
+
+        navigate("/auth/department-login");
       }
     }
   }
@@ -36,7 +38,9 @@ function Main() {
   return (
     <div className="main-container">
       <Navbar />
-      <Outlet />
+      <div className="parent-body">
+        <Outlet />
+      </div>
     </div>
   );
 }

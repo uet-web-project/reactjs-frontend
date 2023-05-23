@@ -1,5 +1,4 @@
 import * as React from "react";
-import { MouseEventHandler } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,12 +16,17 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import "./styles.css";
-import AdbIcon from "@mui/icons-material/Adb";
 import { ChevronRight } from "@mui/icons-material";
-const pages = ["Home", "Create account"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useNavigate } from "react-router-dom";
+import { accountHook } from "../../redux/hooks/accountHooks";
+import axiosInstance from "../../utils/axios";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 
 function Navbar() {
+  const { callClearAllData } = chartStatisticHook();
+  const { isDepLogin, setDepLogin } = accountHook();
+  const navigagte = useNavigate();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -46,6 +50,22 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
+  const homeBtnAction = () => {
+    handleCloseNavMenu;
+    navigagte("/landing-page");
+  };
+  const createAccountBtnAction = () => {
+    handleCloseNavMenu;
+    navigagte("/create-account");
+  };
+
+  const handleLogOutEvent = () => {
+    callClearAllData();
+    axiosInstance.defaults.headers.common = {};
+    window.localStorage.clear();
+    navigagte("/auth/department-login");
+    setDepLogin(false);
+  };
   // for statistics dropdown item and expand item
   const open = Boolean(anchorElStatistic);
   const openExpand = Boolean(anchorElExpand);
@@ -74,14 +94,13 @@ function Navbar() {
   };
   return (
     <AppBar position="static">
-      <Container className="secondary-color" maxWidth="xl">
+      <Container className="secondary-color nav-container">
         <Toolbar disableGutters>
           <img
-            src="/src/assets/icons/My project 1.png"
+            src="/src/assets/icons/Myproject1.png"
             alt="logo-image"
             style={{ width: "100px", marginLeft: "0px" }}
           />
-
           {/* Toggle box */}
           <Box
             className="toggle-box"
@@ -115,32 +134,42 @@ function Navbar() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
             >
-              {pages.map((page, index) => (
-                <MenuItem
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ marginBottom: "20px" }}
+              <MenuItem
+                onClick={handleCloseNavMenu}
+                sx={{ marginBottom: "20px" }}
+              >
+                <HomeIcon sx={{ color: "white" }} />
+                <Typography
+                  sx={{
+                    fontWeight: "500",
+                    display: "inline",
+                    marginLeft: "10px",
+                    color: "white",
+                  }}
+                  textAlign="center"
                 >
-                  <div className="collapsed-item-container">
-                    {index == 0 ? (
-                      <HomeIcon sx={{ color: "white" }} />
-                    ) : (
-                      <GroupsIcon sx={{ color: "white" }} />
-                    )}
-                    <Typography
-                      sx={{
-                        fontWeight: "500",
-                        display: "inline",
-                        marginLeft: "10px",
-                        color: "white",
-                      }}
-                      textAlign="center"
-                    >
-                      {page}
-                    </Typography>
-                  </div>
-                </MenuItem>
-              ))}
+                  {" "}
+                  Home
+                </Typography>
+              </MenuItem>
+              <MenuItem
+                onClick={createAccountBtnAction}
+                sx={{ marginBottom: "20px" }}
+              >
+                <GroupsIcon sx={{ color: "white" }} />
+                <Typography
+                  sx={{
+                    fontWeight: "500",
+                    display: "inline",
+                    marginLeft: "10px",
+                    color: "white",
+                  }}
+                  textAlign="center"
+                >
+                  {" "}
+                  Create account
+                </Typography>
+              </MenuItem>
 
               <MenuItem
                 onClick={handleExpand}
@@ -204,8 +233,6 @@ function Navbar() {
               </MenuItem>
             </Menu>
           </Box>
-
-          {/* Menu Box */}
           <Box
             className="menu-box"
             sx={{
@@ -214,26 +241,31 @@ function Navbar() {
               justifyContent: "center",
             }}
           >
-            {pages.map((page, index) => (
-              <div key={index}>
-                <MenuItem
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    color: "white",
-                    marginBottom: "3px",
-                    marginLeft: "1vw",
-                  }}
-                >
-                  {index == 0 ? (
-                    <HomeIcon sx={{ marginRight: "10px" }} />
-                  ) : (
-                    <GroupsIcon sx={{ marginRight: "10px" }} />
-                  )}
-                  <Typography sx={{ fontWeight: "500" }}>{page}</Typography>
-                </MenuItem>
-              </div>
-            ))}
+            <MenuItem
+              onClick={homeBtnAction}
+              sx={{
+                color: "white",
+                marginBottom: "3px",
+                marginLeft: "1vw",
+              }}
+            >
+              <HomeIcon sx={{ marginRight: "10px" }} />
+              <Typography sx={{ fontWeight: "500" }}>Home</Typography>
+            </MenuItem>
+            <MenuItem
+              onClick={createAccountBtnAction}
+              sx={{
+                color: "white",
+                marginBottom: "3px",
+                marginLeft: "1vw",
+              }}
+            >
+              {/* <HomeIcon sx={{ marginRight: "10px" }} /> */}
+
+              <GroupsIcon sx={{ marginRight: "10px" }} />
+              <Typography sx={{ fontWeight: "500" }}>Create account</Typography>
+            </MenuItem>
+
             <MenuItem
               sx={{ color: "white", marginBottom: "3px", marginLeft: "1vw" }}
               id="statistics-button"
@@ -246,6 +278,7 @@ function Navbar() {
               <Typography sx={{ fontWeight: "500" }}>Statistics</Typography>
               <KeyboardArrowDownIcon />
             </MenuItem>
+
             <Menu
               open={open}
               id="Statistics-Menu"
@@ -277,7 +310,7 @@ function Navbar() {
               </MenuItem>
             </Menu>
           </Box>
-
+          {/* deps profile */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -285,7 +318,9 @@ function Navbar() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{
+                mt: "45px",
+              }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -300,11 +335,17 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem key={"Profile"} onClick={handleCloseUserMenu}>
+                <Typography textAlign="center" color="white">
+                  Profile
+                </Typography>
+              </MenuItem>
+
+              <MenuItem key={"Logout"} onClick={handleLogOutEvent}>
+                <Typography textAlign="center" color="white">
+                  Logout
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
