@@ -14,7 +14,7 @@ import {
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 
 export default function Verticalchart() {
-  const { loading, carTypeOverviewChart, getDataForCarTypeOverview } =
+  const { carTypeOverviewChart, getDataForCarTypeOverview } =
     chartStatisticHook();
 
   useEffect(() => {
