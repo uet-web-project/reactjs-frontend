@@ -189,6 +189,7 @@ export const accountHook = () => {
   ) {
     if (repassword.length == 0) {
       showIcon("repasswordState", false);
+      showError("repasswordError","Re-enter password is required")
       return false;
     } else if (repassword !== signUpData.password) {
       showError("repasswordError", "Repassword is not match");
