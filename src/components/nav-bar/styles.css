@@ -17,3 +17,8 @@
     display: block !important;
   }
 }
+
+.css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+  border-radius: 5px !important;
+}
