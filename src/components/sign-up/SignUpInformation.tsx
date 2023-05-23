@@ -96,7 +96,7 @@ function SignUpInformation() {
 
   let signInButtonStyle: CSS.Properties = {
     height: "36px",
-    marginTop: "15px",
+    margin: "15px 0 30px 0",
     maxWidth: "450px",
     width: "65%",
   };
@@ -132,14 +132,13 @@ function SignUpInformation() {
                 color: "grey",
               }}
             >
-              {" "}
-              Create new account for registry center !
+              Create new account for registry center!
             </span>
           </div>
           <div className="input-information">
             <TextInput
               value={signUpData.centerId}
-              fieldName="CenterId"
+              fieldName="Center ID"
               style={inputStyle}
               type="text"
               onChange={(event) => {
@@ -161,7 +160,7 @@ function SignUpInformation() {
             />
             <TextInput
               value={repassword}
-              fieldName="Repassword"
+              fieldName="Re-enter password"
               style={inputStyle}
               type="password"
               onChange={(event) => {
