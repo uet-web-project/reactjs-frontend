@@ -94,7 +94,7 @@ function Navbar() {
   };
   return (
     <AppBar position="static">
-      <Container className="secondary-color" maxWidth="xl">
+      <Container className="secondary-color nav-container">
         <Toolbar disableGutters>
           <img
             src="/src/assets/icons/Myproject1.png"

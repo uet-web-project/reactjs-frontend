@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/nav-bar/Navbar";
 import axiosInstance from "../../utils/axios";
 import Overview from "../../components/overview/Overview";
-import MonthlyComparision from "../../components/average-comparision/AverageComparision";
+import MonthlyComparision from "../../components/Average-comparision/AverageComparision";
 import RecentRegisteredCarTable from "../../components/table/RecentRegisteredCarTable";
 import CenterList from "../../components/center-list/CenterList";
 import { accountHook } from "../../redux/hooks/accountHooks";

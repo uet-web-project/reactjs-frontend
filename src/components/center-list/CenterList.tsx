@@ -4,7 +4,7 @@ import CenterInformation from "../center-information/CenterInformation";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 
 function CenterList() {
-  const { loading, centerList, getCenterListData } = chartStatisticHook();
+  const { centerList, getCenterListData } = chartStatisticHook();
 
   useEffect(() => {
     getCenterListData();

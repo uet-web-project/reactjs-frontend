@@ -21,11 +21,7 @@ function useWindowSize() {
 }
 
 export default function RecentRegisteredCarTable() {
-  const {
-    loading,
-    carInfoOverviewTable,
-    getVehicleTableData,
-  } = chartStatisticHook();
+  const { carInfoOverviewTable, getVehicleTableData } = chartStatisticHook();
   const [screenWidth, screenHeight] = useWindowSize();
   const rowWidth = (screenWidth * 17) / 100;
   const columns: GridColDef[] = [
