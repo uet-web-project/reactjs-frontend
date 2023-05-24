@@ -14,6 +14,12 @@ function Main() {
 
   async function checkToken() {
     const token = localStorage.getItem("token");
+    // if (!token) {
+    //   navigate("/auth/login");
+    // } else {
+    //   try {
+    //     const res = await axiosInstance.get(getAPI(token).verifyToken);
+    //     console.log(res);
 
     if (!token) {
       navigate("/auth/department-login");
