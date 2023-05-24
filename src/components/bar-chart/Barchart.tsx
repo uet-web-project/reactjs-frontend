@@ -16,7 +16,7 @@ function Barchart() {
 
   useEffect(() => {
     getDataForTotalOverviewChart("week");
-    console.log(totalOverviewChartData);
+    console.log(totalOverviewChartData[0]);
   }, []);
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -26,7 +26,7 @@ function Barchart() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey={Object.keys(totalOverviewChartData[0])[1]} fill="#62b7d3" />
+        <Bar dataKey="vehicles" fill="#62b7d3" />
       </BarChart>
     </ResponsiveContainer>
   );
