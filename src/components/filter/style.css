@@ -1,29 +1,41 @@
-#filterButton{
-    background-color: #edf2ff;
-    border-radius: 5px;
-    border-style: none;
-    color: black;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
-      sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 5px;
-    min-width: 80px;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    outline: none;
-    position: relative;
-    text-align: center;
-    transition: color 100ms;
-    vertical-align: baseline;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+#filterButton {
+  background-color: #edf2ff;
+  border-radius: 5px;
+  border-style: none;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 5px;
+  min-width: 80px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  outline: none;
+  position: relative;
+  text-align: center;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 #filterButton:hover {
   background-color: #627ed3;
   color: white;
+}
+
+.inputCard {
+  min-width: 100px;
+  min-height: 100px;
+  background-color: rebeccapurple;
+  border: #edf2ff solid;
+  margin: 5px;
+}
+
+.filterCarDialog{
+  padding: 10px;
 }

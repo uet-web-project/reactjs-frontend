@@ -13,6 +13,7 @@ import { store } from "./redux/store";
 import CarRegistry from "./screens/car-registry";
 import RegistryCenter from "./screens/registry-center/RegistryCenter";
 import ExpiredCar from "./screens/expired-car/ExpiredCar";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -60,9 +61,8 @@ const router = createBrowserRouter([
 function App() {
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </Provider>
   );
 }
-
 export default App;

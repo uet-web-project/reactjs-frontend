@@ -15,7 +15,7 @@ function Login() {
         </div>
         <img
           className="logo"
-          src={"/src/assets/icons/My project 1.png"}
+          src={"/src/assets/icons/Myproject1.png"}
           alt="logo"
         />
       </div>

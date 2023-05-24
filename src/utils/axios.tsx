@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://auto-registry-server.herokuapp.com/"
+const baseURL = "https://auto-registry-server.herokuapp.com/";
 // const baseURL = "http://localhost:4000/";
 
 const token = localStorage.getItem("token");

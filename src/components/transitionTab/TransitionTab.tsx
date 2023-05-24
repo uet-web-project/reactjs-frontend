@@ -26,19 +26,19 @@ function TransitionTab() {
           className={selectedTab === "center" ? "selected" : "button"}
           onClick={() => navigate("/stats/centers")}
         >
-          tab1
+          Center Registration
         </button>
         <button
           className={selectedTab === "car" ? "selected" : "button"}
           onClick={() => navigate("/stats/cars")}
         >
-          tab2
+          Car Registry
         </button>
         <button
           className={selectedTab === "expired" ? "selected" : "button"}
           onClick={() => navigate("/stats/expired")}
         >
-          tab3
+          Expired Car
         </button>
       </div>
       <div className="content">{pathname}</div>

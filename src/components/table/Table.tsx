@@ -5,63 +5,71 @@ import {
   DataGrid,
   GridColDef,
   GridToolbar,
+  GridValueGetterParams,
 } from "@mui/x-data-grid";
 import { useEffect } from "react";
-
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
+import moment from "moment";
 // car, registryCenter, expired
-interface TableProps {
-  cars: {
-    id?: string;
-    vin: string;
-    registrationNumber: string;
-    vehicleType: string;
-    registrationDate: string;
-    registrationLocation: string;
-    licensePlate: string;
-    vehicleOwner: string;
-    manufacturer: string;
-    model: string;
-    version: string;
-    purpose: string;
-    width: number;
-    length: number;
-    wheelBase: number;
-    emission: number;
-    mileage: number;
-    registrationCenter: string;
-  }[];
-  registryCenter: {}[];
-}
 
 export default function TestTable(props: any) {
-  const rows = props[props.type];
-  const [columns, setColumns] = React.useState<GridColDef[]>([
-    {
-      field: "",
-      headerAlign: "left",
-      flex: 1,
-      align: "left",
-      renderHeader: () => <strong>{""}</strong>,
-    },
-  ]);
-  const [data, setData] = React.useState(rows);
+  const { loading, carInfoOverviewTable, getVehicleTableData } =
+    chartStatisticHook();
   const [search, setSearch] = React.useState<Record<string, string[]>>({});
 
-  useEffect(() => {
-    const Columns: GridColDef[] = Object.keys(rows[0]).map((key) => ({
-      field: key,
-      headerAlign: "left",
+  const columns: GridColDef[] = [
+    {
+      field: "licensePlate",
+      headerName: "License Plate",
+      headerAlign: "center",
       flex: 1,
-      align: "left",
-      renderHeader: () => <strong>{key.toUpperCase()}</strong>,
-    }));
-    setColumns(Columns);
-  });
+      editable: false,
+      align: "center",
+    },
+    {
+      field: "vehicleType",
+      headerName: "Vehicle Type",
+      headerAlign: "center",
+      flex: 1,
+      editable: false,
+      align: "center",
+    },
+    {
+      field: "manufacturer",
+      headerName: "Manufacturer",
+      headerAlign: "center",
+      flex: 1,
+      editable: false,
+      align: "center",
+    },
+    {
+      field: "vehicleOwner",
+      headerName: "owner",
+      headerAlign: "center",
+      flex: 1,
+      editable: false,
+      align: "center",
+    },
+    {
+      field: "registrationDate",
+      headerName: "Registration Date",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      headerAlign: "center",
+      flex: 1,
+      align: "center",
+      valueGetter: (params: GridValueGetterParams) =>
+        `${moment(params.value).format("DD/MM/YYYY")}`,
+    },
+  ];
+
+  useEffect(() => {
+    getVehicleTableData();
+    console.log(carInfoOverviewTable);
+  }, []);
 
   // handle icon click to set colHeader to TextField
-  function onFilterClick(){
-
-  }
+  function onFilterClick() {}
 
   //filtering
   function inputSearch(id: string, e: React.ChangeEvent<HTMLInputElement>) {
@@ -82,7 +90,7 @@ export default function TestTable(props: any) {
       }}
     >
       <DataGrid
-        rows={data}
+        rows={carInfoOverviewTable}
         columns={columns}
         slots={{
           toolbar: GridToolbar,

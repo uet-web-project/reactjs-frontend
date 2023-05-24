@@ -5,10 +5,9 @@ import TestTable from "../../components/table/Table";
 import TransitionTab from "../../components/transitionTab/TransitionTab";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axiosInstance from "../../utils/axios";
-import { getAPI } from "../../api/getAPI";
 import { Box, TextField } from "@mui/material";
 import FilterCar from "../../components/filter/FilterCar";
+import DatePicker from "../../components/date-picker/DatePicker";
 
 const GraphData = [
   { name: "Jan", uv: 4000, pv: 2400, amt: 2400 },
@@ -22,9 +21,6 @@ const GraphData = [
 const TableData = [{ id: 1, name: "fafdas" }];
 function CarRegistry() {
   const [activeIndex, setActiveIndex] = useState<number | undefined>();
-  const [graphData, setData] = useState(GraphData);
-  const [tableData, setTableData] = useState({});
-
   useEffect(() => {});
 
   const handleButtonClick = (index: number) => {
@@ -47,32 +43,42 @@ function CarRegistry() {
     <div className="pageContainer">
       <div className="upperContainer">
         <div className="statsDisplayDiv">
-          <div>
-            <p>Manage</p>
-            <p>date picker be here</p>
-            <button onClick={onclick}>click</button>
+          <div className="chartManager">
+            <p style={{ marginTop: "auto",marginBottom:"auto" }}>Manage</p>
+            <div style={{ margin: "auto" }}>
+              <DatePicker />
+            </div>
           </div>
           <div className="chartUpperButDiv">
-            <button
-              id="chartUpperBut1"
-              className={`chartUpperBut ${activeIndex === 0 ? "active" : ""}`}
-              onClick={() => handleButtonClick(0)}
-            >
-              hello
-            </button>
-            <button
-              className={`chartUpperBut ${activeIndex === 1 ? "active" : ""}`}
-              onClick={() => handleButtonClick(1)}
-            >
-              hello
-            </button>
-            <button
-              id="chartUpperBut3"
-              className={`chartUpperBut ${activeIndex === 2 ? "active" : ""}`}
-              onClick={() => handleButtonClick(2)}
-            >
-              hello
-            </button>
+            <div className="chartUpperButDivHolder">
+              <button
+                id="chartUpperBut1"
+                className={`chartUpperBut ${activeIndex === 0 ? "active" : ""}`}
+                onClick={() => handleButtonClick(0)}
+              >
+                BUS
+              </button>
+              <span></span>
+            </div>
+            <div className="chartUpperButDivHolder">
+              <button
+                id="chartUpperBut2"
+                className={`chartUpperBut ${activeIndex === 1 ? "active" : ""}`}
+                onClick={() => handleButtonClick(1)}
+              >
+                CAR
+              </button>
+            </div>
+            <div className="chartUpperButDivHolder">
+              <button
+                id="chartUpperBut3"
+                className={`chartUpperBut ${activeIndex === 2 ? "active" : ""}`}
+                onClick={() => handleButtonClick(2)}
+              >
+                TRUCK
+              </button>
+              <span></span>
+            </div>
           </div>
           <div className="chartContainer">
             <Barchart data={GraphData} />

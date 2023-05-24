@@ -7,3 +7,6 @@
   background-color: #62b7d3;
   box-sizing: border-box;
 }
+.button-style:hover {
+  cursor: pointer;
+}

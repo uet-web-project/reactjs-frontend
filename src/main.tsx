@@ -5,8 +5,9 @@ import "./App.css";
 
 //tét
 import FilterCar from "./components/filter/FilterCar";
+import DatePicker from "./components/date-picker/DatePicker";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <FilterCar />
+    <App />
   </React.StrictMode>
 );

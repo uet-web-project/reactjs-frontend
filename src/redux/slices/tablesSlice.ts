@@ -42,8 +42,8 @@ const initialState: ChartState = {
   centerList: [],
   loading: false,
 };
-export const chartStatisticSlice = createSlice({
-  name: "chartStatistic",
+export const tableStatisticSlice = createSlice({
+  name: "tableStatistic",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
@@ -78,12 +78,7 @@ export const chartStatisticSlice = createSlice({
 });
 
 export const {
-  setDataForTotalOverviewChart,
-  setDataForCarInfoOverviewTable,
-  setDataForMonthlyComparison,
-  setDataForCenterList,
-  setLoading,
-  setDataForCarTypeOverview,
-} = chartStatisticSlice.actions;
+ 
+} = tableStatisticSlice.actions;
 
-export default chartStatisticSlice.reducer;
+export default tableStatisticSlice.reducer;

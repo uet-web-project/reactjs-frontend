@@ -8,14 +8,13 @@
 }
 
 .monthly-percentage-information {
-  margin: 10px 10px 0 0;
-  font-size: 50px;
+  margin: 20px 10px 0 25px;
+  font-size: 45px;
   font-weight: bolder;
   display: inline-block;
 }
 
 .monthly-quantity-information {
-  font-weight: bold;
-  margin-top: 0px;
+  margin-top: 10px;
   right: 10px;
 }

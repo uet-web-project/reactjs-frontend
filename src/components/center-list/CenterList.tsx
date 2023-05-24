@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.css";
 import CenterInformation from "../center-information/CenterInformation";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 
 function CenterList() {
+  const { loading, centerList, getCenterListData } = chartStatisticHook();
+
+  useEffect(() => {
+    getCenterListData();
+  }, []);
   return (
     <div className="center-list-container">
       <div className="secondary-font center-list-header">
         Centers under this department
       </div>
-      <CenterInformation
-        centerIndex={1}
-        centerName="Tran Thang"
-        centerLocation="HaNoi"
-        centerPhoneNumber="0971238954"
-      />
+      <div className="center-list-information-header"></div>
+      {centerList.length
+        ? centerList.map((centerData, index) => (
+            <CenterInformation
+              key={index}
+              centerData={centerData}
+              index={index + 1}
+            />
+          ))
+        : "No center under this department"}
     </div>
   );
 }

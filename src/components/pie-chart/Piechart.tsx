@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -7,6 +7,7 @@ import {
   Cell,
   ResponsiveContainer,
 } from "recharts";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 
 const current = new Date();
 const currentMonth = current.toLocaleString("default", { month: "long" });
@@ -14,10 +15,12 @@ current.setMonth(current.getMonth() - 1);
 const previousMonth = current.toLocaleString("default", { month: "long" });
 
 const Piechart = () => {
-  const data = [
-    { name: previousMonth, value: 400 },
-    { name: currentMonth, value: 300 },
-  ];
+  const { carRegisteredMonthlyComparison, loading, getDataForMonthlyComparison } =
+    chartStatisticHook();
+
+  useEffect(() => {
+    getDataForMonthlyComparison()
+  }, []);
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -66,7 +69,7 @@ const Piechart = () => {
             margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
             wrapperStyle={{
               position: "absolute",
-              right: "25px",
+              right: "30px",
               top: "190px",
             }}
             align="center"
@@ -75,7 +78,7 @@ const Piechart = () => {
           />
 
           <Pie
-            data={data}
+            data={carRegisteredMonthlyComparison}
             cx="50%"
             cy="50%"
             labelLine={false}
@@ -84,7 +87,7 @@ const Piechart = () => {
             fill="#8884d8"
             dataKey="value"
           >
-            {data.map((entry, index) => (
+            {carRegisteredMonthlyComparison.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
