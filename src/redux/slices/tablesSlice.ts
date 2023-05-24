@@ -31,6 +31,7 @@ export interface ChartState {
   carRegisteredMonthlyComparison: IMonthlyComparison[];
   carInfoOverviewTable: ICarInfoOverviewTable[];
   centerList: IRegistrationCenter[];
+  loading: boolean;
 }
 
 const initialState: ChartState = {
@@ -39,9 +40,10 @@ const initialState: ChartState = {
   carRegisteredMonthlyComparison: [],
   carInfoOverviewTable: [],
   centerList: [],
+  loading: false,
 };
-export const chartStatisticSlice = createSlice({
-  name: "chartStatistic",
+export const tableStatisticSlice = createSlice({
+  name: "tableStatistic",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
@@ -57,11 +59,8 @@ export const chartStatisticSlice = createSlice({
     ) {
       state.carTypeOverviewChart = action.payload;
     },
-    setDataForMonthlyComparison(
-      state,
-      action: PayloadAction<IMonthlyComparison[]>
-    ) {
-      state.carRegisteredMonthlyComparison = action.payload;
+    setDataForMonthlyComparison(state, action: PayloadAction<IMonthlyComparison[]>) {
+      state.carRegisteredMonthlyComparison = action.payload
     },
     setDataForCarInfoOverviewTable(
       state,
@@ -72,23 +71,14 @@ export const chartStatisticSlice = createSlice({
     setDataForCenterList(state, action: PayloadAction<IRegistrationCenter[]>) {
       state.centerList = action.payload;
     },
-    clearAllData(state) {
-      state.totalOverviewChartData = [];
-      state.carTypeOverviewChart = [];
-      state.carRegisteredMonthlyComparison = [];
-      state.carInfoOverviewTable = [];
-      state.centerList = [];
+    setLoading(state, action: PayloadAction<boolean>) {
+      state.loading = action.payload;
     },
   },
 });
 
 export const {
-  setDataForTotalOverviewChart,
-  setDataForCarInfoOverviewTable,
-  setDataForMonthlyComparison,
-  setDataForCenterList,
-  setDataForCarTypeOverview,
-  clearAllData,
-} = chartStatisticSlice.actions;
+ 
+} = tableStatisticSlice.actions;
 
-export default chartStatisticSlice.reducer;
+export default tableStatisticSlice.reducer;

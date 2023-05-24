@@ -29,7 +29,6 @@ export const chartStatisticHook = () => {
   function callClearAllData() {
     dispatch(clearAllData());
   }
-
   async function getDataForTotalOverviewChart(date: string) {
     dispatch(setLoading(true));
     try {

@@ -8,7 +8,6 @@ import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 function Overview() {
   const { getDataForCarTypeOverview, getDataForTotalOverviewChart } =
     chartStatisticHook();
-
   const [btnState, setBtnState] = useState("week");
   const changeToWeekData = () => {
     setBtnState("week");

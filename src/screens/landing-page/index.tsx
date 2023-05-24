@@ -11,6 +11,9 @@ import { accountHook } from "../../redux/hooks/accountHooks";
 // style
 import "./styles.css";
 
+// style
+import './styles.css'
+
 function LandingPage() {
   const { getProfile } = accountHook();
   useEffect(() => {
