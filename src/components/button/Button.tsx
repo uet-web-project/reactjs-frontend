@@ -5,15 +5,17 @@ function Button({
   onClick,
   style,
   content,
+  className,
 }: {
   onClick: () => void;
   style?: CSS.Properties;
   content: string;
+  className?: string;
 }) {
   return (
     <button
       onClick={onClick}
-      className="button-style"
+      className={`button-style ${className ? className : ""}`}
       type="button"
       style={style}
     >

@@ -1,4 +1,3 @@
-import "./styles.css";
 import React, { useEffect } from "react";
 import {
   ComposedChart,
@@ -15,7 +14,7 @@ import {
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 
 export default function Verticalchart() {
-  const { loading, carTypeOverviewChart, getDataForCarTypeOverview } =
+  const { carTypeOverviewChart, getDataForCarTypeOverview } =
     chartStatisticHook();
 
   useEffect(() => {

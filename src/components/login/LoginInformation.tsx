@@ -5,19 +5,26 @@ import Button from "../button/Button";
 import axiosInstance from "../../utils/axios";
 import TextInput from "../input/text-input/TextInput";
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { accountHook } from "../../redux/hooks/accountHooks";
 import axios from "axios";
 
 const idError = "Department does not exist";
 const passwordError = "Wrong password";
-function LoginInformation() {
-  const navigagte = useNavigate();
-  const [loginData, changeLoginData] = useState({
+
+function LoginInformation({ isDepLogin }: { isDepLogin: boolean }) {
+  const { depLogin, centerLogin } = accountHook();
+  const navigate = useNavigate();
+  const [depLoginData, changeDepLoginData] = useState({
     depId: "",
     password: "",
   });
+  const [centerLoginData, changeCenterLoginData] = useState({
+    centerId: "",
+    password: "",
+  });
   const [errorData, changeErrorData] = useState({
-    depIdError: "",
+    IdError: "",
     passwordError: "",
   });
 
@@ -28,40 +35,30 @@ function LoginInformation() {
     }));
   }
   function onLoginChange(event: any, fieldName: string) {
-    if (event.target.value === "") {
-      if (fieldName == "depId") showError("depIdError", "");
-      else {
-        showError("passwordError", "");
-      }
+    if (fieldName == "depId" || fieldName == "centerId")
+      showError("IdError", "");
+    else {
+      showError("passwordError", "");
     }
-    changeLoginData((prev) => ({
-      ...prev,
-      [fieldName]: event.target.value,
-    }));
+
+    if (isDepLogin) {
+      changeDepLoginData((prev) => ({
+        ...prev,
+        [fieldName]: event.target.value,
+      }));
+    } else {
+      changeCenterLoginData((prev) => ({
+        ...prev,
+        [fieldName]: event.target.value,
+      }));
+    }
   }
 
   async function login() {
-    try {
-      const res = await axiosInstance.post(
-        postAPI().registrationDepLogin,
-        loginData
-      );
-      console.log(res);
-      if (res.status === 200) {
-        console.log(res);
-        const token = res.data.access_token;
-        localStorage.setItem("token", token);
-        axiosInstance.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${token}`;
-        navigagte("/landing-page");
-      }
-    } catch (err: any) {
-      if (err.response.data.message === idError) {
-        showError("depIdError", idError);
-      } else if (err.response.data.message === passwordError) {
-        showError("passwordError", passwordError);
-      }
+    {
+      isDepLogin
+        ? depLogin({ loginData: depLoginData, showError: showError })
+        : centerLogin({ loginData: centerLoginData, showError: showError });
     }
   }
 
@@ -71,7 +68,7 @@ function LoginInformation() {
   };
 
   let signInButtonStyle: CSS.Properties = {
-    fontWeight: 400,
+    fontWeight: 500,
     width: "40%",
     height: "36px",
     marginTop: "30px",
@@ -83,22 +80,24 @@ function LoginInformation() {
       <div className="login-header">
         <div className="responsive-bg"></div>
         <h1 className="welcome-back">Welcome back</h1>
-        <p>Welcome back! Please enter your details.</p>
-        <h1 className="login">Login</h1>
+        <p>Please enter your details.</p>
+        <h1 className="login">{`${
+          isDepLogin ? "Department " : "Center "
+        }login`}</h1>
       </div>
       <div className="login-input">
         <TextInput
-          value={loginData.depId}
-          fieldName="Department ID"
+          value={isDepLogin ? depLoginData.depId : centerLoginData.centerId}
+          fieldName={`${isDepLogin ? "Department" : "Center"} ID`}
           style={inputStyle}
           type="text"
           onChange={(event) => {
-            onLoginChange(event, "depId");
+            onLoginChange(event, isDepLogin ? "depId" : "centerId");
           }}
-          error={errorData.depIdError}
+          error={errorData.IdError}
         />
         <TextInput
-          value={loginData.password}
+          value={isDepLogin ? depLoginData.password : centerLoginData.password}
           fieldName="Password"
           style={inputStyle}
           type="password"
@@ -108,10 +107,27 @@ function LoginInformation() {
           error={errorData.passwordError}
         />
         <div className="error-field"></div>
-        <Button onClick={login} content="Sign in" style={signInButtonStyle} />
+        <Button
+          className="custom-signin-btn"
+          onClick={login}
+          content="Sign in"
+          style={signInButtonStyle}
+        />
       </div>
+      {
+        <Link
+          className="secondary-font linkto"
+          to={`/auth/${isDepLogin ? "center-login" : "department-login"}`}
+        >{`Log in as ${isDepLogin ? "center" : "department"}`}</Link>
+      }
     </div>
   );
 }
 
 export default LoginInformation;
+function centerLogin(arg0: {
+  loginData: { depId: string; password: string };
+  showError: (fieldName: string, value: string) => void;
+}) {
+  throw new Error("Function not implemented.");
+}

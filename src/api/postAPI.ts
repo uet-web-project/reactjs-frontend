@@ -4,6 +4,8 @@ export function postAPI() {
     registrationDepLogin: "auth/registration-dep",
     createRegistrationDep: "registration-dep",
 
+    //it's for center
+    registrationCenterLogin: "/auth/registration-center",
     createRegistrationCenter: "registration-center",
   };
 }

@@ -28,9 +28,9 @@
 }
 
 .error-name {
+  margin-bottom: 10px;
   font-size: 12px;
   color: red;
   font-style: italic;
-  margin-right: 10px;
   font-weight: 600;
 }
