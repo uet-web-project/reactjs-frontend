@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { Box, TextField } from "@mui/material";
 import FilterCar from "../../components/filter/FilterCar";
 import DatePicker from "../../components/date-picker/DatePicker";
+import DropZone from "../../components/data-import/DropZone";
+import InfoAreaChart from "../../components/area-chart/AreaChart";
 
 const GraphData = [
   { name: "Jan", uv: 4000, pv: 2400, amt: 2400 },
@@ -35,7 +37,7 @@ function CarRegistry() {
       <div className="upperContainer">
         <div className="statsDisplayDiv">
           <div className="chartManager">
-            <p style={{ marginTop: "auto",marginBottom:"auto" }}>Manage</p>
+            <p style={{ marginTop: "auto", marginBottom: "auto" }}>Manage</p>
             <div style={{ margin: "auto" }}>
               <DatePicker />
             </div>
@@ -72,7 +74,7 @@ function CarRegistry() {
             </div>
           </div>
           <div className="chartContainer">
-            <Barchart data={GraphData} />
+            <InfoAreaChart />
           </div>
         </div>
         <div className="transitionTabDiv">
@@ -81,7 +83,7 @@ function CarRegistry() {
       </div>
       <div className="tableContainer">
         <div className="firstPart">
-          <FilterCar />
+          <DropZone />
           <div className="generalInputContainer">
             <Box sx={{ display: "flex", alignItems: "flex-end" }}>
               <SearchIcon sx={{ color: "white", mr: 1, my: 0.5 }} />

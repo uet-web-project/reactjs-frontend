@@ -7,5 +7,8 @@ export function postAPI() {
     //it's for center
     registrationCenterLogin: "/auth/registration-center",
     createRegistrationCenter: "registration-center",
+
+    //importFile
+    fileImport: "/vehicle/upload-vehicles-sheet",
   };
 }

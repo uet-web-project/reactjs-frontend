@@ -3,21 +3,41 @@ import Paper from "@mui/material/Paper";
 import "./styles.css";
 import {
   DataGrid,
+  GridActionsCellItem,
   GridColDef,
+  GridRowParams,
   GridToolbar,
   GridValueGetterParams,
 } from "@mui/x-data-grid";
 import { useEffect } from "react";
-import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
+import { tableStatisticHook } from "../../redux/hooks/tableStatisticHook";
 import moment from "moment";
+import { Button } from "@mui/material";
 // car, registryCenter, expired
 
 export default function TestTable(props: any) {
-  const { loading, carInfoOverviewTable, getVehicleTableData } =
-    chartStatisticHook();
+  const { getCarTableData, tableInfo } = tableStatisticHook();
   const [search, setSearch] = React.useState<Record<string, string[]>>({});
 
+  function openInfoDiaglog(row: any) {
+    console.log(row);
+  }
   const columns: GridColDef[] = [
+    {
+      field: "actions",
+      headerName: "Actions",
+      type: "actions",
+      getActions: (params: GridRowParams) => [
+        <button onClick={() => openInfoDiaglog(params.row)}>hello</button>,
+      ],
+    },
+    {
+      field: "index",
+      headerName: "Index",
+      headerAlign: "center",
+      editable: false,
+      align: "center",
+    },
     {
       field: "licensePlate",
       headerName: "License Plate",
@@ -43,14 +63,6 @@ export default function TestTable(props: any) {
       align: "center",
     },
     {
-      field: "vehicleOwner",
-      headerName: "owner",
-      headerAlign: "center",
-      flex: 1,
-      editable: false,
-      align: "center",
-    },
-    {
       field: "registrationDate",
       headerName: "Registration Date",
       description: "This column has a value getter and is not sortable.",
@@ -64,8 +76,8 @@ export default function TestTable(props: any) {
   ];
 
   useEffect(() => {
-    getVehicleTableData();
-    console.log(carInfoOverviewTable);
+    getCarTableData();
+    console.log(tableInfo);
   }, []);
 
   // handle icon click to set colHeader to TextField
@@ -90,19 +102,17 @@ export default function TestTable(props: any) {
       }}
     >
       <DataGrid
-        rows={carInfoOverviewTable}
+        rows={tableInfo}
         columns={columns}
         slots={{
           toolbar: GridToolbar,
         }}
         initialState={{
           pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
+            paginationModel: { page: 0, pageSize: 100 },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[5, 10, 100, 1000, 10000]}
         disableRowSelectionOnClick
       />
     </Paper>
