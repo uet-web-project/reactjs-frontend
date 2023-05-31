@@ -2,9 +2,6 @@
   max-width: 100% !important;
 }
 
-.expand {
-  height: 100px;
-}
 .btn:hover {
   background-color: rgba(0, 0, 0, 0.04) !important;
 }
@@ -22,3 +19,7 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
   border-radius: 5px !important;
 }
+
+/* .no-shadow {
+  box-shadow: none !important;
+} */

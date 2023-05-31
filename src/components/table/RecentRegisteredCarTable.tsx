@@ -6,6 +6,7 @@ import { getAPI } from "../../api/getAPI";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import moment from "moment";
 import "./styles.css";
+import { accountHook } from "../../redux/hooks/accountHooks";
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -21,6 +22,7 @@ function useWindowSize() {
 }
 
 export default function RecentRegisteredCarTable() {
+  const { isDepLogin } = accountHook();
   const { carInfoOverviewTable, getVehicleTableData } = chartStatisticHook();
   const [screenWidth, screenHeight] = useWindowSize();
   const rowWidth = (screenWidth * 17) / 100;
@@ -60,6 +62,17 @@ export default function RecentRegisteredCarTable() {
       valueGetter: (params: GridValueGetterParams) =>
         `${moment(params.value).format("DD/MM/YYYY")}`,
     },
+    {
+      field: "registrationExpirationDate",
+      headerName: "Registration Expiration Date",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      headerAlign: "center",
+      width: rowWidth,
+      align: "center",
+      valueGetter: (params: GridValueGetterParams) =>
+        `${moment(params.value).format("DD/MM/YYYY")}`,
+    },
   ];
 
   useEffect(() => {
@@ -67,7 +80,10 @@ export default function RecentRegisteredCarTable() {
   }, []);
 
   return (
-    <Box className="recent-registered-table-container">
+    <Box
+      className="recent-registered-table-container"
+      sx={isDepLogin ? { width: "75%" } : { width: "100%" }}
+    >
       <DataGrid
         className="recent-registered-table"
         rows={carInfoOverviewTable}
@@ -85,10 +101,4 @@ export default function RecentRegisteredCarTable() {
       />
     </Box>
   );
-}
-function getCenterListData() {
-  throw new Error("Function not implemented.");
-}
-function getMonthDataForCarTypeOverview() {
-  throw new Error("Function not implemented.");
 }

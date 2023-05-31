@@ -1,4 +1,5 @@
 import "./App.css";
+import "./index.css";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { deDE } from "@mui/x-date-pickers/locales";
 import SignUpInformation from "./components/sign-up/SignUpInformation";
@@ -9,6 +10,8 @@ import LandingPage from "./screens/landing-page";
 import Main from "./screens/main-screen";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import RegistrationCertificate from "./screens/registration-certificate";
+import RegistrationCertificate2 from "./screens/registration-certificate-2";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "create-account",
         element: <SignUpInformation />,
+      },
+      {
+        path: "registration-certificate",
+        element: <RegistrationCertificate2 />,
       },
     ],
   },

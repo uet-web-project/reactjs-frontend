@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { accountHook } from "../../redux/hooks/accountHooks";
 import axiosInstance from "../../utils/axios";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 
 function Navbar() {
   const { callClearAllData } = chartStatisticHook();
@@ -59,6 +60,10 @@ function Navbar() {
     navigagte("/create-account");
   };
 
+  const registerVehicleBtnAction = () => {
+    handleCloseNavMenu;
+    navigagte("/registration-certificate");
+  };
   const handleLogOutEvent = () => {
     callClearAllData();
     axiosInstance.defaults.headers.common = {};
@@ -72,9 +77,6 @@ function Navbar() {
 
   const handleClose = () => {
     setAnchorElStatistic(null);
-    setTimeout(() => {
-      document.getElementById("expanded")!.classList.remove("expand");
-    }, 170);
   };
 
   const handleExpandClose = () => {
@@ -82,8 +84,6 @@ function Navbar() {
   };
   const handleClick = (event: any) => {
     setAnchorElStatistic(event.currentTarget);
-
-    document.getElementById("expanded")!.classList.add("expand");
   };
 
   const handleExpand = (event: any) => {
@@ -152,24 +152,45 @@ function Navbar() {
                   Home
                 </Typography>
               </MenuItem>
-              <MenuItem
-                onClick={createAccountBtnAction}
-                sx={{ marginBottom: "20px" }}
-              >
-                <GroupsIcon sx={{ color: "white" }} />
-                <Typography
-                  sx={{
-                    fontWeight: "500",
-                    display: "inline",
-                    marginLeft: "10px",
-                    color: "white",
-                  }}
-                  textAlign="center"
+              {isDepLogin ? (
+                <MenuItem
+                  onClick={createAccountBtnAction}
+                  sx={{ marginBottom: "20px" }}
                 >
-                  {" "}
-                  Create account
-                </Typography>
-              </MenuItem>
+                  <GroupsIcon sx={{ color: "white" }} />
+                  <Typography
+                    sx={{
+                      fontWeight: "500",
+                      display: "inline",
+                      marginLeft: "10px",
+                      color: "white",
+                    }}
+                    textAlign="center"
+                  >
+                    {" "}
+                    Create account
+                  </Typography>
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  onClick={registerVehicleBtnAction}
+                  sx={{ marginBottom: "20px" }}
+                >
+                  <DirectionsCarIcon sx={{ color: "white" }} />
+                  <Typography
+                    sx={{
+                      fontWeight: "500",
+                      display: "inline",
+                      marginLeft: "10px",
+                      color: "white",
+                    }}
+                    textAlign="center"
+                  >
+                    {" "}
+                    Register Vehicle
+                  </Typography>
+                </MenuItem>
+              )}
 
               <MenuItem
                 onClick={handleExpand}
@@ -252,19 +273,39 @@ function Navbar() {
               <HomeIcon sx={{ marginRight: "10px" }} />
               <Typography sx={{ fontWeight: "500" }}>Home</Typography>
             </MenuItem>
-            <MenuItem
-              onClick={createAccountBtnAction}
-              sx={{
-                color: "white",
-                marginBottom: "3px",
-                marginLeft: "1vw",
-              }}
-            >
-              {/* <HomeIcon sx={{ marginRight: "10px" }} /> */}
+            {isDepLogin ? (
+              <MenuItem
+                onClick={createAccountBtnAction}
+                sx={{
+                  color: "white",
+                  marginBottom: "3px",
+                  marginLeft: "1vw",
+                }}
+              >
+                {/* <HomeIcon sx={{ marginRight: "10px" }} /> */}
 
-              <GroupsIcon sx={{ marginRight: "10px" }} />
-              <Typography sx={{ fontWeight: "500" }}>Create account</Typography>
-            </MenuItem>
+                <GroupsIcon sx={{ marginRight: "10px" }} />
+                <Typography sx={{ fontWeight: "500" }}>
+                  Create account
+                </Typography>
+              </MenuItem>
+            ) : (
+              <MenuItem
+                onClick={registerVehicleBtnAction}
+                sx={{
+                  color: "white",
+                  marginBottom: "3px",
+                  marginLeft: "1vw",
+                }}
+              >
+                {/* <HomeIcon sx={{ marginRight: "10px" }} /> */}
+
+                <DirectionsCarIcon sx={{ marginRight: "10px" }} />
+                <Typography sx={{ fontWeight: "500" }}>
+                  Register vehicle
+                </Typography>
+              </MenuItem>
+            )}
 
             <MenuItem
               sx={{ color: "white", marginBottom: "3px", marginLeft: "1vw" }}
@@ -280,6 +321,7 @@ function Navbar() {
             </MenuItem>
 
             <Menu
+              className="no-shadow"
               open={open}
               id="Statistics-Menu"
               anchorEl={anchorElStatistic}

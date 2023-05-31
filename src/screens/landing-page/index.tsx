@@ -12,6 +12,7 @@ import { accountHook } from "../../redux/hooks/accountHooks";
 import "./styles.css";
 
 function LandingPage() {
+  const { isDepLogin } = accountHook();
   const { getProfile } = accountHook();
   useEffect(() => {
     getProfile();
@@ -24,7 +25,7 @@ function LandingPage() {
       </div>
       <div className="data-group">
         <RecentRegisteredCarTable />
-        <CenterList />
+        {isDepLogin ? <CenterList /> : null}
       </div>
     </div>
   );

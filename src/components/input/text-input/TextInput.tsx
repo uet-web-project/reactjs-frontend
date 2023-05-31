@@ -10,14 +10,18 @@ function TextInput({
   onChange,
   error,
   showIcon,
+  placeholder,
+  className,
 }: {
-  fieldName: string;
+  fieldName?: string;
   style?: CSS.Properties;
   type: string;
-  value: string;
+  value: string | number ;
   onChange: (event: any) => void;
   error?: string;
   showIcon?: boolean;
+  placeholder?: string;
+  className?: string;
 }) {
   return (
     <div style={style} className="input-container">
@@ -36,8 +40,9 @@ function TextInput({
         value={value}
         onChange={onChange}
         style={{ width: "100%" }}
-        className="inputPlace"
+        className={`inputPlace placeholder-gray-500 text-sm ${className ? className : ""}`}
         type={type}
+        placeholder={placeholder}
       />
     </div>
   );
