@@ -92,6 +92,10 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleClickProfile = () => {
+    navigagte("/profile");
+    handleCloseUserMenu();
+  };
   return (
     <AppBar position="static">
       <Container className="secondary-color nav-container">
@@ -377,7 +381,7 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key={"Profile"} onClick={handleCloseUserMenu}>
+              <MenuItem key={"Profile"} onClick={handleClickProfile}>
                 <Typography textAlign="center" color="white">
                   Profile
                 </Typography>
