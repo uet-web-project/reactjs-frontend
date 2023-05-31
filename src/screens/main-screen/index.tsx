@@ -4,8 +4,10 @@ import { Outlet, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axios";
 import "./styles.css";
 import { getAPI } from "../../api/getAPI";
+import { accountHook } from "../../redux/hooks/accountHooks";
 
 function Main() {
+  const { getProfile } = accountHook();
   const navigate = useNavigate();
 
   useEffect(() => {

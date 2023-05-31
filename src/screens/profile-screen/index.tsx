@@ -8,10 +8,7 @@ import "./styles.css";
 function ProfileScreen() {
   const { isDepLogin } = accountHook();
   return (
-    <div className="secondary-font profile-container">
-      <h1 className="profile-title">{`${
-        isDepLogin ? "Department" : "Center"
-      } profile`}</h1>
+    <div className="secondary-font profile-container shadow-xl">
       {isDepLogin ? <DepInfo /> : <CenterInfo />}
     </div>
   );
