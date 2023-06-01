@@ -1,19 +1,67 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IRegistrationDep } from "../../interfaces/registrationDep.interface";
+import { IRegistrationCenter } from "../../interfaces/registrationCenter.interface";
+
+interface accountInterface {
+  isDepLogin: boolean;
+  depProfile: IRegistrationDep;
+  centerProfile: IRegistrationCenter;
+}
 
 // check whether user log in as department or center
-const initialState = {
-    isDepLogin: false,
-  };
-  export const accountSlice = createSlice({
-    name: "isDepLogin",
-    initialState,
-    reducers: {
-      setDepLoginState(state, action: PayloadAction<boolean>) {
-        state.isDepLogin = action.payload;
-      },
+const initialState: accountInterface = {
+  isDepLogin: true,
+  depProfile: {
+    _id: "",
+    name: "",
+    depId: "",
+    password: "",
+  },
+  centerProfile: {
+    _id: "",
+    name: "",
+    centerId: "",
+    password: "",
+    registrationDep: "",
+    location: "",
+    phoneNumber: "",
+  },
+};
+export const accountSlice = createSlice({
+  name: "isDepLogin",
+  initialState,
+  reducers: {
+    setDepLoginState(state, action: PayloadAction<boolean>) {
+      state.isDepLogin = action.payload;
     },
-  });
-  
-  export const { setDepLoginState } = accountSlice.actions;
-  
-  export default accountSlice.reducer;
+    setDepProfile(state, action: PayloadAction<IRegistrationDep>) {
+      state.depProfile = action.payload;
+    },
+    setCenterProfile(state, action: PayloadAction<IRegistrationCenter>) {
+      state.centerProfile = action.payload;
+    },
+    clearState(state) {
+      state.isDepLogin = true;
+      state.depProfile = {
+        _id: "",
+        name: "",
+        depId: "",
+        password: "",
+      };
+      state.centerProfile = {
+        _id: "",
+        name: "",
+        centerId: "",
+        password: "",
+        registrationDep: "",
+        location: "",
+        phoneNumber: "",
+      };
+    },
+  },
+});
+
+export const { setDepLoginState, setDepProfile, setCenterProfile, clearState } =
+  accountSlice.actions;
+
+export default accountSlice.reducer;

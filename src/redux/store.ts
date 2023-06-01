@@ -1,4 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import chartStatisticSlice from "./slices/chartsSlice";
 import loadingSlice from "./slices/loadingSlice";
@@ -15,11 +17,18 @@ export const store = configureStore({
   reducer: {
     chartStatistic: chartStatisticSlice,
     loading: loadingSlice,
-    isDepLogin: accountSlice,
-    certification:certificationSlice,
-    step:certificationStepSlice,
+    isDepLogin: persistReducer(
+      {
+        key: "profile",
+        storage,
+      },
+      accountSlice
+    ),
+    certification: certificationSlice,
   },
 });
+
+export const persistor = persistStore(store);
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

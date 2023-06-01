@@ -20,7 +20,7 @@ import { accountHook } from "./accountHooks";
 export const chartStatisticHook = () => {
   const dispatch = useDispatch();
 
-  const { isDepLogin } = accountHook();
+  const { isDepLogin, depProfile } = accountHook();
   const {
     totalOverviewChartData,
     carTypeOverviewChart,
@@ -123,16 +123,10 @@ export const chartStatisticHook = () => {
   async function getCenterListData() {
     dispatch(setLoading(true));
     try {
-      const depProfile = await axiosInstance.get(getAPI().getDepProfile);
-      const depId = depProfile.data._id;
-      if (depId && depProfile.status === 200) {
-        const res = await axiosInstance.get(
-          getAPI("", depId).getCenterListById
-        );
-        console.log(res);
-        if (res.status === 200) {
-          dispatch(setDataForCenterList(res.data));
-        }
+      const depId = depProfile._id;
+      const res = await axiosInstance.get(getAPI("", depId).getCenterListById);
+      if (res.status === 200) {
+        dispatch(setDataForCenterList(res.data));
       }
     } catch (err) {
       console.log(err);

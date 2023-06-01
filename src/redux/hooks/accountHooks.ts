@@ -1,17 +1,28 @@
 import axiosInstance from "../../utils/axios";
-import { getAPI } from "../../api/getAPI";
 import { postAPI } from "../../api/postAPI";
 import { useNavigate } from "react-router-dom";
-import swal from "sweetalert";
 import Swal from "sweetalert2";
-import { setDepLoginState } from "../slices/accountSlice";
+import {
+  setDepLoginState,
+  setDepProfile,
+  setCenterProfile,
+  clearState,
+} from "../slices/accountSlice";
 import { RootState, useAppSelector } from "../store";
 import { useDispatch } from "react-redux";
+import { loadingHook } from "./loadingHooks";
 
 export const accountHook = () => {
+  const { loading, setLoadingState } = loadingHook();
   const dispatch = useDispatch();
   const isDepLogin = useAppSelector(
     (state: RootState) => state.isDepLogin.isDepLogin
+  );
+  const depProfile = useAppSelector(
+    (state: RootState) => state.isDepLogin.depProfile
+  );
+  const centerProfile = useAppSelector(
+    (state: RootState) => state.isDepLogin.centerProfile
   );
   const depIdError = "Department does not exist";
   const centerIdError = "Center does not exist";
@@ -27,9 +38,36 @@ export const accountHook = () => {
       const res = await axiosInstance.get(
         `registration-${isDepLogin ? "dep" : "center"}/profile`
       );
-      console.log(res);
+      if (res.status === 200) {
+        if (isDepLogin) {
+          dispatch(setDepProfile(res.data));
+        } else {
+          dispatch(setCenterProfile(res.data));
+        }
+      }
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async function updateProfile(data: any) {
+    setLoadingState(true);
+    try {
+      const res = await axiosInstance.post(
+        `registration-${isDepLogin ? "dep" : "center"}/profile`,
+        data
+      );
+      if (res.status === 200) {
+        if (isDepLogin) {
+          dispatch(setDepProfile(res.data));
+        } else {
+          dispatch(setCenterProfile(res.data));
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoadingState(false);
     }
   }
 
@@ -45,15 +83,14 @@ export const accountHook = () => {
         postAPI().registrationDepLogin,
         loginData
       );
-      console.log(res);
       if (res.status === 200) {
         setDepLogin(true);
-        console.log(res);
         const token = res.data.access_token;
         localStorage.setItem("token", token);
         axiosInstance.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${token}`;
+        await getProfile();
         navigate("/landing-page");
       }
     } catch (err: any) {
@@ -79,14 +116,14 @@ export const accountHook = () => {
         postAPI().registrationCenterLogin,
         loginData
       );
-      console.log(res);
       if (res.status === 200) {
-        console.log(res);
+        setDepLogin(false);
         const token = res.data.access_token;
         localStorage.setItem("token", token);
         axiosInstance.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${token}`;
+        await getProfile();
         navigate("/landing-page");
       }
     } catch (err: any) {
@@ -292,27 +329,21 @@ export const accountHook = () => {
           validatePhoneNumber(signUpData, showError, showIcon)
         ) {
           try {
-            const depProfile = await axiosInstance.get(getAPI().getDepProfile);
-            console.log(depProfile);
-            if (depProfile.status === 200) {
-              console.log(signUpData);
-
-              const depID = depProfile.data._id;
-              const res = await axiosInstance.post(
-                postAPI().createRegistrationCenter,
-                {
-                  ...signUpData,
-                  registrationDep: depID,
-                }
-              );
-              if (res.status === 200) {
-                Swal.fire({
-                  icon: "success",
-                  title: "Success",
-                  text: "The operation was successful!",
-                  confirmButtonText: "OK",
-                });
+            const depId = depProfile._id;
+            const res = await axiosInstance.post(
+              postAPI().createRegistrationCenter,
+              {
+                ...signUpData,
+                registrationDep: depId,
               }
+            );
+            if (res.status === 200) {
+              Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "The operation was successful!",
+                confirmButtonText: "OK",
+              });
             }
           } catch (err: any) {
             showError("centerIdError", "center ID already exist");
@@ -325,14 +356,22 @@ export const accountHook = () => {
     });
   }
 
+  function clearAllData() {
+    dispatch(clearState());
+  }
+
   //     }
   //   }
   return {
     isDepLogin,
+    depProfile,
+    centerProfile,
     getProfile,
+    updateProfile,
     setDepLogin,
     depLogin,
     centerLogin,
     createRegistrationCenter,
+    clearAllData,
   };
 };

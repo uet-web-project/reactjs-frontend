@@ -9,9 +9,11 @@ import LoginInformation from "./components/login/LoginInformation";
 import LandingPage from "./screens/landing-page";
 import Main from "./screens/main-screen";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
 import RegistrationCertificate from "./screens/registration-certificate";
 import RegistrationCertificate2 from "./screens/registration-certificate-2";
+import ProfileScreen from "./screens/profile-screen";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "registration-certificate",
         element: <RegistrationCertificate2/>,
+      },
+      {
+        path: "profile",
+        element: <ProfileScreen />,
       },
     ],
   },
@@ -50,7 +56,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PersistGate persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
   );
 }

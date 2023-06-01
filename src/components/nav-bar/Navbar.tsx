@@ -25,7 +25,7 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 
 function Navbar() {
   const { callClearAllData } = chartStatisticHook();
-  const { isDepLogin, setDepLogin } = accountHook();
+  const { isDepLogin, setDepLogin, clearAllData } = accountHook();
   const navigagte = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -66,10 +66,11 @@ function Navbar() {
   };
   const handleLogOutEvent = () => {
     callClearAllData();
+    clearAllData();
     axiosInstance.defaults.headers.common = {};
     window.localStorage.clear();
     navigagte("/auth/department-login");
-    setDepLogin(false);
+    setDepLogin(true);
   };
   // for statistics dropdown item and expand item
   const open = Boolean(anchorElStatistic);
@@ -91,6 +92,10 @@ function Navbar() {
   };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleClickProfile = () => {
+    navigagte("/profile");
+    handleCloseUserMenu();
   };
   return (
     <AppBar position="static">
@@ -377,7 +382,7 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key={"Profile"} onClick={handleCloseUserMenu}>
+              <MenuItem key={"Profile"} onClick={handleClickProfile}>
                 <Typography textAlign="center" color="white">
                   Profile
                 </Typography>
