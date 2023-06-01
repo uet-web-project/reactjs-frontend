@@ -7,7 +7,7 @@ export interface IcertificationState {
   version: string;
   model: string;
   registrationNumber: string;
-  registrationDate: string;
+  registrationDate: Date;
   registrationLocation: string;
   vehicleType: string;
   purpose: string;
@@ -21,7 +21,7 @@ export interface IcertificationState {
   ownerName: string;
   ownerType: string;
   ownerPhoneNumber: string;
-  ownerDob: string;
+  ownerDob: Date;
   ownerAddress: string;
 }
 const initialState = {
@@ -31,7 +31,7 @@ const initialState = {
     version: "",
     model: "",
     registrationNumber: "",
-    registrationDate: "",
+    registrationDate: new Date(),
     registrationLocation: "",
     vehicleType: "car",
     purpose: "personal_transportation",
@@ -45,7 +45,7 @@ const initialState = {
     ownerName: "",
     ownerType: "personal",
     ownerPhoneNumber: "",
-    ownerDob: "",
+    ownerDob: new Date(),
     ownerAddress: "",
   },
 };

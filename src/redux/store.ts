@@ -4,6 +4,7 @@ import chartStatisticSlice from "./slices/chartsSlice";
 import loadingSlice from "./slices/loadingSlice";
 import accountSlice from "./slices/accountSlice";
 import certificationSlice from "./slices/certificationSlice";
+import certificationStepSlice from "./slices/certificationStepSlice";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch: () => AppDispatch = useDispatch;
@@ -16,6 +17,7 @@ export const store = configureStore({
     loading: loadingSlice,
     isDepLogin: accountSlice,
     certification:certificationSlice,
+    step:certificationStepSlice,
   },
 });
 

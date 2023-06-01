@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "registration-certificate",
-        element: <RegistrationCertificate2 />,
+        element: <RegistrationCertificate2/>,
       },
     ],
   },
