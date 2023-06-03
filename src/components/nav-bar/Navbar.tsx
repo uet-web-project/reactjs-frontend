@@ -72,7 +72,6 @@ function Navbar() {
     navigagte("/auth/department-login");
     setDepLogin(true);
   };
-  // for statistics dropdown item and expand item
   const open = Boolean(anchorElStatistic);
   const openExpand = Boolean(anchorElExpand);
 

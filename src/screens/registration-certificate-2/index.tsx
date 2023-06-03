@@ -6,6 +6,9 @@ import OwnerInformation from "../../components/certification-vehicle/steps/Owner
 import VehicleInformation from "../../components/certification-vehicle/steps/VehicleInformation";
 import { certificationStepHook } from "../../redux/hooks/certificationStepHooks";
 import VehicleInformation2 from "../../components/certification-vehicle/steps/VehicleInformation2";
+import VehicleInformation3 from "../../components/certification-vehicle/steps/VehicleInformation3";
+import VehicleInformation4 from "../../components/certification-vehicle/steps/VehicleInformation4";
+import OwnerInformation1 from "../../components/certification-vehicle/steps/OwnerInformation1";
 
 function RegistrationCertificate2() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -18,10 +21,16 @@ function RegistrationCertificate2() {
       case 0:
         return <VehicleInformation />;
       case 0.1:
-        return <VehicleInformation2/>
-      case 2:
+        return <VehicleInformation2 />;
+      case 0.2:
+        return <VehicleInformation3 />;
+      case 0.4:
+        return <VehicleInformation4 />;
+      case 1:
         return <OwnerInformation />;
-      case 3:
+      case 1.1:
+        return <OwnerInformation1 />;
+      case 2:
         return <Final />;
       default:
     }
@@ -41,11 +50,6 @@ function RegistrationCertificate2() {
       </div>
 
       <div className="my-10 p-10">{displayStep(certificationStep)}</div>
-      <StepperControl
-        handleClick={handleClick}
-        currentStep={certificationStep}
-        steps={steps}
-      />
     </div>
   );
 }

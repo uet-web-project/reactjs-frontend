@@ -228,11 +228,9 @@ export const certificateHook = () => {
               }
             }
           } catch (err: any) {
-            console.log(err);
           }
         }
       } else if (result.isDismissed) {
-        console.log("User selected No");
       }
     });
   }

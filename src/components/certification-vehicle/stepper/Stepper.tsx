@@ -1,5 +1,5 @@
-import { Update } from "@mui/icons-material";
 import React, { useEffect, useRef, useState } from "react";
+import "./styles.css";
 function Stepper({
   steps,
   currentStep,
@@ -13,13 +13,22 @@ function Stepper({
     const newSteps = [...steps];
     let count = 0;
     while (count < newSteps.length) {
-      if (count == stepNumber) {
-        newSteps[count] = {
-          ...newSteps[count],
-          highlighted: true,
-          selected: true,
-          completed: true,
-        };
+      if (count == Math.floor(stepNumber)) {
+        if (stepNumber == 2) {
+          newSteps[count] = {
+            ...newSteps[count],
+            highlighted: false,
+            selected: true,
+            completed: true,
+          };
+        } else {
+          newSteps[count] = {
+            ...newSteps[count],
+            highlighted: true,
+            selected: false,
+            completed: false,
+          };
+        }
         count++;
       } else if (count < stepNumber) {
         newSteps[count] = {
@@ -43,8 +52,6 @@ function Stepper({
   };
   useEffect(() => {
     const stepsState = steps.map((step: string, index: number) => {
-      // Object.assign(
-      //   {},
       return {
         description: step,
         completed: false,
@@ -53,7 +60,7 @@ function Stepper({
       };
     });
     stepRef.current = stepsState;
-    const current: any = updateStep(currentStep - 1, stepRef.current);
+    const current: any = updateStep(currentStep, stepRef.current);
     setNewStep(current);
   }, [steps, currentStep]);
 
@@ -85,7 +92,7 @@ function Stepper({
           <div
             className={`absolute top-0 text-center mt-16 w-32 text-xs
           font-medium uppercase ${
-            step.highlighted ? "text-grey-900" : "text-gray-400"
+            step.highlighted ? "custom-color" : "text-gray-400"
           }`}
           >
             {step.description}

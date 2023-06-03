@@ -23,10 +23,16 @@ function VehicleInformation() {
 
   useEffect(() => {
     if (certificateInformation.manufacturer) {
-      validateManufacturer("manufacturerError");
-      validateLicensePlate("licensePlateError");
-      validateVersion("version");
-      validateModel("model");
+      validateManufacturer(certificateInformation.manufacturer);
+    }
+    if (certificateInformation.licensePlate) {
+      validateLicensePlate(certificateInformation.licensePlate);
+    }
+    if (certificateInformation.version) {
+      validateVersion(certificateInformation.version);
+    }
+    if (certificateInformation.model) {
+      validateModel(certificateInformation.model);
     }
   }, []);
   function makeErrorChange(fieldName: string, errorMessage: string) {
@@ -44,9 +50,7 @@ function VehicleInformation() {
   }
   function validateManufacturer(manufacturer: string) {
     if (manufacturer.length == 0) {
-  
       makeErrorChange("manufacturerError", "Required");
-      console.log(errorData.manufacturerError);
       makeIconChange("manufacturerState", false);
       return false;
     } else {
@@ -59,7 +63,6 @@ function VehicleInformation() {
   function validateLicensePlate(licensePlate: string) {
     if (licensePlate.length == 0) {
       makeErrorChange("licensePlateError", "Required");
-      console.log(errorData.licensePlateError);
       makeIconChange("licensePlateState", false);
       return false;
     } else {
@@ -72,6 +75,14 @@ function VehicleInformation() {
   function validateVersion(version: string) {
     if (version.length == 0) {
       makeErrorChange("versionError", "Required");
+      makeIconChange("versionState", false);
+      return false;
+    } else if (
+      Number.isNaN(Number(version)) ||
+      parseFloat(version) < 0 ||
+      !Number.isInteger(Number(version))
+    ) {
+      makeErrorChange("versionError", "Version must be a integer number");
       makeIconChange("versionState", false);
       return false;
     } else {
@@ -97,8 +108,6 @@ function VehicleInformation() {
 
   const handleClick = (direction?: string) => {
     let newStep = certificationStep;
-    console.log(certificateInformation.manufacturer);
-    console.log("a" + errorData.manufacturerError);
     if (direction == "next") {
       if (
         validateLicensePlate(certificateInformation.licensePlate) &&
@@ -107,18 +116,14 @@ function VehicleInformation() {
         validateModel(certificateInformation.model) &&
         newStep < 3
       ) {
-        newStep+=0.1
+        newStep += 0.1;
         setNewCertificationStep(newStep);
-        makeIconChange("manufacturerState", true);
       }
     } else if (direction == "back") {
       if (newStep > 0) {
         setNewCertificationStep(newStep);
       }
     }
-    // direction == "next" ? newStep++ : newStep--;
-
-    // newStep >= 0 && newStep <= 3 && setNewCertificationStep(newStep);
   };
   return (
     <div className="flex flex-col">
@@ -128,12 +133,15 @@ function VehicleInformation() {
           fieldName="License plate"
           type="text"
           value={certificateInformation.licensePlate}
-          onChange={(event) =>
+          onChange={(event) => {
             setCertificateInformation({
               ...certificateInformation,
               licensePlate: event.target.value,
-            })
-          }
+              registrationNumber: event.target.value,
+            });
+            makeErrorChange("licensePlateError", "");
+            makeIconChange("licensePlateState", false);
+          }}
           placeholder="License plate"
           error={errorData.licensePlateError}
           showIcon={iconState.licensePlateState}
@@ -144,12 +152,14 @@ function VehicleInformation() {
           fieldName="Manufacturer"
           type="text"
           value={certificateInformation.manufacturer}
-          onChange={(event) =>
+          onChange={(event) => {
             setCertificateInformation({
               ...certificateInformation,
               manufacturer: event.target.value,
-            })
-          }
+            });
+            makeErrorChange("manufacturerError", "");
+            makeIconChange("manufacturerState",false);
+          }}
           placeholder="Manufacturer"
           error={errorData.manufacturerError}
           showIcon={iconState.manufacturerState}
@@ -161,12 +171,14 @@ function VehicleInformation() {
           fieldName="Version"
           type="text"
           value={certificateInformation.version}
-          onChange={(event) =>
+          onChange={(event) => {
             setCertificateInformation({
               ...certificateInformation,
               version: event.target.value,
-            })
-          }
+            });
+            makeErrorChange("versionError", "");
+            makeIconChange("versionState", false)
+          }}
           placeholder="Version"
           error={errorData.versionError}
           showIcon={iconState.versionState}
@@ -177,12 +189,14 @@ function VehicleInformation() {
           fieldName="Model"
           type="text"
           value={certificateInformation.model}
-          onChange={(event) =>
+          onChange={(event) => {
             setCertificateInformation({
               ...certificateInformation,
               model: event.target.value,
-            })
-          }
+            });
+            makeErrorChange("modelError", "");
+            makeIconChange("modelState", false);
+          }}
           placeholder="Model"
           error={errorData.modelError}
           showIcon={iconState.modelState}

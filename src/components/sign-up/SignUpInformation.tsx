@@ -108,7 +108,6 @@ function SignUpInformation() {
 
   async function getAllDeps() {
     const res = await axiosInstance.get(getAPI().getAllDeps);
-    console.log(res);
   }
 
   return (

@@ -76,7 +76,6 @@ function CenterInfo() {
             }}
             content="Change password"
             onClick={() => {
-              console.log("Change password");
             }}
           />
         </span>

@@ -71,7 +71,6 @@ function DepInfo() {
             }}
             content="Change password"
             onClick={() => {
-              console.log("Change password");
             }}
           />
         </span>

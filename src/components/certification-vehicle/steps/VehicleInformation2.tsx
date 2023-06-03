@@ -4,10 +4,14 @@ import { certificationHook } from "../../../redux/hooks/certificationHooks";
 import { certificationStepHook } from "../../../redux/hooks/certificationStepHooks";
 import StepperControl from "../stepper/StepperControl";
 import CheckIcon from "@mui/icons-material/Check";
-import DatePicker from "react-datepicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { styled } from "@mui/material";
+import dayjs, { Dayjs } from "dayjs";
 import "./styles.css";
 
-function VehicleInformation() {
+function VehicleInformation2() {
   const fieldNameStyle = {
     marginTop: "3px",
     marginBottom: "8px",
@@ -26,6 +30,10 @@ function VehicleInformation() {
   };
   const { certificationStep, setNewCertificationStep } =
     certificationStepHook();
+
+  const { certificateInformation, setCertificateInformation } =
+    certificationHook();
+
   const steps = ["Vehicle Information", "Owner Information", "Complete"];
   const [errorData, changeErrorData] = useState({
     registrationNumberError: "",
@@ -40,14 +48,31 @@ function VehicleInformation() {
     purposeState: false,
   });
 
-  //   useEffect(() => {
-  //     if (certificateInformation.manufacturer) {
-  //       validateRegistrationNumber(certificateInformation.registrationNumber);
-  //       validateRegistrationLocation(certificateInformation.registrationLocation);
-  //       validateRegistrationDate(certificateInformation.registrationDate);
-  //       validatePurpose(certificateInformation.purpose);
-  //     }
-  //   }, []);
+  const [dateObject, setDateObject] = useState<Dayjs | null>(dayjs(new Date()));
+
+  const changeRegistrationDate = (date: Dayjs | null) => {
+    if (date) {
+      setDateObject(date);
+      setCertificateInformation({
+        ...certificateInformation,
+        registrationDate: date.toISOString(),
+      });
+    }
+  };
+  useEffect(() => {
+    if (certificateInformation.registrationNumber) {
+      validateRegistrationNumber(certificateInformation.registrationNumber);
+    }
+    if (certificateInformation.registrationLocation) {
+      validateRegistrationLocation(certificateInformation.registrationLocation);
+    }
+    if (certificateInformation.registrationDate) {
+      validateRegistrationDate(certificateInformation.registrationDate);
+    }
+    if (certificateInformation.purpose) {
+      validatePurpose(certificateInformation.purpose);
+    }
+  }, []);
   function makeErrorChange(fieldName: string, errorMessage: string) {
     changeErrorData((prev) => ({
       ...prev,
@@ -63,11 +88,7 @@ function VehicleInformation() {
   }
   function validateRegistrationNumber(registrationNumber: string) {
     if (registrationNumber.length == 0) {
-      makeErrorChange(
-        "registrationNumberError",
-        "Required"
-      );
-      console.log(errorData.registrationNumberError);
+      makeErrorChange("registrationNumberError", "Required");
       makeIconChange("registrationNumberState", false);
       return false;
     } else {
@@ -77,10 +98,9 @@ function VehicleInformation() {
     }
   }
 
-  function validateRegistrationDate(registrationDate: Date) {
-    if (registrationDate) {
+  function validateRegistrationDate(registrationDate: string) {
+    if (registrationDate.length == 0) {
       makeErrorChange("registrationDateError", "Required");
-      console.log(errorData.registrationDateError);
       makeIconChange("registrationDateState", false);
       return false;
     } else {
@@ -92,10 +112,7 @@ function VehicleInformation() {
 
   function validateRegistrationLocation(registrationLocation: string) {
     if (registrationLocation.length == 0) {
-      makeErrorChange(
-        "registrationLocationError",
-        "Required"
-      );
+      makeErrorChange("registrationLocationError", "Required");
       makeIconChange("registrationLocationState", false);
       return false;
     } else {
@@ -116,15 +133,15 @@ function VehicleInformation() {
       return true;
     }
   }
-  const { certificateInformation, setCertificateInformation } =
-    certificationHook();
 
   const handleClick = (direction?: string) => {
     let newStep = certificationStep;
     if (direction == "next") {
       if (
         validateRegistrationNumber(certificateInformation.registrationNumber) &&
-        validateRegistrationLocation(certificateInformation.registrationLocation) &&
+        validateRegistrationLocation(
+          certificateInformation.registrationLocation
+        ) &&
         validateRegistrationDate(certificateInformation.registrationDate) &&
         validatePurpose(certificateInformation.purpose) &&
         newStep < 3
@@ -138,9 +155,6 @@ function VehicleInformation() {
         setNewCertificationStep(newStep);
       }
     }
-    // direction == "next" ? newStep++ : newStep--;
-
-    // newStep >= 0 && newStep <= 3 && setNewCertificationStep(newStep);
   };
   return (
     <div className="flex flex-col">
@@ -150,12 +164,14 @@ function VehicleInformation() {
           fieldName="Registration number"
           type="text"
           value={certificateInformation.registrationNumber}
-          onChange={(event) =>
+          onChange={(event) => {
             setCertificateInformation({
               ...certificateInformation,
               registrationNumber: event.target.value,
-            })
-          }
+            });
+            makeErrorChange("registrationNumberError", "");
+            makeIconChange("registrationNumberState",false);
+          }}
           placeholder="Registration number"
           error={errorData.registrationNumberError}
           showIcon={iconState.registrationNumberState}
@@ -166,12 +182,14 @@ function VehicleInformation() {
           fieldName="Registration location"
           type="text"
           value={certificateInformation.registrationLocation}
-          onChange={(event) =>
+          onChange={(event) => {
             setCertificateInformation({
               ...certificateInformation,
               registrationLocation: event.target.value,
-            })
-          }
+            });
+            makeErrorChange("registrationLocationError", "");
+            makeIconChange("registrationLocationState", false);
+          }}
           placeholder="Registration location"
           error={errorData.registrationLocationError}
           showIcon={iconState.registrationLocationState}
@@ -192,18 +210,14 @@ function VehicleInformation() {
               </span>
             ) : null}
           </div>
-          <DatePicker
-            className="date-picker text-sm "
-            selected={certificateInformation.registrationDate}
-            onChange={(event: any) =>
-              setCertificateInformation({
-                ...certificateInformation,
-                registrationLocation: event.target.value,
-              })
-            }
-            dateFormat="dd/MM/yyyy"
-            placeholderText="Select a date"
-          />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              format="DD/MM/YYYY"
+              className="date-picker"
+              value={dateObject}
+              onChange={(newValue) => changeRegistrationDate(newValue)}
+            />
+          </LocalizationProvider>
         </div>
         <div style={{ width: "100%" }}>
           <div className="primary-font field-name-container">
@@ -218,12 +232,12 @@ function VehicleInformation() {
             className="text-sm"
             style={inputStyle}
             value={certificateInformation.purpose}
-            onChange={(event) =>
+            onChange={(event) => {
               setCertificateInformation({
                 ...certificateInformation,
                 purpose: event.target.value,
-              })
-            }
+              });
+            }}
           >
             {/* <option value="car">-- Select an option --</option> */}
             <option value="personal_transportation">
@@ -243,4 +257,4 @@ function VehicleInformation() {
   );
 }
 
-export default VehicleInformation;
+export default VehicleInformation2;

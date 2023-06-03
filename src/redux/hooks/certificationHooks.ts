@@ -15,5 +15,30 @@ export const certificationHook = () => {
   ) {
     dispatch(changeInformation(certificateInformation));
   }
-  return { certificateInformation, setCertificateInformation };
+  function clearFormData() {
+    setCertificateInformation({
+      licensePlate: "",
+      manufacturer: "",
+      version: "",
+      model: "",
+      registrationNumber: "",
+      registrationDate: new Date().toISOString(),
+      registrationLocation: "",
+      vehicleType: "car",
+      purpose: "personal_transportation",
+      vin: "",
+      width: "",
+      length: "",
+      wheelBase: "",
+      emission: "",
+      mileage: "",
+      vehicleOwnerCid: "",
+      ownerName: "",
+      ownerType: "personal",
+      ownerPhoneNumber: "",
+      ownerDob: new Date().toISOString(),
+      ownerAddress: "",
+    });
+  }
+  return { certificateInformation, setCertificateInformation, clearFormData };
 };

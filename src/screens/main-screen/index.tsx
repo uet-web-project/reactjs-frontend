@@ -22,7 +22,6 @@ function Main() {
     } else {
       try {
         const res = await axiosInstance.get(getAPI(token).verifyToken);
-        console.log(res);
 
         if (res.status === 200) {
           navigate("/landing-page");
@@ -30,7 +29,6 @@ function Main() {
           navigate("/auth/department-login");
         }
       } catch (err) {
-        console.log(err);
 
         navigate("/auth/department-login");
       }

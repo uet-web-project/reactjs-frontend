@@ -46,7 +46,6 @@ export const accountHook = () => {
         }
       }
     } catch (err) {
-      console.log(err);
     }
   }
 
@@ -65,7 +64,6 @@ export const accountHook = () => {
         }
       }
     } catch (err) {
-      console.log(err);
     } finally {
       setLoadingState(false);
     }
@@ -94,7 +92,6 @@ export const accountHook = () => {
         navigate("/landing-page");
       }
     } catch (err: any) {
-      console.log(err);
       if (err.response.data.message === centerIdError) {
         showError("IdError", centerIdError);
       } else if (err.response.data.message === passwordError) {
@@ -127,7 +124,6 @@ export const accountHook = () => {
         navigate("/landing-page");
       }
     } catch (err: any) {
-      console.log(err);
 
       if (err.response.data.message === depIdError) {
         showError("IdError", depIdError);
@@ -351,7 +347,6 @@ export const accountHook = () => {
           }
         }
       } else if (result.isDismissed) {
-        console.log("User selected No");
       }
     });
   }
@@ -360,8 +355,6 @@ export const accountHook = () => {
     dispatch(clearState());
   }
 
-  //     }
-  //   }
   return {
     isDepLogin,
     depProfile,

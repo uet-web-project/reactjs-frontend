@@ -46,9 +46,7 @@ export const chartStatisticHook = () => {
       if (res.status === 200) {
         dispatch(setDataForTotalOverviewChart(res.data));
       }
-      console.log(res);
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
@@ -89,7 +87,6 @@ export const chartStatisticHook = () => {
         dispatch(setDataForMonthlyComparison(pieData));
       }
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
@@ -114,7 +111,6 @@ export const chartStatisticHook = () => {
         dispatch(setDataForCarInfoOverviewTable(moddedData));
       }
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
@@ -129,7 +125,6 @@ export const chartStatisticHook = () => {
         dispatch(setDataForCenterList(res.data));
       }
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
@@ -145,11 +140,9 @@ export const chartStatisticHook = () => {
         }
       );
       if (monthDataForCarTypeOverview.status === 200) {
-        console.log(monthDataForCarTypeOverview);
         dispatch(setDataForCarTypeOverview(monthDataForCarTypeOverview.data));
       }
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
