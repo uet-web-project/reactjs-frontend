@@ -93,6 +93,12 @@
   .barchart {
     margin-bottom: 30px;
   }
+  .overview-center-responsive{
+    width: 100%;
+  }
+  .overview-dep-responsive{
+    width: 100%;
+  }
 }
 
 .recharts-default-legend {

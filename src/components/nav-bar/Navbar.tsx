@@ -238,13 +238,15 @@ function Navbar() {
                 horizontal: "left",
               }}
             >
-              <MenuItem
-                sx={{ color: "white", marginBottom: "20px" }}
-                onClick={handleExpandClose}
-              >
-                {" "}
-                Registry Center{" "}
-              </MenuItem>
+              {isDepLogin ? (
+                <MenuItem
+                  sx={{ color: "white", marginBottom: "20px" }}
+                  onClick={handleExpandClose}
+                >
+                  {" "}
+                  Registry Center{" "}
+                </MenuItem>
+              ) : null}
               <MenuItem
                 sx={{ color: "white", marginBottom: "20px" }}
                 onClick={handleExpandClose}
@@ -342,10 +344,12 @@ function Navbar() {
                 horizontal: "right",
               }}
             >
-              <MenuItem sx={{ color: "white" }} onClick={handleClose}>
-                {" "}
-                Registry Center{" "}
-              </MenuItem>
+              {isDepLogin ? (
+                <MenuItem sx={{ color: "white" }} onClick={handleClose}>
+                  {" "}
+                  Registry Center{" "}
+                </MenuItem>
+              ) : null}
               <MenuItem sx={{ color: "white" }} onClick={handleClose}>
                 {" "}
                 Car registry

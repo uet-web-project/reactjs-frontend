@@ -7,3 +7,9 @@
   border-radius: 20px !important;
   background-color: white !important;
 }
+
+@media (max-width: 1200px) {
+  .width-responsive{
+    width: 100% !important;
+  }
+}

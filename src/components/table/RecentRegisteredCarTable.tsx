@@ -25,7 +25,13 @@ export default function RecentRegisteredCarTable() {
   const { isDepLogin } = accountHook();
   const { carInfoOverviewTable, getVehicleTableData } = chartStatisticHook();
   const [screenWidth, screenHeight] = useWindowSize();
-  const rowWidth = (screenWidth * 17) / 100;
+  let rowWidth = !isDepLogin
+    ? (screenWidth * 18) / 100
+    : (screenWidth * 14) / 100;
+
+  if (isDepLogin && screenWidth < 1200) {
+    rowWidth = (screenWidth * 18) / 100;
+  }
   const columns: GridColDef[] = [
     {
       field: "licensePlate",
@@ -81,7 +87,9 @@ export default function RecentRegisteredCarTable() {
 
   return (
     <Box
-      className="recent-registered-table-container"
+      className={`recent-registered-table-container ${
+        isDepLogin ? "width-responsive" : null
+      }`}
       sx={isDepLogin ? { width: "75%" } : { width: "100%" }}
     >
       <DataGrid
@@ -96,8 +104,7 @@ export default function RecentRegisteredCarTable() {
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
+        disableColumnSelector
       />
     </Box>
   );

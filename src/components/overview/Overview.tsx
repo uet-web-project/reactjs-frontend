@@ -4,11 +4,12 @@ import { Button } from "@mui/material";
 import Barchart from "../bar-chart/Barchart";
 import Verticalchart from "../vertical-composed-chart/Verticalchart";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
+import { accountHook } from "../../redux/hooks/accountHooks";
 
 function Overview() {
   const { getDataForCarTypeOverview, getDataForTotalOverviewChart } =
     chartStatisticHook();
-
+  const{isDepLogin} = accountHook()
   const [btnState, setBtnState] = useState("week");
   const changeToWeekData = () => {
     setBtnState("week");
@@ -28,7 +29,7 @@ function Overview() {
     getDataForTotalOverviewChart("year");
   };
   return (
-    <div className="overview-container">
+    <div className={`overview-container ${isDepLogin?"overview-dep-responsive":"overview-center-responsive"}`}>
       <div className="overview-title">
         <div className="overview-text-containner">
           <h3 className="overview-text secondary-font"> Overview </h3>

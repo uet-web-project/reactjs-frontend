@@ -101,6 +101,11 @@ function SignUpInformation() {
     maxWidth: "450px",
     width: "65%",
   };
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter") {
+      signUp();
+    }
+  };
 
   async function signUp() {
     createRegistrationCenter(signUpData, repassword, showError, showIcon);
@@ -118,10 +123,13 @@ function SignUpInformation() {
           alt="create account image"
         />
       </div>
-      <div className="signUp-section">
+      <div className="signUp-section" onKeyDown={handleKeyDown}>
         <div className="signUp-input">
           <div className="signUp-header">
-            <h3 style={{ marginBottom: "0px", marginTop:"10px" }} className="secondary-font">
+            <h3
+              style={{ marginBottom: "0px", marginTop: "10px" }}
+              className="secondary-font"
+            >
               Create account
             </h3>
             <span
