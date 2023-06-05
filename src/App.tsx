@@ -11,7 +11,7 @@ import Main from "./screens/main-screen";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/store";
-import RegistrationCertificate from "../src/screens/registration-certificate"
+import RegistrationCertificate from "../src/screens/registration-certificate";
 import ProfileScreen from "./screens/profile-screen";
 
 const router = createBrowserRouter([
@@ -29,12 +29,12 @@ const router = createBrowserRouter([
       },
       {
         path: "registration-certificate",
-        element: <RegistrationCertificate/>,
+        element: <RegistrationCertificate />,
       },
-      {
-        path: "profile",
-        element: <ProfileScreen />,
-      },
+      // {
+      //   path: "profile",
+      //   element: <ProfileScreen />,
+      // },
     ],
   },
   {

@@ -22,11 +22,14 @@ import { accountHook } from "../../redux/hooks/accountHooks";
 import axiosInstance from "../../utils/axios";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import ProfileScreen from "../../screens/profile-screen";
 
 function Navbar() {
   const { callClearAllData } = chartStatisticHook();
   const { isDepLogin, setDepLogin, clearAllData } = accountHook();
   const navigagte = useNavigate();
+
+  const [openProfile, setOpenProfile] = React.useState<boolean>(false);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -93,12 +96,13 @@ function Navbar() {
     setAnchorElUser(null);
   };
   const handleClickProfile = () => {
-    navigagte("/profile");
+    setOpenProfile(!openProfile);
     handleCloseUserMenu();
   };
   return (
     <AppBar position="static">
       <Container className="secondary-color nav-container">
+        <ProfileScreen open={openProfile} onClose={handleClickProfile} />
         <Toolbar disableGutters>
           <img
             src="/src/assets/icons/Myproject1.png"
