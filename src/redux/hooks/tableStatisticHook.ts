@@ -27,6 +27,51 @@ export const tableStatisticHook = () => {
           })
         );
         dispatch(setDataForTableInfo(moddedData));
+        console.log("ok");
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+
+  async function getNearExpiredCarTableData() {
+    dispatch(setLoading(true));
+    try {
+      const res = await axiosInstance.get(getAPI().getAllVehicles);
+      if (res.status === 200) {
+        const moddedData: ICarInfoTable[] = res.data.map(
+          (item: IVehicle, index: number) => ({
+            ...item,
+            id: item._id,
+            index: index + 1,
+          })
+        );
+        dispatch(setDataForTableInfo(moddedData));
+        console.log("ok");
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+  
+  async function getCenterTableData() {
+    dispatch(setLoading(true));
+    try {
+      const res = await axiosInstance.get(getAPI().getAllCenter);
+      if (res.status === 200) {
+        const moddedData: ICarInfoTable[] = res.data.map(
+          (item: IVehicle, index: number) => ({
+            ...item,
+            id: item._id,
+            index: index + 1,
+          })
+        );
+        dispatch(setDataForTableInfo(moddedData));
+        console.log("ok");
       }
     } catch (err) {
       console.log(err);
@@ -36,6 +81,8 @@ export const tableStatisticHook = () => {
   }
   return {
     getCarTableData,
+    getCenterTableData,
+    getNearExpiredCarTableData,
     tableInfo,
   };
 };

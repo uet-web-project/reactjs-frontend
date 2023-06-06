@@ -1,36 +1,70 @@
+import {
+  GridColDef,
+  GridRowParams,
+  GridValueGetterParams,
+} from "@mui/x-data-grid";
+import moment from "moment";
+import CarDialog from "../../components/profile-dialog/CarDialog";
 import Barchart from "../../components/bar-chart/TestBarChart";
 import SearchIcon from "@mui/icons-material/Search";
 import "./styles.css";
-import TestTable from "../../components/table/Table";
+import InfoTable from "../../components/table/InfoTable";
 import TransitionTab from "../../components/transitionTab/TransitionTab";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Box, TextField } from "@mui/material";
-import FilterCar from "../../components/filter/FilterCar";
 import DatePicker from "../../components/date-picker/DatePicker";
 import DropZone from "../../components/data-import/DropZone";
 import InfoAreaChart from "../../components/area-chart/AreaChart";
+import CarPieChart from "../../components/pie-chart/CarPieChart";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
+import { loadingHook } from "../../redux/hooks/loadingHooks";
 
-const GraphData = [
-  { name: "Jan", uv: 4000, pv: 2400, amt: 2400 },
-  { name: "Feb", uv: 3000, pv: 1398, amt: 2210 },
-  { name: "Mar", uv: 2000, pv: 9800, amt: 2290 },
-  { name: "Apr", uv: 2780, pv: 3908, amt: 2000 },
-  { name: "May", uv: 1890, pv: 4800, amt: 2181 },
-  { name: "Jun", uv: 2390, pv: 3800, amt: 2500 },
-  { name: "Jul", uv: 3490, pv: 4300, amt: 2100 },
-];
-const TableData = [{ id: 1, name: "fafdas" }];
 function CarRegistry() {
-  const [activeIndex, setActiveIndex] = useState<number | undefined>();
-  useEffect(() => {});
-
+  const { infoChartController } = chartStatisticHook();
+  const { setTypeState, loading } = loadingHook();
+  const [activeIndex, setActiveIndex] = useState<number>(3);
+  const [timeOutIndex, setTimeOutIndex] = useState<number>(3);
   const handleButtonClick = (index: number) => {
-    if (activeIndex !== index) setActiveIndex(index);
-    else {
-      setActiveIndex(4);
+    if (activeIndex !== index) {
+      let typeState = "all";
+      switch (index) {
+        case 0:
+          typeState = "bus";
+          break;
+        case 1:
+          typeState = "car";
+          break;
+        case 2:
+          typeState = "truck";
+          break;
+      }
+      setTypeState(typeState);
+      setTimeOutIndex(index);
+    } else {
+      setTypeState("all");
+      setTimeOutIndex(3);
     }
   };
+
+  useEffect(() => {
+    infoChartController();
+  }, [timeOutIndex]);
+
+  useEffect(() => {
+    if (!loading) {
+      setActiveIndex(timeOutIndex);
+    }
+  }, [loading]);
+
+  let timeoutId: any;
+  function onGeneralSearch() {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      console.log("complete timeout");
+    }, 1000);
+  }
 
   return (
     <div className="pageContainer">
@@ -79,6 +113,7 @@ function CarRegistry() {
         </div>
         <div className="transitionTabDiv">
           <TransitionTab />
+          <CarPieChart />
         </div>
       </div>
       <div className="tableContainer">
@@ -92,15 +127,68 @@ function CarRegistry() {
                 label="Search"
                 sx={{ color: "white", mr: 1, my: 0.5 }}
                 variant="standard"
+                onChange={onGeneralSearch}
               />
             </Box>
           </div>
         </div>
         <div className="secondPart">
-          <TestTable cars={TableData} type="cars" />
+          <InfoTable location="car" columns={carColumns} />
         </div>
       </div>
     </div>
   );
 }
 export default CarRegistry;
+const carColumns: GridColDef[] = [
+  {
+    field: "actions",
+    headerName: "Actions",
+    type: "actions",
+    getActions: (params: GridRowParams<any>) => [
+      <CarDialog data={params.row} />,
+    ],
+  },
+  {
+    field: "index",
+    headerName: "Index",
+    headerAlign: "center",
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "licensePlate",
+    headerName: "License Plate",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "vehicleType",
+    headerName: "Vehicle Type",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "manufacturer",
+    headerName: "Manufacturer",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "registrationDate",
+    headerName: "Registration Date",
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    headerAlign: "center",
+    flex: 1,
+    align: "center",
+    valueGetter: (params: GridValueGetterParams) =>
+      `${moment(params.value).format("DD/MM/YYYY")}`,
+  },
+];

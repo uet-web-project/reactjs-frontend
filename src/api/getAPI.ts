@@ -5,6 +5,8 @@ export function getAPI(token?: string, id?: string) {
     // registration dep
     getAllDeps: "registration-dep",
     getDepProfile: "registration-dep/profile",
+    // registration center
+    getAllCenter:"/registration-center",
 
     // vehicle
     getAllVehicles: "vehicle",

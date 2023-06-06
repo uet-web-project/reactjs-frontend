@@ -1,9 +1,11 @@
+import { ICarTypeOverviewChart } from "./../slices/chartsSlice";
 import {
   setDataForCarInfoOverviewTable,
   setDataForCarTypeOverview,
   setDataForMonthlyComparison,
   setDataForCenterList,
   setDataForTotalOverviewChart,
+  setDataForCarChart,
   clearAllData,
 } from "../slices/chartsSlice";
 import { ICarInfoOverviewTable } from "../slices/chartsSlice";
@@ -14,6 +16,10 @@ import axiosInstance from "../../utils/axios";
 import { getAPI } from "../../api/getAPI";
 import { IMonthlyComparison } from "../slices/chartsSlice";
 import { setLoading } from "../slices/loadingSlice";
+import { postAPI } from "../../api/postAPI";
+import { useEffect, useState } from "react";
+import startOfMonth from "date-fns/startOfMonth";
+import addMonths from "date-fns/addMonths";
 
 export const chartStatisticHook = () => {
   const dispatch = useDispatch();
@@ -24,7 +30,10 @@ export const chartStatisticHook = () => {
     carRegisteredMonthlyComparison,
     carInfoOverviewTable,
     centerList,
+    carStatsForChart,
   } = useAppSelector((state: RootState) => state.chartStatistic);
+
+  const { type, date } = useAppSelector((state: RootState) => state.loading);
 
   function callClearAllData() {
     dispatch(clearAllData());
@@ -153,17 +162,62 @@ export const chartStatisticHook = () => {
     }
   }
 
+  //const
+
+  async function getChartDataOfRegisteredCar(
+    date: [string, string],
+    type = "all"
+  ) {
+    dispatch(setLoading(true));
+    try {
+      const startDate = date[0];
+      const endDate = date[1];
+      const requestedData =
+        type === "all"
+          ? {
+              startDate: startDate,
+              endDate: endDate,
+            }
+          : {
+              vehicleType: type,
+              startDate: startDate,
+              endDate: endDate,
+            };
+
+      const chartData = await axiosInstance.post(
+        postAPI().registeredCarData,
+        requestedData
+      );
+      if (chartData.status === 200) {
+        console.log(chartData.data);
+        dispatch(setDataForCarChart(chartData.data));
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+  function infoChartController() {
+    console.log(date);
+    console.log(type);
+    getChartDataOfRegisteredCar(date, type);
+  }
+
   return {
     centerList,
     carInfoOverviewTable,
     carTypeOverviewChart,
     carRegisteredMonthlyComparison,
     totalOverviewChartData,
+    carStatsForChart,
     getDataForTotalOverviewChart,
     getVehicleTableData,
     getDataForMonthlyComparison,
     getCenterListData,
     getDataForCarTypeOverview,
+    getChartDataOfRegisteredCar,
+    infoChartController,
     callClearAllData,
   };
 };

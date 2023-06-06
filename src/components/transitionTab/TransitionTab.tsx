@@ -7,7 +7,6 @@ function TransitionTab() {
   const [selectedTab, setSelectedTab] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
-    // Update the selectedTab state when the pathname changes
     if (pathname.includes("/stats/cars")) {
       setSelectedTab("car");
     } else if (pathname.includes("/stats/centers")) {
@@ -22,18 +21,21 @@ function TransitionTab() {
   return (
     <div className="transitionTab">
       <button
+        id="transitionTabButton1"
         className={selectedTab === "center" ? "selected" : "button"}
         onClick={() => navigate("/stats/centers")}
       >
         Center Registration
       </button>
       <button
+        id="transitionTabButton2"
         className={selectedTab === "car" ? "selected" : "button"}
         onClick={() => navigate("/stats/cars")}
       >
         Car Registry
       </button>
       <button
+        id="transitionTabButton3"
         className={selectedTab === "expired" ? "selected" : "button"}
         onClick={() => navigate("/stats/expired")}
       >

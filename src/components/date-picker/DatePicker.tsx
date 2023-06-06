@@ -8,8 +8,10 @@ import addDays from "date-fns/addDays";
 import startOfMonth from "date-fns/startOfMonth";
 import endOfMonth from "date-fns/endOfMonth";
 import addMonths from "date-fns/addMonths";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RangeType } from "rsuite/esm/DateRangePicker";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
+import { loadingHook } from "../../redux/hooks/loadingHooks";
 
 const today = new Date();
 const pastMonthStart = startOfMonth(addMonths(today, 0));
@@ -67,7 +69,7 @@ const predefinedRanges = [
     label: "Last year",
     value: [
       new Date(new Date().getFullYear() - 1, 0, 1),
-      new Date(new Date().getFullYear(), 0, 0),
+      new Date(new Date().getFullYear(), 0, 1),
     ],
     placement: "left",
   },
@@ -78,13 +80,23 @@ const predefinedRanges = [
   },
 ];
 export default function DatePicker() {
+  const { infoChartController } = chartStatisticHook();
+  const { setDateState } = loadingHook();
   const [value, setValue] = useState([pastMonthStart, today]);
+  useEffect(() => {
+    infoChartController();
+  }, [value]);
 
   const handleDateRangeChange = (
     value: [Date, Date] | null,
     event: React.SyntheticEvent<Element, Event>
   ) => {
-    setValue(value as [Date, Date]);
+    if (value !== null) {
+      const startDate = value[0].toISOString().split("T")[0];
+      const endDate = value[1].toISOString().split("T")[0];
+      setDateState([startDate, endDate]);
+      setValue(value as [Date, Date]);
+    }
   };
 
   return (
@@ -93,7 +105,7 @@ export default function DatePicker() {
       ranges={predefinedRanges as RangeType[]}
       placeholder="Placement left"
       onChange={handleDateRangeChange}
-      style={{color:"black"}}
+      style={{ color: "black" }}
     />
   );
 }

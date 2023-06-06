@@ -13,6 +13,7 @@ export interface ICarInfoTable extends IVehicle {
 
 export interface tableState {
   tableInfo: ICarInfoTable[];
+  
 }
 
 const initialState: tableState = {

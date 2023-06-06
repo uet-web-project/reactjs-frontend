@@ -10,5 +10,9 @@ export function postAPI() {
 
     //importFile
     fileImport: "/vehicle/upload-vehicles-sheet",
+
+    //data for chart
+    registeredCarData: "vehicle/get-vehicles-by-type-and-date-range",
+    allRegisteredCarData: "vehicle/group-by-vehicle-type",
   };
 }

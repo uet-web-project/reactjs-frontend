@@ -16,7 +16,7 @@ export interface IMonthlyComparison {
   value: number;
 }
 
-interface ICarTypeOverviewChart {
+export interface ICarTypeOverviewChart {
   carType: string;
   numberOfCar: number;
 }
@@ -31,6 +31,7 @@ export interface ChartState {
   carRegisteredMonthlyComparison: IMonthlyComparison[];
   carInfoOverviewTable: ICarInfoOverviewTable[];
   centerList: IRegistrationCenter[];
+  carStatsForChart: ICarTypeOverviewChart[];
 }
 
 const initialState: ChartState = {
@@ -39,6 +40,7 @@ const initialState: ChartState = {
   carRegisteredMonthlyComparison: [],
   carInfoOverviewTable: [],
   centerList: [],
+  carStatsForChart: [],
 };
 export const chartStatisticSlice = createSlice({
   name: "chartStatistic",
@@ -72,6 +74,9 @@ export const chartStatisticSlice = createSlice({
     setDataForCenterList(state, action: PayloadAction<IRegistrationCenter[]>) {
       state.centerList = action.payload;
     },
+    setDataForCarChart(state, action: PayloadAction<ICarTypeOverviewChart[]>) {
+      state.carStatsForChart = action.payload;
+    },
     clearAllData(state) {
       state.totalOverviewChartData = [];
       state.carTypeOverviewChart = [];
@@ -88,6 +93,7 @@ export const {
   setDataForMonthlyComparison,
   setDataForCenterList,
   setDataForCarTypeOverview,
+  setDataForCarChart,
   clearAllData,
 } = chartStatisticSlice.actions;
 
