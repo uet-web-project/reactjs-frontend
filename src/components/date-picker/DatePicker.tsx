@@ -18,16 +18,6 @@ const pastMonthStart = startOfMonth(addMonths(today, 0));
 
 const predefinedRanges = [
   {
-    label: "Today",
-    value: [new Date(), new Date()],
-    placement: "left",
-  },
-  {
-    label: "Yesterday",
-    value: [addDays(new Date(), -1), addDays(new Date(), -1)],
-    placement: "left",
-  },
-  {
     label: "This week",
     value: [startOfWeek(new Date()), endOfWeek(new Date())],
     placement: "left",
@@ -74,17 +64,26 @@ const predefinedRanges = [
     placement: "left",
   },
   {
+    label: "Last 5 years",
+    value: [
+      new Date(new Date().getFullYear() - 5, 0, 1),
+      new Date(new Date().getFullYear(), 0, 1),
+    ],
+    placement: "left",
+  },
+  {
     label: "All time",
-    value: [new Date(new Date().getFullYear() - 1, 0, 1), new Date()],
+    value: [new Date(new Date().getFullYear() - 20, 0, 1), new Date()],
     placement: "left",
   },
 ];
 export default function DatePicker() {
-  const { infoChartController } = chartStatisticHook();
+  const { infoChartController, getDataForCarPieChart } = chartStatisticHook();
   const { setDateState } = loadingHook();
   const [value, setValue] = useState([pastMonthStart, today]);
   useEffect(() => {
     infoChartController();
+    getDataForCarPieChart();
   }, [value]);
 
   const handleDateRangeChange = (

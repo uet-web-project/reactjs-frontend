@@ -17,7 +17,6 @@ import CarDialog from "../profile-dialog/CarDialog";
 // car, registryCenter, expired
 
 export default function InfoTable(prop: any) {
-  const columns = prop.columns;
   const location = prop.location;
   const {
     getCarTableData,
@@ -26,7 +25,9 @@ export default function InfoTable(prop: any) {
     tableInfo,
   } = tableStatisticHook();
   const [search, setSearch] = React.useState<Record<string, string[]>>({});
-
+  const [columns, setColumns] = React.useState<GridColDef[]>(
+    "car" ? carColumns : "center" ? centerColumns : nearExpiredColumns
+  );
   useEffect(() => {
     switch (location) {
       case "car":
@@ -40,7 +41,7 @@ export default function InfoTable(prop: any) {
         break;
     }
   }, []);
-  
+
   // handle icon click to set colHeader to TextField
   function onFilterClick() {}
 
@@ -78,3 +79,162 @@ export default function InfoTable(prop: any) {
     </Paper>
   );
 }
+
+const carColumns: GridColDef[] = [
+  {
+    field: "actions",
+    headerName: "Actions",
+    type: "actions",
+    getActions: (params: GridRowParams<any>) => [
+      <CarDialog data={params.row} />,
+    ],
+  },
+  {
+    field: "index",
+    headerName: "Index",
+    headerAlign: "center",
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "licensePlate",
+    headerName: "License Plate",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "vehicleType",
+    headerName: "Vehicle Type",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "manufacturer",
+    headerName: "Manufacturer",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "registrationDate",
+    headerName: "Registration Date",
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    headerAlign: "center",
+    flex: 1,
+    align: "center",
+    valueGetter: (params: GridValueGetterParams) =>
+      `${moment(params.value).format("DD/MM/YYYY")}`,
+  },
+];
+
+const nearExpiredColumns: GridColDef[] = [
+  {
+    field: "actions",
+    headerName: "Actions",
+    type: "actions",
+    getActions: (params: GridRowParams<any>) => [
+      <CarDialog data={params.row} />,
+    ],
+  },
+  {
+    field: "index",
+    headerName: "Index",
+    headerAlign: "center",
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "licensePlate",
+    headerName: "License Plate",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "vehicleType",
+    headerName: "Vehicle Type",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "manufacturer",
+    headerName: "Manufacturer",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "registrationDate",
+    headerName: "Registration Date",
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    headerAlign: "center",
+    flex: 1,
+    align: "center",
+    valueGetter: (params: GridValueGetterParams) =>
+      `${moment(params.value).format("DD/MM/YYYY")}`,
+  },
+];
+
+const centerColumns: GridColDef[] = [
+  {
+    field: "actions",
+    headerName: "Actions",
+    type: "actions",
+    getActions: (params: GridRowParams<any>) => [
+      <CarDialog data={params.row} />,
+    ],
+  },
+  {
+    field: "index",
+    headerName: "Index",
+    headerAlign: "center",
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "licensePlate",
+    headerName: "License Plate",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "vehicleType",
+    headerName: "Vehicle Type",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "manufacturer",
+    headerName: "Manufacturer",
+    headerAlign: "center",
+    flex: 1,
+    editable: false,
+    align: "center",
+  },
+  {
+    field: "registrationDate",
+    headerName: "Registration Date",
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    headerAlign: "center",
+    flex: 1,
+    align: "center",
+    valueGetter: (params: GridValueGetterParams) =>
+      `${moment(params.value).format("DD/MM/YYYY")}`,
+  },
+];

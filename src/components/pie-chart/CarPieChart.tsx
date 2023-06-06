@@ -8,18 +8,17 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
-import "./styles.css"
+import "./styles.css";
 const current = new Date();
 const currentMonth = current.toLocaleString("default", { month: "long" });
 current.setMonth(current.getMonth() - 1);
 const previousMonth = current.toLocaleString("default", { month: "long" });
 
 const CarPieChart = () => {
-  const { carRegisteredMonthlyComparison, getDataForMonthlyComparison } =
-    chartStatisticHook();
+  const { carPieChart, getDataForCarPieChart } = chartStatisticHook();
 
   useEffect(() => {
-    getDataForMonthlyComparison()
+    getDataForCarPieChart();
   }, []);
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -78,16 +77,16 @@ const CarPieChart = () => {
           />
 
           <Pie
-            data={carRegisteredMonthlyComparison}
+            data={carPieChart}
             cx="50%"
             cy="50%"
             labelLine={false}
             label={renderCustomizedLabel}
             outerRadius={80}
             fill="#8884d8"
-            dataKey="value"
+            dataKey="vehicles"
           >
-            {carRegisteredMonthlyComparison.map((entry, index) => (
+            {carPieChart.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}

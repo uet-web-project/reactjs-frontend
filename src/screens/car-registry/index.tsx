@@ -141,62 +141,10 @@ function CarRegistry() {
           </div>
         </div>
         <div className="secondPart">
-          <InfoTable location="car" columns={carColumns} />
+          <InfoTable location="car" />
         </div>
       </div>
     </div>
   );
 }
 export default CarRegistry;
-const carColumns: GridColDef[] = [
-  {
-    field: "actions",
-    headerName: "Actions",
-    type: "actions",
-    getActions: (params: GridRowParams<any>) => [
-      <CarDialog data={params.row} />,
-    ],
-  },
-  {
-    field: "index",
-    headerName: "Index",
-    headerAlign: "center",
-    editable: false,
-    align: "center",
-  },
-  {
-    field: "licensePlate",
-    headerName: "License Plate",
-    headerAlign: "center",
-    flex: 1,
-    editable: false,
-    align: "center",
-  },
-  {
-    field: "vehicleType",
-    headerName: "Vehicle Type",
-    headerAlign: "center",
-    flex: 1,
-    editable: false,
-    align: "center",
-  },
-  {
-    field: "manufacturer",
-    headerName: "Manufacturer",
-    headerAlign: "center",
-    flex: 1,
-    editable: false,
-    align: "center",
-  },
-  {
-    field: "registrationDate",
-    headerName: "Registration Date",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    headerAlign: "center",
-    flex: 1,
-    align: "center",
-    valueGetter: (params: GridValueGetterParams) =>
-      `${moment(params.value).format("DD/MM/YYYY")}`,
-  },
-];

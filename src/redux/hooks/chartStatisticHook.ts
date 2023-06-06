@@ -6,6 +6,7 @@ import {
   setDataForCenterList,
   setDataForTotalOverviewChart,
   setDataForCarChart,
+  setDataForCarPieChart,
   clearAllData,
 } from "../slices/chartsSlice";
 import { ICarInfoOverviewTable } from "../slices/chartsSlice";
@@ -31,6 +32,7 @@ export const chartStatisticHook = () => {
     carInfoOverviewTable,
     centerList,
     carStatsForChart,
+    carPieChart,
   } = useAppSelector((state: RootState) => state.chartStatistic);
 
   const { type, date } = useAppSelector((state: RootState) => state.loading);
@@ -198,6 +200,31 @@ export const chartStatisticHook = () => {
       dispatch(setLoading(false));
     }
   }
+  async function getDataForCarPieChart() {
+    dispatch(setLoading(true));
+    try {
+      const startDate = date[0];
+      const endDate = date[1];
+      const requestedData = {
+        filterType: "filter-by-date-range",
+        startDate: startDate,
+        endDate: endDate,
+      };
+
+      const chartData = await axiosInstance.post(
+        postAPI().allRegisteredCarData,
+        requestedData
+      );
+      if (chartData.status === 200) {
+        console.log(chartData.data);
+        dispatch(setDataForCarPieChart(chartData.data));
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
   function infoChartController() {
     console.log(date);
     console.log(type);
@@ -211,6 +238,7 @@ export const chartStatisticHook = () => {
     carRegisteredMonthlyComparison,
     totalOverviewChartData,
     carStatsForChart,
+    carPieChart,
     getDataForTotalOverviewChart,
     getVehicleTableData,
     getDataForMonthlyComparison,
@@ -218,6 +246,7 @@ export const chartStatisticHook = () => {
     getDataForCarTypeOverview,
     getChartDataOfRegisteredCar,
     infoChartController,
+    getDataForCarPieChart,
     callClearAllData,
   };
 };
