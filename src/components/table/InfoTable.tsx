@@ -39,8 +39,6 @@ export default function InfoTable(prop: any) {
         getNearExpiredCarTableData();
         break;
     }
-
-    console.log(tableInfo);
   }, []);
   
   // handle icon click to set colHeader to TextField

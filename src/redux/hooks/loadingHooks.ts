@@ -4,7 +4,6 @@ import { setLoading, setDate, setType } from "../slices/loadingSlice";
 
 export const loadingHook = () => {
   const dispatch = useDispatch();
-
   const loading = useAppSelector((state: RootState) => state.loading.loading);
   const date = useAppSelector((state: RootState) => state.loading.date);
   const type = useAppSelector((state: RootState) => state.loading.type);

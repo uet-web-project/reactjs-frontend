@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
-
+import "./styles.css"
 const current = new Date();
 const currentMonth = current.toLocaleString("default", { month: "long" });
 current.setMonth(current.getMonth() - 1);
@@ -61,7 +61,7 @@ const CarPieChart = () => {
   };
 
   return (
-    <div className="pie-chart-container" style={{ width: "100%", height: 200 }}>
+    <div className="pie-chart-container" style={{ width: "99%", height: 200 }}>
       <ResponsiveContainer>
         <PieChart className="pie-chart">
           <Legend

@@ -1,13 +1,11 @@
 /*phan tren*/
 .upperContainer {
-  display: flex;
-  flex-direction: row;
+
 }
 
 .statsDisplayDiv {
-  flex: 4;
-  order: 0;
-  flex-shrink: 1;
+  display: flex;
+  flex-direction: row;
   min-width: 0;
   animation-name: slide-in-left;
   animation-duration: 1s;
@@ -15,8 +13,15 @@
 .chartManager {
   display: flex;
 }
+
+.chart-button-container{
+  min-width: none;
+  overflow: hidden;
+  flex: 4;
+  order: 0;
+}
+
 .transitionTabDiv {
-  margin-top: 36px;
   flex: 1;
   order: 1;
   width: 100%;
@@ -105,14 +110,17 @@
   .pageContainer {
 
   }
-  .upperContainer {
+  .statsDisplayDiv {
     flex-direction: column;
   }
-  .statsDisplayDiv {
+
+  .chart-button-container{
+    min-width: none;
+    overflow: hidden;
+    flex: 4;
     order: 1;
-    width: 100%;
-    min-width: auto;
   }
+
   .transitionTabDiv {
     order: 0;
     padding: 10px;

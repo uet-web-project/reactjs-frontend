@@ -1,8 +1,14 @@
 import "./styles.css";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { loadingHook } from "../../redux/hooks/loadingHooks";
+import startOfMonth from "date-fns/startOfMonth";
+import addMonths from "date-fns/addMonths";
 
+const today = new Date();
+const pastMonthStart = startOfMonth(addMonths(today, 0));
 function TransitionTab() {
+  const { setDateState, setTypeState } = loadingHook();
   const { pathname } = location;
   const [selectedTab, setSelectedTab] = useState("");
   const navigate = useNavigate();
@@ -23,21 +29,37 @@ function TransitionTab() {
       <button
         id="transitionTabButton1"
         className={selectedTab === "center" ? "selected" : "button"}
-        onClick={() => navigate("/stats/centers")}
+        onClick={() => {
+          navigate("/stats/centers");
+        }}
       >
         Center Registration
       </button>
       <button
         id="transitionTabButton2"
         className={selectedTab === "car" ? "selected" : "button"}
-        onClick={() => navigate("/stats/cars")}
+        onClick={() => {
+          navigate("/stats/cars");
+          setDateState([
+            pastMonthStart.toISOString().split("T")[0],
+            today.toISOString().split("T")[0],
+          ]);
+          setTypeState("all");
+        }}
       >
         Car Registry
       </button>
       <button
         id="transitionTabButton3"
         className={selectedTab === "expired" ? "selected" : "button"}
-        onClick={() => navigate("/stats/expired")}
+        onClick={() => {
+          navigate("/stats/expired");
+          setDateState([
+            pastMonthStart.toISOString().split("T")[0],
+            today.toISOString().split("T")[0],
+          ]);
+          setTypeState("all");
+        }}
       >
         Expired Car
       </button>

@@ -69,51 +69,59 @@ function CarRegistry() {
   return (
     <div className="pageContainer">
       <div className="upperContainer">
-        <div className="statsDisplayDiv">
-          <div className="chartManager">
-            <p style={{ marginTop: "auto", marginBottom: "auto" }}>Manage</p>
-            <div style={{ margin: "auto" }}>
-              <DatePicker />
-            </div>
-          </div>
-          <div className="chartUpperButDiv">
-            <div className="chartUpperButDivHolder">
-              <button
-                id="chartUpperBut1"
-                className={`chartUpperBut ${activeIndex === 0 ? "active" : ""}`}
-                onClick={() => handleButtonClick(0)}
-              >
-                BUS
-              </button>
-              <span></span>
-            </div>
-            <div className="chartUpperButDivHolder">
-              <button
-                id="chartUpperBut2"
-                className={`chartUpperBut ${activeIndex === 1 ? "active" : ""}`}
-                onClick={() => handleButtonClick(1)}
-              >
-                CAR
-              </button>
-            </div>
-            <div className="chartUpperButDivHolder">
-              <button
-                id="chartUpperBut3"
-                className={`chartUpperBut ${activeIndex === 2 ? "active" : ""}`}
-                onClick={() => handleButtonClick(2)}
-              >
-                TRUCK
-              </button>
-              <span></span>
-            </div>
-          </div>
-          <div className="chartContainer">
-            <InfoAreaChart />
+        <div className="chartManager">
+          <p style={{ marginTop: "auto", marginBottom: "auto" }}>Manage</p>
+          <div style={{ margin: "auto" }}>
+            <DatePicker />
           </div>
         </div>
-        <div className="transitionTabDiv">
-          <TransitionTab />
-          <CarPieChart />
+        <div className="statsDisplayDiv">
+          <div className="chart-button-container">
+            <div className="chartUpperButDiv">
+              <div className="chartUpperButDivHolder">
+                <button
+                  id="chartUpperBut1"
+                  className={`chartUpperBut ${
+                    activeIndex === 0 ? "active" : ""
+                  }`}
+                  onClick={() => handleButtonClick(0)}
+                >
+                  BUS
+                </button>
+                <span></span>
+              </div>
+              <div className="chartUpperButDivHolder">
+                <button
+                  id="chartUpperBut2"
+                  className={`chartUpperBut ${
+                    activeIndex === 1 ? "active" : ""
+                  }`}
+                  onClick={() => handleButtonClick(1)}
+                >
+                  CAR
+                </button>
+              </div>
+              <div className="chartUpperButDivHolder">
+                <button
+                  id="chartUpperBut3"
+                  className={`chartUpperBut ${
+                    activeIndex === 2 ? "active" : ""
+                  }`}
+                  onClick={() => handleButtonClick(2)}
+                >
+                  TRUCK
+                </button>
+                <span></span>
+              </div>
+            </div>
+            <div className="chartContainer">
+              <InfoAreaChart />
+            </div>
+          </div>
+          <div className="transitionTabDiv">
+            <TransitionTab />
+            <CarPieChart/>
+          </div>
         </div>
       </div>
       <div className="tableContainer">

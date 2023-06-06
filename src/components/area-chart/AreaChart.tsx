@@ -13,7 +13,7 @@ import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 export default function InfoAreaChart() {
   const { carStatsForChart } = chartStatisticHook();
   return (
-    <ResponsiveContainer width="100%">
+    <ResponsiveContainer width="99%">
       <AreaChart data={carStatsForChart}>
         <defs>
           <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
