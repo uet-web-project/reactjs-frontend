@@ -16,6 +16,7 @@ import {
   ListItemIcon,
   ListItemText,
   Paper,
+  Slide,
   Typography,
 } from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
@@ -26,6 +27,29 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import { fileImportHooks } from "../../redux/hooks/fileImportHooks";
+import { TransitionProps } from "@mui/material/transitions";
+import { PaperProps } from "@mui/material/Paper";
+import Draggable from "react-draggable";
+
+function PaperComponent(props: PaperProps) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function DropZone(props: any) {
   const { uploadFile } = fileImportHooks();
@@ -126,6 +150,8 @@ export default function DropZone(props: any) {
         IMPORT DATA
       </button>
       <Dialog
+        PaperComponent={PaperComponent}
+        TransitionComponent={Transition}
         fullScreen={false}
         maxWidth={false}
         open={open}
@@ -133,14 +159,16 @@ export default function DropZone(props: any) {
         aria-labelledby="responsive-dialog-title"
         style={{}}
       >
-        <Typography
-          sx={{ mt: 4, mb: 2 }}
-          variant="h6"
-          component="div"
-          style={{ margin: "10px" }}
-        >
-          IMPORT FILE
-        </Typography>
+        <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+          <Typography
+            sx={{ mt: 4, mb: 2 }}
+            variant="h6"
+            component="div"
+            style={{ margin: "10px" }}
+          >
+            IMPORT FILE
+          </Typography>
+        </DialogTitle>
         <Box className="dropZoneContainer">
           <Box>
             <Box {...getRootProps()} className="dropZone">

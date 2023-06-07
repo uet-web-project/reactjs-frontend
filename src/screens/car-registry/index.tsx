@@ -1,12 +1,3 @@
-import {
-  GridColDef,
-  GridRowParams,
-  GridValueGetterParams,
-} from "@mui/x-data-grid";
-import moment from "moment";
-import CarDialog from "../../components/profile-dialog/CarDialog";
-import Barchart from "../../components/bar-chart/TestBarChart";
-import SearchIcon from "@mui/icons-material/Search";
 import "./styles.css";
 import InfoTable from "../../components/table/InfoTable";
 import TransitionTab from "../../components/transitionTab/TransitionTab";
@@ -60,14 +51,7 @@ function CarRegistry() {
     setLocationState("car");
   }, []);
 
-  let timeoutId: any;
-  function onGeneralSearch() {
-    clearTimeout(timeoutId);
 
-    timeoutId = setTimeout(() => {
-      console.log("complete timeout");
-    }, 1000);
-  }
 
   return (
     <div className="pageContainer">
@@ -123,29 +107,23 @@ function CarRegistry() {
           </div>
           <div className="transitionTabDiv">
             <TransitionTab />
-            <CarPieChart />
+            <div
+              className="pieChartContainer"
+              style={{
+                border: "1px solid #62b7d3",
+                height: "220px",
+                width: "100%",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
+              <CarPieChart />
+            </div>
           </div>
         </div>
       </div>
-      <div className="tableContainer">
-        <div className="firstPart">
-          <DropZone />
-          <div className="generalInputContainer">
-            <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-              <SearchIcon sx={{ color: "white", mr: 1, my: 0.5 }} />
-              <TextField
-                id="input-with-sx"
-                label="Search"
-                sx={{ color: "white", mr: 1, my: 0.5 }}
-                variant="standard"
-                onChange={onGeneralSearch}
-              />
-            </Box>
-          </div>
-        </div>
-        <div className="secondPart">
+      <div className="tableContainer">  
           <InfoTable location="car" />
-        </div>
       </div>
     </div>
   );

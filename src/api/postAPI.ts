@@ -13,7 +13,7 @@ export function postAPI() {
     getDataForCarTypeOverview: `vehicle/group-by-vehicle-type`,
 
     //importFile
-    fileImport: "/vehicle/upload-vehicles-sheet",
+    fileImport: "vehicle/upload-vehicles-sheet",
 
     //data for chart
     registeredCarData: "vehicle/get-vehicles-by-type-and-date-range",

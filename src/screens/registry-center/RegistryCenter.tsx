@@ -17,7 +17,9 @@ import TransitionTab from "../../components/transitionTab/TransitionTab";
 function RegistryCenter() {
   const { setLocationState, setTypeState, loading } = loadingHook();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setLocationState("center");
+  }, []);
 
   return (
     <div className="pageContainer">
@@ -25,22 +27,7 @@ function RegistryCenter() {
         <TransitionTab />
       </div>
       <div className="tableContainer">
-        <div className="firstPart">
-          <div className="generalInputContainer">
-            <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-              <SearchIcon sx={{ color: "white", mr: 1, my: 0.5 }} />
-              <TextField
-                id="input-with-sx"
-                label="Search"
-                sx={{ color: "white", mr: 1, my: 0.5 }}
-                variant="standard"
-              />
-            </Box>
-          </div>
-        </div>
-        <div className="secondPart">
-          <InfoTable location="center" />
-        </div>
+        <InfoTable location="center" />
       </div>
     </div>
   );

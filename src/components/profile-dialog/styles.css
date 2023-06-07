@@ -20,22 +20,29 @@
 
 h2 {
   font-weight: bold;
-  text-transform: uppercase;
+  text-transform: capitalize;
+}
+h4 {
+  color: white;
+  font-weight: bold;
+  text-transform: capitalize;
 }
 
-.nameAndPicture
-
-.carImage {
+.nameAndPicture .carImage {
   top: 0;
   left: 0;
-  width: 50%;
-  height: 50%;
+  width: 80%;
+  height: 70%;
   object-fit: fill;
 }
 
-.carInfo {
-  width: 70%;
-  margin: 0;
+.Info {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid blue;
+  border-radius: 5px;
+  background-color: #62b7d3;
 }
 
 .item {
@@ -43,7 +50,9 @@ h2 {
   padding: 5px;
   align-items: center;
   border: 1px solid rgb(219, 212, 212);
+  border-radius: 5px;
   margin: 2px;
+  background-color: white;
 }
 
 .left {

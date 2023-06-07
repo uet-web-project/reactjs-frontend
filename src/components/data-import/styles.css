@@ -24,7 +24,9 @@
 #importButton{
   color:black;
   background-color:white;
-  height: 35px;
+  border: 1px solid #62b7d3;
+  height: 30px;
+  width: 100px;
   border-radius: 5px;
 }
 

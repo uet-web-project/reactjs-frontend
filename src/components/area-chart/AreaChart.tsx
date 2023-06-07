@@ -39,7 +39,7 @@ export default function InfoAreaChart() {
 
           <XAxis
             dataKey="date"
-            angle={-10}
+            angle={-5}
             allowDataOverflow={false}
             allowDecimals={false}
             axisLine={false}

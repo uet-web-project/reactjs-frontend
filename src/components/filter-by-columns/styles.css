@@ -1,0 +1,44 @@
+#filterByColumns{
+  color:black;
+  background-color:white;
+  border: 1px solid #62b7d3;
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+}
+
+#filterByColumns:hover{
+  color:white;
+  background-color: blue;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.column {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+  padding: 10px;
+}
+.filterTextField {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border: 1px solid #4bacbd;
+  border-radius: 5px;
+  min-width: 250px;
+  height: 70px;
+  padding: 5px;
+}
+.filterTextField1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+

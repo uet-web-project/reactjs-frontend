@@ -10,10 +10,10 @@ export function getAPI(token?: string, id?: string) {
     getCenterProfile: "registration-center/profile",
     getAllVehicleByCenter: "vehicle/get-by-registration-center",
     // registration center
-    getAllCenter:"/registration-center",
+    getAllCenter:"registration-center",
     // vehicle
     getAllVehicles: "vehicle",
-    getAllNearExpiredVehicles:"/vehicle/get-near-expired-vehicles",
+    getAllNearExpiredVehicles:"vehicle/get-near-expired-vehicles",
     getCenterListById: `registration-center/get-by-dep-id/${id}`,
 
     //TotalOverviewChart

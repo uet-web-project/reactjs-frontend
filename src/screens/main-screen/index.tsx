@@ -24,25 +24,25 @@ function Main() {
   });
 
   async function checkToken() {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/auth/department-login");
-    } else {
-      try {
-        const res = await axiosInstance.get(getAPI(token).verifyToken);
-        console.log(res);
+    // const token = localStorage.getItem("token");
+    // if (!token) {
+    //   navigate("/auth/department-login");
+    // } else {
+    //   try {
+    //     const res = await axiosInstance.get(getAPI(token).verifyToken);
+    //     console.log(res);
 
-        if (res.status === 200) {
-          navigate("/landing-page");
-        } else {
-          navigate("/auth/department-login");
-        }
-      } catch (err) {
-        console.log(err);
+    //     if (res.status === 200) {
+    //       navigate("/landing-page");
+    //     } else {
+    //       navigate("/auth/department-login");
+    //     }
+    //   } catch (err) {
+    //     console.log(err);
 
-        navigate("/auth/department-login");
-      }
-    }
+    //     navigate("/auth/department-login");
+    //   }
+    // }
   }
 
   return (

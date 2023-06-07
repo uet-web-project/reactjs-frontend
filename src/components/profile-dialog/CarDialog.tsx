@@ -1,40 +1,51 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  useDropzone,
-  FileWithPath,
-  FileError,
-  FileRejection,
-  DropEvent,
-} from "react-dropzone";
 import "./styles.css";
 import {
   Box,
   Button,
   Dialog,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
+  DialogTitle,
   Paper,
+  Slide,
   Typography,
 } from "@mui/material";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import { fileImportHooks } from "../../redux/hooks/fileImportHooks";
+import { TransitionProps } from "@mui/material/transitions";
+import { PaperProps } from "@mui/material/Paper";
+import Draggable from "react-draggable";
+import { loadingHook } from "../../redux/hooks/loadingHooks";
+
+function PaperComponent(props: PaperProps) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function CarDialog(props: any) {
+  const { location } = loadingHook();
   const data = props.data;
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
-    
+    console.log(location);
+    console.log("fadfasdfdfdf");
   }, []);
   const handleClickOpen = () => {
     setOpen(true);
@@ -58,12 +69,14 @@ export default function CarDialog(props: any) {
   return (
     <React.Fragment>
       <button id="viewDetailBut" onClick={handleClickOpen}>
-        View Detail
+        Detail
       </button>
       <Dialog
+        TransitionComponent={Transition}
+        PaperComponent={PaperComponent}
         fullScreen={false}
-        fullWidth={true}
-        maxWidth={"xl"}
+        fullWidth={false}
+        maxWidth={"sm"}
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
@@ -72,25 +85,83 @@ export default function CarDialog(props: any) {
         {open && (
           <Box className="dialogContainer">
             <Box className="nameAndPicture">
-              <h2>
-                {data.vehicleType}: {data.manufacturer} {data.model} {data.version}
-              </h2>
+              <DialogTitle
+                style={{ cursor: "move" }}
+                id="draggable-dialog-title"
+              >
+                {location === "car" ? (
+                  <Typography variant="h4">
+                    {data.vehicleType}: {data.manufacturer} {data.model}{" "}
+                    {data.version}
+                  </Typography>
+                ) : (
+                  <Typography variant="h4">{data.name}</Typography>
+                )}
+              </DialogTitle>
               <Box className="pictureHolder">
-                <img src="/src/assets/images/CarDialog/carImage.jpg" alt="" className="carImage" />
+                {location !== "center" && (
+                  <img
+                    src="/src/assets/images/CarDialog/carImage.jpg"
+                    alt=""
+                    className="carImage"
+                  />
+                )}
               </Box>
             </Box>
-            <Box className="carInfo">
-              <h4>Car Info</h4>
+            <Box className="Info">
+              <h4>Info</h4>
               {Object.entries(data).map(([key, value]: [string, unknown]) => {
                 if (
-                  ["_v", "id", "index", "model", "version", "_id", "__v", "vehicleType", "manufacturer"].includes(key)
+                  [
+                    "_v",
+                    "id",
+                    "index",
+                    "model",
+                    "version",
+                    "_id",
+                    "__v",
+                    "vehicleType",
+                    "manufacturer",
+                  ].includes(key)
                 ) {
-                  return null; // Skip mapping for unwanted keys
+                  return null;
                 }
+
+                if (
+                  key === "registrationDate" ||
+                  key === "registrationExpirationDate"
+                ) {
+                  const date = new Date(value as string);
+                  const formattedDate = `${date.getDate()}/${
+                    date.getMonth() + 1
+                  }/${date.getFullYear()}`;
+                  value = formattedDate;
+                }
+
+                if (
+                  [
+                    "width",
+                    "length",
+                    "wheelBase",
+                    "emission",
+                    "mileage",
+                  ].includes(key)
+                ) {
+                  key += " (mm)";
+                }
+
                 return (
-                  <Box className="item">
-                    <Box className="left">{key}</Box>
-                    <Box className="right">{value as React.ReactNode}</Box>
+                  <Box className="item" key={key}>
+                    <Box className="left">
+                      <Typography style={{ wordBreak: "break-all" }}>
+                        {key}
+                      </Typography>
+                    </Box>
+                    <Box className="right">
+                      <Typography style={{ wordBreak: "break-all" }}>
+                        {value as React.ReactNode}
+                      </Typography>
+                    </Box>
                   </Box>
                 );
               })}

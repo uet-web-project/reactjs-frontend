@@ -59,7 +59,7 @@ function CarRegistry() {
   }, [loading]);
 
   useEffect(() => {
-    setLocationState("car");
+    setLocationState("nearExpired");
   }, []);
 
   return (
@@ -120,24 +120,8 @@ function CarRegistry() {
           </div>
         </div>
       </div>
-      <div className="tableContainer">
-        <div className="firstPart">
-          <DropZone />
-          <div className="generalInputContainer">
-            <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-              <SearchIcon sx={{ color: "white", mr: 1, my: 0.5 }} />
-              <TextField
-                id="input-with-sx"
-                label="Search"
-                sx={{ color: "white", mr: 1, my: 0.5 }}
-                variant="standard"
-              />
-            </Box>
-          </div>
-        </div>
-        <div className="secondPart">
+      <div className="tableContainer">  
           <InfoTable location="nearExpired" />
-        </div>
       </div>
     </div>
   );
