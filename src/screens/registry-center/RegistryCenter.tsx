@@ -15,7 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import TransitionTab from "../../components/transitionTab/TransitionTab";
 
 function RegistryCenter() {
-  const { setTypeState, loading } = loadingHook();
+  const { setLocationState, setTypeState, loading } = loadingHook();
 
   useEffect(() => {}, []);
 
@@ -39,7 +39,7 @@ function RegistryCenter() {
           </div>
         </div>
         <div className="secondPart">
-          <InfoTable location="center"/>
+          <InfoTable location="center" />
         </div>
       </div>
     </div>

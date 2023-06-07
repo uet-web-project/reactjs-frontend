@@ -108,6 +108,7 @@ export default function DropZone(props: any) {
 
   function onCloseButtonClick() {
     setOpen(false);
+    removeAll();
   }
 
   function onUploadButtonClick() {
@@ -117,6 +118,7 @@ export default function DropZone(props: any) {
     });
     uploadFile(formData);
     setOpen(false);
+    removeAll();
   }
   return (
     <React.Fragment>

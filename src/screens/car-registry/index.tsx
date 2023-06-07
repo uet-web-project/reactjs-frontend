@@ -22,7 +22,7 @@ import { loadingHook } from "../../redux/hooks/loadingHooks";
 
 function CarRegistry() {
   const { infoChartController } = chartStatisticHook();
-  const { setTypeState, loading } = loadingHook();
+  const { setLocationState, setTypeState, loading } = loadingHook();
   const [activeIndex, setActiveIndex] = useState<number>(3);
   const [timeOutIndex, setTimeOutIndex] = useState<number>(3);
   const handleButtonClick = (index: number) => {
@@ -56,6 +56,9 @@ function CarRegistry() {
       setActiveIndex(timeOutIndex);
     }
   }, [loading]);
+  useEffect(() => {
+    setLocationState("car");
+  }, []);
 
   let timeoutId: any;
   function onGeneralSearch() {
@@ -120,7 +123,7 @@ function CarRegistry() {
           </div>
           <div className="transitionTabDiv">
             <TransitionTab />
-            <CarPieChart/>
+            <CarPieChart />
           </div>
         </div>
       </div>

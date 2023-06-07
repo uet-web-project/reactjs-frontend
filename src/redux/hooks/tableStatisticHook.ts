@@ -39,7 +39,7 @@ export const tableStatisticHook = () => {
   async function getNearExpiredCarTableData() {
     dispatch(setLoading(true));
     try {
-      const res = await axiosInstance.get(getAPI().getAllVehicles);
+      const res = await axiosInstance.get(getAPI().getAllNearExpiredVehicles);
       if (res.status === 200) {
         const moddedData: ICarInfoTable[] = res.data.map(
           (item: IVehicle, index: number) => ({
@@ -49,7 +49,7 @@ export const tableStatisticHook = () => {
           })
         );
         dispatch(setDataForTableInfo(moddedData));
-        console.log("ok");
+        console.log(moddedData);
       }
     } catch (err) {
       console.log(err);
@@ -71,7 +71,7 @@ export const tableStatisticHook = () => {
           })
         );
         dispatch(setDataForTableInfo(moddedData));
-        console.log("ok");
+        console.log("center");
       }
     } catch (err) {
       console.log(err);

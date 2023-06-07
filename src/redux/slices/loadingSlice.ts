@@ -12,6 +12,7 @@ const initialState = {
     today.toISOString().split("T")[0],
   ] as [string, string],
   type: "all",
+  location: "car",
 };
 export const loadingSlide = createSlice({
   name: "loading",
@@ -26,9 +27,13 @@ export const loadingSlide = createSlice({
     setType(state, action: PayloadAction<string>) {
       state.type = action.payload;
     },
+    setLocation(state, action: PayloadAction<string>) {
+      state.location = action.payload;
+    },
   },
 });
 
-export const { setLoading, setDate, setType } = loadingSlide.actions;
+export const { setLoading, setDate, setType, setLocation } =
+  loadingSlide.actions;
 
 export default loadingSlide.reducer;

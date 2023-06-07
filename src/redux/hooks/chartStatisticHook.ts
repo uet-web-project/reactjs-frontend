@@ -35,7 +35,9 @@ export const chartStatisticHook = () => {
     carPieChart,
   } = useAppSelector((state: RootState) => state.chartStatistic);
 
-  const { type, date } = useAppSelector((state: RootState) => state.loading);
+  const { type, date, location } = useAppSelector(
+    (state: RootState) => state.loading
+  );
 
   function callClearAllData() {
     dispatch(clearAllData());
@@ -174,18 +176,32 @@ export const chartStatisticHook = () => {
     try {
       const startDate = date[0];
       const endDate = date[1];
-      const requestedData =
-        type === "all"
-          ? {
-              startDate: startDate,
-              endDate: endDate,
-            }
-          : {
-              vehicleType: type,
-              startDate: startDate,
-              endDate: endDate,
-            };
-
+      let requestedData;
+      if (location === "car") {
+        requestedData =
+          type === "all"
+            ? {
+                startDate: startDate,
+                endDate: endDate,
+              }
+            : {
+                vehicleType: type,
+                startDate: startDate,
+                endDate: endDate,
+              };
+      } else {
+        requestedData =
+          type === "all"
+            ? {
+                startDate: startDate,
+                endDate: endDate,
+              }
+            : {
+                vehicleType: type,
+                startDate: startDate,
+                endDate: endDate,
+              };
+      }
       const chartData = await axiosInstance.post(
         postAPI().registeredCarData,
         requestedData
@@ -205,11 +221,18 @@ export const chartStatisticHook = () => {
     try {
       const startDate = date[0];
       const endDate = date[1];
-      const requestedData = {
-        filterType: "filter-by-date-range",
-        startDate: startDate,
-        endDate: endDate,
-      };
+      const requestedData =
+        location === "car"
+          ? {
+              filterType: "filter-by-date-range",
+              startDate: startDate,
+              endDate: endDate,
+            }
+          : {
+              filterType: "filter-by-date-range",
+              startDate: startDate,
+              endDate: endDate,
+            };
 
       const chartData = await axiosInstance.post(
         postAPI().allRegisteredCarData,

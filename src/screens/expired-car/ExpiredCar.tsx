@@ -23,7 +23,7 @@ import { loadingHook } from "../../redux/hooks/loadingHooks";
 
 function CarRegistry() {
   const { infoChartController } = chartStatisticHook();
-  const { setTypeState, loading } = loadingHook();
+  const { setLocationState, setTypeState, loading } = loadingHook();
   const [activeIndex, setActiveIndex] = useState<number>(3);
   const [timeOutIndex, setTimeOutIndex] = useState<number>(3);
   const handleButtonClick = (index: number) => {
@@ -57,6 +57,10 @@ function CarRegistry() {
       setActiveIndex(timeOutIndex);
     }
   }, [loading]);
+
+  useEffect(() => {
+    setLocationState("car");
+  }, []);
 
   return (
     <div className="pageContainer">
@@ -112,7 +116,7 @@ function CarRegistry() {
           </div>
           <div className="transitionTabDiv">
             <TransitionTab />
-            <CarPieChart/>
+            <CarPieChart />
           </div>
         </div>
       </div>
@@ -132,7 +136,7 @@ function CarRegistry() {
           </div>
         </div>
         <div className="secondPart">
-          <InfoTable location="car" />
+          <InfoTable location="nearExpired" />
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ export function getAPI(token?: string, id?: string) {
 
     // vehicle
     getAllVehicles: "vehicle",
-
+    getAllNearExpiredVehicles:"/vehicle/get-near-expired-vehicles",
     getCenterListById: `registration-center/get-by-dep-id/${id}`,
 
     //Car Type
