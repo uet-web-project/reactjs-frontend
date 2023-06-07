@@ -6,7 +6,9 @@ import "./styles.css";
 import { getAPI } from "../../api/getAPI";
 import { setLoading } from "../../redux/slices/loadingSlice";
 import { accountHook } from "../../redux/hooks/accountHooks";
+import LoadingScreen from "../../components/loading-screen/LoadingScreen";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
+import LoadingOverlay from "react-loading-overlay-ts";
 
 function Main() {
   const { loading } = loadingHook();
