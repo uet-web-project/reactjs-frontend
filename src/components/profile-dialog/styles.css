@@ -1,0 +1,59 @@
+#viewDetailBut {
+  color: black;
+  background-color: white;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#viewDetailBut:hover {
+  color: white;
+  background-color: blue;
+}
+
+.dialogContainer {
+  padding: 10px;
+}
+
+h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.nameAndPicture
+
+.carImage {
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  object-fit: fill;
+}
+
+.carInfo {
+  width: 70%;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  border: 1px solid rgb(219, 212, 212);
+  margin: 2px;
+}
+
+.left {
+  margin-right: 5px;
+  min-width: 200px;
+  flex: 1;
+  text-align: left;
+}
+
+.right {
+  flex: 1;
+  text-align: left;
+}

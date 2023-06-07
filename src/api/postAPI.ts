@@ -11,5 +11,12 @@ export function postAPI() {
 
     //it's for data
     getDataForCarTypeOverview: `vehicle/group-by-vehicle-type`,
+
+    //importFile
+    fileImport: "/vehicle/upload-vehicles-sheet",
+
+    //data for chart
+    registeredCarData: "vehicle/get-vehicles-by-type-and-date-range",
+    allRegisteredCarData: "vehicle/group-by-vehicle-type",
   };
 }

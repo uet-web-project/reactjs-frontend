@@ -1,9 +1,12 @@
+import { ICarTypeOverviewChart } from "./../slices/chartsSlice";
 import {
   setDataForCarInfoOverviewTable,
   setDataForCarTypeOverview,
   setDataForMonthlyComparison,
   setDataForCenterList,
   setDataForTotalOverviewChart,
+  setDataForCarChart,
+  setDataForCarPieChart,
   clearAllData,
 } from "../slices/chartsSlice";
 import { ICarInfoOverviewTable } from "../slices/chartsSlice";
@@ -16,6 +19,9 @@ import { IMonthlyComparison } from "../slices/chartsSlice";
 import { setLoading } from "../slices/loadingSlice";
 import { postAPI } from "../../api/postAPI";
 import { accountHook } from "./accountHooks";
+import { useEffect, useState } from "react";
+import startOfMonth from "date-fns/startOfMonth";
+import addMonths from "date-fns/addMonths";
 
 export const chartStatisticHook = () => {
   const dispatch = useDispatch();
@@ -27,12 +33,17 @@ export const chartStatisticHook = () => {
     carRegisteredMonthlyComparison,
     carInfoOverviewTable,
     centerList,
+    carStatsForChart,
+    carPieChart,
   } = useAppSelector((state: RootState) => state.chartStatistic);
+
+  const { type, date, location } = useAppSelector(
+    (state: RootState) => state.loading
+  );
 
   function callClearAllData() {
     dispatch(clearAllData());
   }
-
   async function getDataForTotalOverviewChart(date: string) {
     dispatch(setLoading(true));
     try {
@@ -148,17 +159,110 @@ export const chartStatisticHook = () => {
     }
   }
 
+  //const
+
+  async function getChartDataOfRegisteredCar(
+    date: [string, string],
+    type = "all"
+  ) {
+    dispatch(setLoading(true));
+    try {
+      const startDate = date[0];
+      const endDate = date[1];
+      let requestedData;
+      if (location === "car") {
+        requestedData =
+          type === "all"
+            ? {
+                startDate: startDate,
+                endDate: endDate,
+              }
+            : {
+                vehicleType: type,
+                startDate: startDate,
+                endDate: endDate,
+              };
+      } else {
+        requestedData =
+          type === "all"
+            ? {
+                startDate: startDate,
+                endDate: endDate,
+              }
+            : {
+                vehicleType: type,
+                startDate: startDate,
+                endDate: endDate,
+              };
+      }
+      const chartData = await axiosInstance.post(
+        postAPI().registeredCarData,
+        requestedData
+      );
+      if (chartData.status === 200) {
+        console.log(chartData.data);
+        dispatch(setDataForCarChart(chartData.data));
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+  async function getDataForCarPieChart() {
+    dispatch(setLoading(true));
+    try {
+      const startDate = date[0];
+      const endDate = date[1];
+      const requestedData =
+        location === "car"
+          ? {
+              filterType: "filter-by-date-range",
+              startDate: startDate,
+              endDate: endDate,
+            }
+          : {
+              filterType: "filter-by-date-range",
+              startDate: startDate,
+              endDate: endDate,
+            };
+
+      const chartData = await axiosInstance.post(
+        postAPI().allRegisteredCarData,
+        requestedData
+      );
+      if (chartData.status === 200) {
+        console.log(chartData.data);
+        dispatch(setDataForCarPieChart(chartData.data));
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+  function infoChartController() {
+    console.log(date);
+    console.log(type);
+    getChartDataOfRegisteredCar(date, type);
+  }
+
   return {
     centerList,
     carInfoOverviewTable,
     carTypeOverviewChart,
     carRegisteredMonthlyComparison,
     totalOverviewChartData,
+    carStatsForChart,
+    carPieChart,
     getDataForTotalOverviewChart,
     getVehicleTableData,
     getDataForMonthlyComparison,
     getCenterListData,
     getDataForCarTypeOverview,
+    getChartDataOfRegisteredCar,
+    infoChartController,
+    getDataForCarPieChart,
     callClearAllData,
   };
 };

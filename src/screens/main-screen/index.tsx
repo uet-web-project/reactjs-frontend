@@ -1,27 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/nav-bar/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axios";
 import "./styles.css";
 import { getAPI } from "../../api/getAPI";
+import { setLoading } from "../../redux/slices/loadingSlice";
 import { accountHook } from "../../redux/hooks/accountHooks";
+import { loadingHook } from "../../redux/hooks/loadingHooks";
 
 function Main() {
+  const { loading } = loadingHook();
+  const [Loading, setLoading] = useState(loading);
   const { getProfile } = accountHook();
   const navigate = useNavigate();
 
   useEffect(() => {
     checkToken();
-  }, []);
+    if (loading) setLoading(true);
+    else setLoading(false);
+    console.log(Loading);
+  });
 
   async function checkToken() {
     const token = localStorage.getItem("token");
-
     if (!token) {
       navigate("/auth/department-login");
     } else {
       try {
         const res = await axiosInstance.get(getAPI(token).verifyToken);
+        console.log(res);
 
         if (res.status === 200) {
           navigate("/landing-page");
@@ -29,6 +36,7 @@ function Main() {
           navigate("/auth/department-login");
         }
       } catch (err) {
+        console.log(err);
 
         navigate("/auth/department-login");
       }
@@ -36,12 +44,17 @@ function Main() {
   }
 
   return (
-    <div className="main-container">
+    <LoadingOverlay
+      className="main-container"
+      active={loading}
+      spinner={<LoadingScreen />}
+      text="Loading Content..."
+    >
       <Navbar />
       <div className="parent-body">
         <Outlet />
       </div>
-    </div>
+    </LoadingOverlay>
   );
 }
 
