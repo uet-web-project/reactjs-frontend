@@ -33,4 +33,8 @@
   color: red;
   font-style: italic;
   font-weight: 600;
+  text-align: right;
+}
+.inputPlace::placeholder{
+  font-style: italic;
 }

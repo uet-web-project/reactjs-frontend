@@ -21,11 +21,15 @@ import { useNavigate } from "react-router-dom";
 import { accountHook } from "../../redux/hooks/accountHooks";
 import axiosInstance from "../../utils/axios";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import ProfileScreen from "../../screens/profile-screen";
 
 function Navbar() {
   const { callClearAllData } = chartStatisticHook();
-  const { isDepLogin, setDepLogin } = accountHook();
+  const { isDepLogin, setDepLogin, clearAllData } = accountHook();
   const navigagte = useNavigate();
+
+  const [openProfile, setOpenProfile] = React.useState<boolean>(false);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -59,22 +63,23 @@ function Navbar() {
     navigagte("/create-account");
   };
 
+  const registerVehicleBtnAction = () => {
+    handleCloseNavMenu;
+    navigagte("/registration-certificate");
+  };
   const handleLogOutEvent = () => {
     callClearAllData();
+    clearAllData();
     axiosInstance.defaults.headers.common = {};
     window.localStorage.clear();
     navigagte("/auth/department-login");
-    setDepLogin(false);
+    setDepLogin(true);
   };
-  // for statistics dropdown item and expand item
   const open = Boolean(anchorElStatistic);
   const openExpand = Boolean(anchorElExpand);
 
   const handleClose = () => {
     setAnchorElStatistic(null);
-    setTimeout(() => {
-      document.getElementById("expanded")!.classList.remove("expand");
-    }, 170);
   };
 
   const handleExpandClose = () => {
@@ -82,8 +87,6 @@ function Navbar() {
   };
   const handleClick = (event: any) => {
     setAnchorElStatistic(event.currentTarget);
-
-    document.getElementById("expanded")!.classList.add("expand");
   };
 
   const handleExpand = (event: any) => {
@@ -92,9 +95,14 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleClickProfile = () => {
+    setOpenProfile(!openProfile);
+    handleCloseUserMenu();
+  };
   return (
     <AppBar position="static">
       <Container className="secondary-color nav-container">
+        <ProfileScreen open={openProfile} onClose={handleClickProfile} />
         <Toolbar disableGutters>
           <img
             src="/src/assets/icons/Myproject1.png"
@@ -152,24 +160,45 @@ function Navbar() {
                   Home
                 </Typography>
               </MenuItem>
-              <MenuItem
-                onClick={createAccountBtnAction}
-                sx={{ marginBottom: "20px" }}
-              >
-                <GroupsIcon sx={{ color: "white" }} />
-                <Typography
-                  sx={{
-                    fontWeight: "500",
-                    display: "inline",
-                    marginLeft: "10px",
-                    color: "white",
-                  }}
-                  textAlign="center"
+              {isDepLogin ? (
+                <MenuItem
+                  onClick={createAccountBtnAction}
+                  sx={{ marginBottom: "20px" }}
                 >
-                  {" "}
-                  Create account
-                </Typography>
-              </MenuItem>
+                  <GroupsIcon sx={{ color: "white" }} />
+                  <Typography
+                    sx={{
+                      fontWeight: "500",
+                      display: "inline",
+                      marginLeft: "10px",
+                      color: "white",
+                    }}
+                    textAlign="center"
+                  >
+                    {" "}
+                    Create account
+                  </Typography>
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  onClick={registerVehicleBtnAction}
+                  sx={{ marginBottom: "20px" }}
+                >
+                  <DirectionsCarIcon sx={{ color: "white" }} />
+                  <Typography
+                    sx={{
+                      fontWeight: "500",
+                      display: "inline",
+                      marginLeft: "10px",
+                      color: "white",
+                    }}
+                    textAlign="center"
+                  >
+                    {" "}
+                    Register Vehicle
+                  </Typography>
+                </MenuItem>
+              )}
 
               <MenuItem
                 onClick={handleExpand}
@@ -213,13 +242,15 @@ function Navbar() {
                 horizontal: "left",
               }}
             >
-              <MenuItem
-                sx={{ color: "white", marginBottom: "20px" }}
-                onClick={handleExpandClose}
-              >
-                {" "}
-                Registry Center{" "}
-              </MenuItem>
+              {isDepLogin ? (
+                <MenuItem
+                  sx={{ color: "white", marginBottom: "20px" }}
+                  onClick={handleExpandClose}
+                >
+                  {" "}
+                  Registry Center{" "}
+                </MenuItem>
+              ) : null}
               <MenuItem
                 sx={{ color: "white", marginBottom: "20px" }}
                 onClick={handleExpandClose}
@@ -252,19 +283,39 @@ function Navbar() {
               <HomeIcon sx={{ marginRight: "10px" }} />
               <Typography sx={{ fontWeight: "500" }}>Home</Typography>
             </MenuItem>
-            <MenuItem
-              onClick={createAccountBtnAction}
-              sx={{
-                color: "white",
-                marginBottom: "3px",
-                marginLeft: "1vw",
-              }}
-            >
-              {/* <HomeIcon sx={{ marginRight: "10px" }} /> */}
+            {isDepLogin ? (
+              <MenuItem
+                onClick={createAccountBtnAction}
+                sx={{
+                  color: "white",
+                  marginBottom: "3px",
+                  marginLeft: "1vw",
+                }}
+              >
+                {/* <HomeIcon sx={{ marginRight: "10px" }} /> */}
 
-              <GroupsIcon sx={{ marginRight: "10px" }} />
-              <Typography sx={{ fontWeight: "500" }}>Create account</Typography>
-            </MenuItem>
+                <GroupsIcon sx={{ marginRight: "10px" }} />
+                <Typography sx={{ fontWeight: "500" }}>
+                  Create account
+                </Typography>
+              </MenuItem>
+            ) : (
+              <MenuItem
+                onClick={registerVehicleBtnAction}
+                sx={{
+                  color: "white",
+                  marginBottom: "3px",
+                  marginLeft: "1vw",
+                }}
+              >
+                {/* <HomeIcon sx={{ marginRight: "10px" }} /> */}
+
+                <DirectionsCarIcon sx={{ marginRight: "10px" }} />
+                <Typography sx={{ fontWeight: "500" }}>
+                  Register vehicle
+                </Typography>
+              </MenuItem>
+            )}
 
             <MenuItem
               sx={{ color: "white", marginBottom: "3px", marginLeft: "1vw" }}
@@ -280,6 +331,7 @@ function Navbar() {
             </MenuItem>
 
             <Menu
+              className="no-shadow"
               open={open}
               id="Statistics-Menu"
               anchorEl={anchorElStatistic}
@@ -296,10 +348,12 @@ function Navbar() {
                 horizontal: "right",
               }}
             >
-              <MenuItem sx={{ color: "white" }} onClick={handleClose}>
-                {" "}
-                Registry Center{" "}
-              </MenuItem>
+              {isDepLogin ? (
+                <MenuItem sx={{ color: "white" }} onClick={handleClose}>
+                  {" "}
+                  Registry Center{" "}
+                </MenuItem>
+              ) : null}
               <MenuItem sx={{ color: "white" }} onClick={handleClose}>
                 {" "}
                 Car registry
@@ -335,7 +389,7 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key={"Profile"} onClick={handleCloseUserMenu}>
+              <MenuItem key={"Profile"} onClick={handleClickProfile}>
                 <Typography textAlign="center" color="white">
                   Profile
                 </Typography>

@@ -8,6 +8,7 @@ import TextInput from "../input/text-input/TextInput";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
 import { accountHook } from "../../redux/hooks/accountHooks";
+import { Margin } from "@mui/icons-material";
 
 function SignUpInformation() {
   const navigate = useNavigate();
@@ -100,6 +101,11 @@ function SignUpInformation() {
     maxWidth: "450px",
     width: "65%",
   };
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter") {
+      signUp();
+    }
+  };
 
   async function signUp() {
     createRegistrationCenter(signUpData, repassword, showError, showIcon);
@@ -107,7 +113,6 @@ function SignUpInformation() {
 
   async function getAllDeps() {
     const res = await axiosInstance.get(getAPI().getAllDeps);
-    console.log(res);
   }
 
   return (
@@ -118,10 +123,13 @@ function SignUpInformation() {
           alt="create account image"
         />
       </div>
-      <div className="signUp-section">
+      <div className="signUp-section" onKeyDown={handleKeyDown}>
         <div className="signUp-input">
           <div className="signUp-header">
-            <h3 style={{ marginBottom: "0px" }} className="secondary-font">
+            <h3
+              style={{ marginBottom: "0px", marginTop: "10px" }}
+              className="secondary-font"
+            >
               Create account
             </h3>
             <span

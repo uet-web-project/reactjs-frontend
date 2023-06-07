@@ -1,0 +1,16 @@
+.date-picker .MuiInputBase-root {
+  border: none !important;
+  width: 100%;
+  height: 43px;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  padding: 10px;
+  padding-left: 0px;
+  background-color: white;
+
+}
+
+
+.date-picker{
+  width: 100%;
+}

@@ -1,0 +1,39 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 30px;
+}
+
+.section-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.info-span {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.info-span > span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.field-title {
+  font-family: "Roboto Mono", monospace;
+  color: gray;
+  font-size: 14px;
+  width: 180px;
+}
+
+.spacer {
+  border: 0.5px solid gray;
+  margin: 30px 0;
+}

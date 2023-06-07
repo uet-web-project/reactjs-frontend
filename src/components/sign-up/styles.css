@@ -9,7 +9,7 @@
 }
 .signUp-section {
   height: 100%;
-  flex: 2;
+  flex: 3;
   flex-direction: column;
   align-items: center;
 }
@@ -44,5 +44,11 @@
   align-items: center;
 }
 .side-image {
-  flex: 1;
+  flex: 2;
+}
+
+@media (max-width: 930px) {
+  .side-image{
+    display: none;
+  }
 }

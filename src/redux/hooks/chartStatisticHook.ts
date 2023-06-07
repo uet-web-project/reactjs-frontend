@@ -18,6 +18,7 @@ import { getAPI } from "../../api/getAPI";
 import { IMonthlyComparison } from "../slices/chartsSlice";
 import { setLoading } from "../slices/loadingSlice";
 import { postAPI } from "../../api/postAPI";
+import { accountHook } from "./accountHooks";
 import { useEffect, useState } from "react";
 import startOfMonth from "date-fns/startOfMonth";
 import addMonths from "date-fns/addMonths";
@@ -25,6 +26,7 @@ import addMonths from "date-fns/addMonths";
 export const chartStatisticHook = () => {
   const dispatch = useDispatch();
 
+  const { isDepLogin, depProfile } = accountHook();
   const {
     totalOverviewChartData,
     carTypeOverviewChart,
@@ -55,9 +57,7 @@ export const chartStatisticHook = () => {
       if (res.status === 200) {
         dispatch(setDataForTotalOverviewChart(res.data));
       }
-      console.log(res);
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
@@ -98,7 +98,6 @@ export const chartStatisticHook = () => {
         dispatch(setDataForMonthlyComparison(pieData));
       }
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
@@ -107,7 +106,12 @@ export const chartStatisticHook = () => {
   async function getVehicleTableData() {
     dispatch(setLoading(true));
     try {
-      const res = await axiosInstance.get(getAPI().getAllVehicles);
+      const res = await axiosInstance.get(
+        isDepLogin
+          ? getAPI().getAllVehicleByDep
+          : getAPI().getAllVehicleByCenter
+      );
+
       if (res.status === 200) {
         const moddedData: ICarInfoOverviewTable[] = res.data.map(
           (item: IVehicle) => ({
@@ -118,7 +122,6 @@ export const chartStatisticHook = () => {
         dispatch(setDataForCarInfoOverviewTable(moddedData));
       }
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
@@ -127,19 +130,12 @@ export const chartStatisticHook = () => {
   async function getCenterListData() {
     dispatch(setLoading(true));
     try {
-      const depProfile = await axiosInstance.get(getAPI().getDepProfile);
-      const depId = depProfile.data._id;
-      if (depId && depProfile.status === 200) {
-        const res = await axiosInstance.get(
-          getAPI("", depId).getCenterListById
-        );
-        console.log(res);
-        if (res.status === 200) {
-          dispatch(setDataForCenterList(res.data));
-        }
+      const depId = depProfile._id;
+      const res = await axiosInstance.get(getAPI("", depId).getCenterListById);
+      if (res.status === 200) {
+        dispatch(setDataForCenterList(res.data));
       }
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
@@ -148,19 +144,16 @@ export const chartStatisticHook = () => {
   async function getDataForCarTypeOverview(date: string) {
     dispatch(setLoading(true));
     try {
-      const monthDataForCarTypeOverview = await axiosInstance.get(
-        date === "week"
-          ? getAPI().getWeekDataForCarTypeOverview
-          : date == "month"
-          ? getAPI().getMonthDataForCarTypeOverview
-          : getAPI().getYearDataForCarTypeOverview
+      const monthDataForCarTypeOverview = await axiosInstance.post(
+        postAPI().getDataForCarTypeOverview,
+        {
+          filterType: `filter-by-${date}`,
+        }
       );
       if (monthDataForCarTypeOverview.status === 200) {
-        console.log(monthDataForCarTypeOverview);
         dispatch(setDataForCarTypeOverview(monthDataForCarTypeOverview.data));
       }
     } catch (err) {
-      console.log(err);
     } finally {
       dispatch(setLoading(false));
     }
