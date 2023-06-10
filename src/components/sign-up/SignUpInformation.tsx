@@ -127,8 +127,13 @@ function SignUpInformation() {
         <div className="signUp-input">
           <div className="signUp-header">
             <h3
-              style={{ marginBottom: "0px", marginTop: "10px" }}
-              className="secondary-font"
+              style={{
+                marginBottom: "0px",
+                marginTop: "10px",
+                fontSize: "25px",
+                fontWeight: "700",
+              }}
+              className="secondary-font "
             >
               Create account
             </h3>
