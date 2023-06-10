@@ -142,7 +142,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField">
                 <TextField
                   variant="standard"
-                  label="licensePlate"
+                  label="License Plate"
                   type="text"
                   name="licensePlate"
                   onChange={handleFiltersChange}
@@ -152,7 +152,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField">
                 <TextField
                   variant="standard"
-                  label="manufacturer"
+                  label="Manufacturer"
                   type="text"
                   name="manufacturer"
                   onChange={handleFiltersChange}
@@ -162,7 +162,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField">
                 <TextField
                   variant="standard"
-                  label="registrationLocation"
+                  label="Registration Location"
                   type="text"
                   name="registrationLocation"
                   onChange={handleFiltersChange}
@@ -184,7 +184,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField">
                 <TextField
                   variant="standard"
-                  label="registrationDate"
+                  label="Registration Date"
                   type="text"
                   name="registrationDate"
                   onChange={handleFiltersChange}
@@ -194,7 +194,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField">
                 <TextField
                   variant="standard"
-                  label="registrationExpirationDate"
+                  label="Registration Expiration Date"
                   type="text"
                   name="registrationExpirationDate"
                   onChange={handleFiltersChange}
@@ -206,7 +206,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField">
                 <TextField
                   variant="standard"
-                  label="model"
+                  label="Model"
                   type="text"
                   name="model"
                   onChange={handleFiltersChange}
@@ -216,7 +216,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField">
                 <TextField
                   variant="standard"
-                  label="version"
+                  label="Version"
                   type="text"
                   name="version"
                   onChange={handleFiltersChange}
@@ -226,7 +226,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField">
                 <TextField
                   variant="standard"
-                  label="vehicleOwnerCid"
+                  label="Vehicle Owner Cid"
                   type="text"
                   name="vehicleOwnerCid"
                   onChange={handleFiltersChange}
@@ -305,7 +305,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField1">
                 <TextField
                   variant="standard"
-                  label="width (mm)"
+                  label="Width (mm)"
                   type="text"
                   name="width"
                   onChange={handleFiltersChange}
@@ -315,7 +315,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField1">
                 <TextField
                   variant="standard"
-                  label="length (mm)"
+                  label="Length (mm)"
                   type="text"
                   name="length"
                   onChange={handleFiltersChange}
@@ -325,7 +325,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField1">
                 <TextField
                   variant="standard"
-                  label="wheelBase (mm)"
+                  label="Wheel Base (mm)"
                   type="text"
                   name="wheelBase"
                   onChange={handleFiltersChange}
@@ -335,7 +335,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField1">
                 <TextField
                   variant="standard"
-                  label="emission"
+                  label="Emission (kg CO2/km)"
                   type="text"
                   name="emission"
                   onChange={handleFiltersChange}
@@ -347,7 +347,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField1">
                 <TextField
                   variant="standard"
-                  label="mileage (mm)"
+                  label="Mileage (mm)"
                   type="text"
                   name="mileage"
                   onChange={handleFiltersChange}
@@ -357,7 +357,7 @@ export default function FilterDialog(props: any) {
               <div className="filterTextField1">
                 <TextField
                   variant="standard"
-                  label="registrationCenterId"
+                  label="Registration Center Id"
                   type="text"
                   name="registrationCenterId"
                   onChange={handleFiltersChange}
