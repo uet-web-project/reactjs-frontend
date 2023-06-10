@@ -2,6 +2,7 @@ import "./App.css";
 import "./index.css";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { deDE } from "@mui/x-date-pickers/locales";
+import React from "react";
 import SignUpInformation from "./components/sign-up/SignUpInformation";
 import Login from "./screens/authentication/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -13,6 +14,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/store";
 import RegistrationCertificate from "../src/screens/registration-certificate";
 import ProfileScreen from "./screens/profile-screen";
+import CarRegistry from "./screens/car-registry";
+import RegistryCenter from "./screens/registry-center/RegistryCenter";
+import ExpiredCar from "./screens/expired-car/ExpiredCar";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +55,24 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/stats",
+    element: <Main />,
+    children: [
+      {
+        path: "cars",
+        element: <CarRegistry />,
+      },
+      {
+        path: "centers",
+        element: <RegistryCenter />,
+      },
+      {
+        path: "expired",
+        element: <ExpiredCar />,
+      },
+    ],
+  },
 ]);
 function App() {
   return (
@@ -61,5 +83,4 @@ function App() {
     </Provider>
   );
 }
-
 export default App;

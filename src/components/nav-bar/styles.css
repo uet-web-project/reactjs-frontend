@@ -20,6 +20,7 @@
   border-radius: 5px !important;
 }
 
-/* .no-shadow {
-  box-shadow: none !important;
-} */
+/* change background color of navbar's dropdown */
+.MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper {
+  background-color: #62b7d3 !important;
+}
