@@ -9,7 +9,7 @@ import {
 import "./styles.css";
 import {
   Box,
-  Button,
+  // Button,
   Dialog,
   List,
   ListItem,
@@ -19,6 +19,7 @@ import {
   Slide,
   Typography,
 } from "@mui/material";
+import Button from "../button/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -120,13 +121,10 @@ export default function DropZone(props: any) {
       </ListItemIcon>
       <ListItemText primary={`${file.path} - ${file.size} bytes`} />
       <Button
+        content="Remove File"
         onClick={() => removeFile(file)}
-        variant="contained"
-        color="primary"
         style={{ marginLeft: "10px" }}
-      >
-        Remove File
-      </Button>
+      />
     </ListItem>
   ));
 
@@ -146,9 +144,14 @@ export default function DropZone(props: any) {
   }
   return (
     <React.Fragment>
-      <button id="importButton" onClick={handleClickOpen}>
+      {/* <button id="importButton" onClick={handleClickOpen} className=" text-base text-gray-700 text-sm">
         IMPORT DATA
-      </button>
+      </button> */}
+      <Button
+        content="IMPORT DATA"
+        onClick={handleClickOpen}
+        className="text-base text-gray-700 text-sm"
+      />
       <Dialog
         PaperComponent={PaperComponent}
         TransitionComponent={Transition}
@@ -192,37 +195,30 @@ export default function DropZone(props: any) {
             </Paper>
             {files.length > 0 && (
               <Button
+                content="Remove all"
                 onClick={removeAll}
-                variant="contained"
-                color="primary"
                 style={{ marginTop: "10px" }}
-              >
-                Remove All
-              </Button>
+              />
             )}
           </Box>
           <Box display="flex" justifyContent="flex-end">
             <Button
+              content="Cancel"
               onClick={onCloseButtonClick}
-              variant="contained"
               style={{
                 marginTop: "10px",
                 backgroundColor: "#62b7d3",
               }}
-            >
-              cancel
-            </Button>
+            />
             <Button
+              content="Upload"
               onClick={onUploadButtonClick}
-              variant="contained"
               style={{
                 marginLeft: "10px",
                 marginTop: "10px",
                 backgroundColor: "#62b7d3",
               }}
-            >
-              upload
-            </Button>
+            />
           </Box>
         </Box>
       </Dialog>

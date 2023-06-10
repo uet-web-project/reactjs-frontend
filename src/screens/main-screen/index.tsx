@@ -26,21 +26,21 @@ function Main() {
   async function checkToken() {
     const token = localStorage.getItem("token");
 
-    if (!token) {
-      navigate("/auth/department-login");
-    } else {
-      try {
-        const res = await axiosInstance.get(getAPI(token).verifyToken);
+    // if (!token) {
+    //   navigate("/auth/department-login");
+    // } else {
+    //   try {
+    //     const res = await axiosInstance.get(getAPI(token).verifyToken);
 
-        if (res.status === 200) {
-          navigate("/landing-page");
-        } else {
-          navigate("/auth/department-login");
-        }
-      } catch (err) {
-        navigate("/auth/department-login");
-      }
-    }
+    //     if (res.status === 200) {
+    //       navigate("/landing-page");
+    //     } else {
+    //       navigate("/auth/department-login");
+    //     }
+    //   } catch (err) {
+    //     navigate("/auth/department-login");
+    //   }
+    // }
   }
 
   return (

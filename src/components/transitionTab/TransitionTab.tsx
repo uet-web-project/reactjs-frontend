@@ -28,7 +28,9 @@ function TransitionTab() {
     <div className="transitionTab">
       <button
         id="transitionTabButton1"
-        className={selectedTab === "center" ? "selected" : "button"}
+        className={`text-base text-gray-700 font-medium text-xs ${
+          selectedTab === "center" ? "selected" : "button"
+        }`}
         onClick={() => {
           navigate("/stats/centers");
         }}
@@ -37,7 +39,9 @@ function TransitionTab() {
       </button>
       <button
         id="transitionTabButton2"
-        className={selectedTab === "car" ? "selected" : "button"}
+        className={`text-base text-gray-700 font-medium text-xs ${
+          selectedTab === "car" ? "selected" : "button"
+        }`}
         onClick={() => {
           navigate("/stats/cars");
           setDateState([
@@ -51,7 +55,9 @@ function TransitionTab() {
       </button>
       <button
         id="transitionTabButton3"
-        className={selectedTab === "expired" ? "selected" : "button"}
+        className={`text-base text-gray-700 font-medium text-xs ${
+          selectedTab === "expired" ? "selected" : "button"
+        }`}
         onClick={() => {
           navigate("/stats/expired");
           setDateState([

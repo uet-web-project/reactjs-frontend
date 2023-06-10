@@ -51,13 +51,10 @@ function CarRegistry() {
     setLocationState("car");
   }, []);
 
-
-
   return (
     <div className="pageContainer">
       <div className="upperContainer">
         <div className="chartManager">
-          <p style={{ marginTop: "auto", marginBottom: "auto" }}>Manage</p>
           <div style={{ margin: "auto" }}>
             <DatePicker />
           </div>
@@ -68,7 +65,7 @@ function CarRegistry() {
               <div className="chartUpperButDivHolder">
                 <button
                   id="chartUpperBut1"
-                  className={`chartUpperBut ${
+                  className={`text-base text-gray-700 font-medium chartUpperBut ${
                     activeIndex === 0 ? "active" : ""
                   }`}
                   onClick={() => handleButtonClick(0)}
@@ -80,7 +77,7 @@ function CarRegistry() {
               <div className="chartUpperButDivHolder">
                 <button
                   id="chartUpperBut2"
-                  className={`chartUpperBut ${
+                  className={`text-base text-gray-700 font-medium chartUpperBut ${
                     activeIndex === 1 ? "active" : ""
                   }`}
                   onClick={() => handleButtonClick(1)}
@@ -91,7 +88,7 @@ function CarRegistry() {
               <div className="chartUpperButDivHolder">
                 <button
                   id="chartUpperBut3"
-                  className={`chartUpperBut ${
+                  className={`text-base text-gray-700 font-medium chartUpperBut ${
                     activeIndex === 2 ? "active" : ""
                   }`}
                   onClick={() => handleButtonClick(2)}
@@ -105,13 +102,13 @@ function CarRegistry() {
               <InfoAreaChart />
             </div>
           </div>
-          <div className="transitionTabDiv">
+          <div className="transitionTabDiv" >
             <TransitionTab />
             <div
               className="pieChartContainer"
               style={{
                 border: "1px solid #62b7d3",
-                height: "220px",
+                borderRadius:"10px",
                 width: "100%",
                 marginLeft: "auto",
                 marginRight: "auto",
@@ -122,8 +119,8 @@ function CarRegistry() {
           </div>
         </div>
       </div>
-      <div className="tableContainer">  
-          <InfoTable location="car" />
+      <div className="tableContainer">
+        <InfoTable location="car" />
       </div>
     </div>
   );

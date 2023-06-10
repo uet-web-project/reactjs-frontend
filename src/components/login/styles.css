@@ -32,24 +32,9 @@
   font-weight: 700;
 }
 
-/* @media (max-width: 750px) {
-  .responsive-bg {
-    width: 200px;
-    height: 200px;
-    background-image: url("../../assets/icons/logo-no-background.png");
-    object-fit: cover;
-    background-size: cover;
-    background-position: center;
-    margin: 0 auto 0 auto;
-  }
-} */
-
 .linkto {
   margin-top: 20px;
 }
 .linkto:active {
   color: blue;
-}
-.custom-signin-btn:hover {
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
