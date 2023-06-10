@@ -81,6 +81,19 @@ function Navbar() {
   const handleClose = () => {
     setAnchorElStatistic(null);
   };
+  //navigate function to 3 info stage
+  function navigateToCarPage() {
+    navigagte("/stats/cars");
+    handleClose();
+  }
+  function navigateToCenterPage() {
+    navigagte("/stats/centers");
+    handleClose();
+  }
+  function navigateToNearExpiredPage() {
+    navigagte("/stats/expired");
+    handleClose();
+  }
 
   const handleExpandClose = () => {
     setAnchorElExpand(null);
@@ -245,7 +258,7 @@ function Navbar() {
               {isDepLogin ? (
                 <MenuItem
                   sx={{ color: "white", marginBottom: "20px" }}
-                  onClick={handleExpandClose}
+                  onClick={navigateToCenterPage}
                 >
                   {" "}
                   Registry Center{" "}
@@ -253,12 +266,15 @@ function Navbar() {
               ) : null}
               <MenuItem
                 sx={{ color: "white", marginBottom: "20px" }}
-                onClick={handleExpandClose}
+                onClick={navigateToCarPage}
               >
                 {" "}
                 Car registry
               </MenuItem>
-              <MenuItem sx={{ color: "white" }} onClick={handleExpandClose}>
+              <MenuItem
+                sx={{ color: "white" }}
+                onClick={navigateToNearExpiredPage}
+              >
                 {" "}
                 Near-expired
               </MenuItem>
@@ -349,16 +365,22 @@ function Navbar() {
               }}
             >
               {isDepLogin ? (
-                <MenuItem sx={{ color: "white" }} onClick={handleClose}>
+                <MenuItem
+                  sx={{ color: "white" }}
+                  onClick={navigateToCenterPage}
+                >
                   {" "}
                   Registry Center{" "}
                 </MenuItem>
               ) : null}
-              <MenuItem sx={{ color: "white" }} onClick={handleClose}>
+              <MenuItem sx={{ color: "white" }} onClick={navigateToCarPage}>
                 {" "}
                 Car registry
               </MenuItem>
-              <MenuItem sx={{ color: "white" }} onClick={handleClose}>
+              <MenuItem
+                sx={{ color: "white" }}
+                onClick={navigateToNearExpiredPage}
+              >
                 {" "}
                 Near-expired
               </MenuItem>

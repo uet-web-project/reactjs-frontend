@@ -21,28 +21,26 @@ function Main() {
     if (loading) setLoading(true);
     else setLoading(false);
     console.log(Loading);
-  });
+  }, []);
 
   async function checkToken() {
-    // const token = localStorage.getItem("token");
-    // if (!token) {
-    //   navigate("/auth/department-login");
-    // } else {
-    //   try {
-    //     const res = await axiosInstance.get(getAPI(token).verifyToken);
-    //     console.log(res);
+    const token = localStorage.getItem("token");
 
-    //     if (res.status === 200) {
-    //       navigate("/landing-page");
-    //     } else {
-    //       navigate("/auth/department-login");
-    //     }
-    //   } catch (err) {
-    //     console.log(err);
+    if (!token) {
+      navigate("/auth/department-login");
+    } else {
+      try {
+        const res = await axiosInstance.get(getAPI(token).verifyToken);
 
-    //     navigate("/auth/department-login");
-    //   }
-    // }
+        if (res.status === 200) {
+          navigate("/landing-page");
+        } else {
+          navigate("/auth/department-login");
+        }
+      } catch (err) {
+        navigate("/auth/department-login");
+      }
+    }
   }
 
   return (

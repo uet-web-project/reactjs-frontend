@@ -54,11 +54,3 @@
   transition: transform 0.3s ease-out;
   transform: translateX(-100%);
 }
-
-.MuiInputBase-root .filterField{
-  padding: 10px!important;
-}
-.MuiDataGrid-columnHeaders{
- height: 200px!important;
- max-height: 100px!important;
-}
