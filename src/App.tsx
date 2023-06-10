@@ -2,7 +2,7 @@ import "./App.css";
 import "./index.css";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { deDE } from "@mui/x-date-pickers/locales";
-import React from "react";
+import React, { useEffect } from "react";
 import SignUpInformation from "./components/sign-up/SignUpInformation";
 import Login from "./screens/authentication/login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -17,6 +17,7 @@ import ProfileScreen from "./screens/profile-screen";
 import CarRegistry from "./screens/car-registry";
 import RegistryCenter from "./screens/registry-center/RegistryCenter";
 import ExpiredCar from "./screens/expired-car/ExpiredCar";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,13 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
+  useEffect(() => {
+    axios
+      .get("https://provinces.open-api.vn/api?depth==2")
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
