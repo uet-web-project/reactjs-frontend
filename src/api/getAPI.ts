@@ -20,5 +20,8 @@ export function getAPI(token?: string, id?: string) {
     getWeekDataForTotalOverviewChart: `vehicle/get-registered-vehicles-count/filter-by-week`,
     getMonthDataForTotalOverviewChart: `vehicle/get-registered-vehicles-count/filter-by-month`,
     getYearDataForTotalOverviewChart: `vehicle/get-registered-vehicles-count/filter-by-year`,
+
+    //data for postal code
+    locationCode: "/provinces",
   };
 }

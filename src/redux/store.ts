@@ -9,11 +9,11 @@ import certificationSlice from "./slices/certificationSlice";
 import certificationStepSlice from "./slices/certificationStepSlice";
 import tableStatisticSlice from "./slices/tablesSlice";
 import fileImportSlice from "./slices/fileImportSlice";
+import postalCodeSlice from "./slices/postalCode";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
 
 export const store = configureStore({
   reducer: {
@@ -27,9 +27,10 @@ export const store = configureStore({
       accountSlice
     ),
     certification: certificationSlice,
-    step:certificationStepSlice,
+    step: certificationStepSlice,
     tableStatistic: tableStatisticSlice,
     fileImport: fileImportSlice,
+    locationCode: postalCodeSlice,
   },
 });
 

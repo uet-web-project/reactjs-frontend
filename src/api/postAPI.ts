@@ -7,7 +7,7 @@ export function postAPI() {
     //it's for center
     registrationCenterLogin: "auth/registration-center",
     createRegistrationCenter: "registration-center",
-    createVehicleFromCertificate:"vehicle/create-vehicle-from-certificate",
+    createVehicleFromCertificate: "vehicle/create-vehicle-from-certificate",
 
     //it's for data
     getDataForCarTypeOverview: `vehicle/group-by-vehicle-type`,

@@ -115,7 +115,7 @@ export default function InfoTable(prop: any) {
           return index >= 2
             ? {
                 ...item,
-                minWidth: 200,
+                minWidth: 300,
                 renderHeader: () => (
                   <TextField
                     id={item.field}
@@ -136,7 +136,7 @@ export default function InfoTable(prop: any) {
         return current.map((item, index) => {
           return {
             ...item,
-            minWidth: 0,
+            minWidth: 200,
             renderHeader: undefined,
             className: isFilterCol ? "column-animation" : "",
           };

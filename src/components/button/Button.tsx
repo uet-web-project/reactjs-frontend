@@ -7,7 +7,7 @@ function Button({
   content,
   className,
 }: {
-  onClick: () => void;
+  onClick: (e?: React.MouseEvent<HTMLElement>) => void;
   style?: CSS.Properties;
   content: string;
   className?: string;

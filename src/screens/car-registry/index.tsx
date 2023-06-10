@@ -10,8 +10,11 @@ import InfoAreaChart from "../../components/area-chart/AreaChart";
 import CarPieChart from "../../components/pie-chart/CarPieChart";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
+import { locationHook } from "../../redux/hooks/locationCode";
+import DropDownLocation from "../../components/dropDown-location/DropDownLocation";
 
 function CarRegistry() {
+  const { getLocationCode } = locationHook();
   const { infoChartController } = chartStatisticHook();
   const { setLocationState, setTypeState, loading } = loadingHook();
   const [activeIndex, setActiveIndex] = useState<number>(3);
@@ -49,14 +52,14 @@ function CarRegistry() {
   }, [loading]);
   useEffect(() => {
     setLocationState("car");
+    getLocationCode();
   }, []);
-
-
 
   return (
     <div className="pageContainer">
       <div className="upperContainer">
         <div className="chartManager">
+          <DropDownLocation />
           <p style={{ marginTop: "auto", marginBottom: "auto" }}>Manage</p>
           <div style={{ margin: "auto" }}>
             <DatePicker />
@@ -122,8 +125,8 @@ function CarRegistry() {
           </div>
         </div>
       </div>
-      <div className="tableContainer">  
-          <InfoTable location="car" />
+      <div className="tableContainer">
+        <InfoTable location="car" />
       </div>
     </div>
   );
