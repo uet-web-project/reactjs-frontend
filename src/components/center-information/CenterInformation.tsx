@@ -11,15 +11,26 @@ function CenterInformation({
   return (
     <div>
       <div className="center-information-container">
-        <span style={{ fontWeight: "600" }}>{`${index}.`}</span>
+        <span
+          style={{ fontWeight: "600" }}
+          className="text-base text-gray-700 font-medium"
+        >{`${index}.`}</span>
         <div className="center-detail-information">
           <div>
-            <div style={{ marginBottom: "4px", fontWeight: "600" }}>
+            <div
+              style={{ marginBottom: "4px", fontWeight: "600" }}
+              className="text-base text-gray-700 font-medium"
+            >
               {centerData.name}
             </div>
-            <div style={{ fontStyle: "italic" }}>{centerData.location}</div>
+            <div
+              style={{ fontStyle: "italic" }}
+              className="text-base text-black"
+            >
+              {centerData.location}
+            </div>
           </div>
-          <div>{centerData.phoneNumber}</div>
+          <div className="text-base text-black">{centerData.phoneNumber}</div>
         </div>
       </div>
       <hr />

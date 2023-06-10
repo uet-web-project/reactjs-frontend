@@ -26,8 +26,10 @@
 }
 
 .login {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 23px;
+  font-weight: 700;
 }
 
 /* @media (max-width: 750px) {

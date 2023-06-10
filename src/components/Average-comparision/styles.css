@@ -50,7 +50,9 @@
     display: none !important;
   }
   .dep-login-responsive{
-    display: block !important;
+    display: flex !important;
+    justify-content: center;
+    flex-direction: column;
     width: 50%;
     margin-left: 0px;
   }
