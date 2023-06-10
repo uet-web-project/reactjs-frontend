@@ -10,3 +10,7 @@
   justify-content: space-between;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
+
+hr{
+  margin: 3px !important;
+}

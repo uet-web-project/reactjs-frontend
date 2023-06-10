@@ -11,7 +11,7 @@ function CenterList() {
   }, []);
   return (
     <div className="center-list-container">
-      <div className="secondary-font center-list-header">
+      <div className="secondary-font center-list-header text-base text-gray-700 font-medium">
         Centers under this department
       </div>
       <div className="center-list-information-header"></div>

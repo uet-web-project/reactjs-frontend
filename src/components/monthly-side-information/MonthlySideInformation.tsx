@@ -48,7 +48,7 @@ function MonthlySideInformation({ title }: { title: string }) {
               <DownCircleOutlined style={{ width: 20, height: 20 }} />
             )}
           </span>
-          <p className="monthly-quantity-information secondary-font">
+          <p className="monthly-quantity-information secondary-font text-base text-gray-700 font-medium">
             Vehicles registered this month:{" "}
             <span style={{ fontWeight: "bold" }}>
               {carRegisteredMonthlyComparison[1]?.value}
