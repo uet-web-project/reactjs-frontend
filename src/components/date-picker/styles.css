@@ -1,18 +1,21 @@
 .rs-calendar {
-  font-size: 17px!important;
-  width: 300px!important;
-  min-width: none!important;
+  font-size: 17px !important;
+  width: 300px !important;
+  min-width: none !important;
   transition: width 0.5s ease; /* Add transition properties */
 }
-.rs-calendar-table-cell-day{
-  font-size: 17px!important;
+.rs-calendar-table-cell-day {
+  font-size: 17px !important;
 }
-.rs-calendar-month-dropdown-cell-content{
-  font-size: 17px!important;
+.rs-calendar-month-dropdown-cell-content {
+  font-size: 17px !important;
 }
 @media only screen and (max-width: 900px) {
   .rs-calendar {
-    width: 350px!important;
+    width: 350px !important;
   }
 }
 
+.rs-picker-toggle.rs-btn.rs-btn-default {
+  border-radius: 99px;
+}

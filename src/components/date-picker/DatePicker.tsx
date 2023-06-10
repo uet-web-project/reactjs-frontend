@@ -104,7 +104,7 @@ export default function DatePicker() {
       ranges={predefinedRanges as RangeType[]}
       placeholder="Placement left"
       onChange={handleDateRangeChange}
-      style={{ color: "black"}}
+      style={{ color: "black" }}
     />
   );
 }

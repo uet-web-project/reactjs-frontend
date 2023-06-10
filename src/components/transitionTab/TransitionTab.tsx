@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
 import startOfMonth from "date-fns/startOfMonth";
 import addMonths from "date-fns/addMonths";
+import { Button } from "@mui/material";
 
 const today = new Date();
 const pastMonthStart = startOfMonth(addMonths(today, 0));
@@ -25,6 +26,51 @@ function TransitionTab() {
   }, [pathname]);
 
   return (
+    // <div className="overview-button" style={{ width: "100%" }}>
+    //   <Button
+    //     style={{ width: "33%" }}
+    //     className={`week-button ${
+    //       selectedTab === "center" ? "selected-button" : "button"
+    //     }`}
+    //     onClick={() => {
+    //       navigate("/stats/centers");
+    //     }}
+    //   >
+    //     Registry center
+    //   </Button>
+    //   <Button
+    //     style={{ width: "33%" }}
+    //     className={`month-button ${
+    //       selectedTab === "car" ? "selected-button" : "button"
+    //     }`}
+    //     onClick={() => {
+    //       navigate("/stats/cars");
+    //       setDateState([
+    //         pastMonthStart.toISOString().split("T")[0],
+    //         today.toISOString().split("T")[0],
+    //       ]);
+    //       setTypeState("all");
+    //     }}
+    //   >
+    //     Car registry
+    //   </Button>
+    //   <Button
+    //     style={{ width: "33%" }}
+    //     className={`year-button ${
+    //       selectedTab === "expired" ? "selected-button" : "button"
+    //     }`}
+    //     onClick={() => {
+    //       navigate("/stats/expired");
+    //       setDateState([
+    //         pastMonthStart.toISOString().split("T")[0],
+    //         today.toISOString().split("T")[0],
+    //       ]);
+    //       setTypeState("all");
+    //     }}
+    //   >
+    //     Near-expired
+    //   </Button>
+    // </div>
     <div className="transitionTab">
       <button
         id="transitionTabButton1"

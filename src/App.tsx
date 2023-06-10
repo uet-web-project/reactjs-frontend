@@ -70,19 +70,12 @@ const router = createBrowserRouter([
       },
       {
         path: "expired",
-        element: <ExpiredCar />,
+        element: <CarRegistry />,
       },
     ],
   },
 ]);
 function App() {
-  useEffect(() => {
-    axios
-      .get("https://provinces.open-api.vn/api?depth==2")
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
-  }, []);
-
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>

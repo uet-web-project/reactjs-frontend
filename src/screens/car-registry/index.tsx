@@ -14,10 +14,12 @@ import { loadingHook } from "../../redux/hooks/loadingHooks";
 import DropDownLocation from "../../components/dropDown-location/DropDownLocation";
 
 import { Button } from "@mui/material";
+import { setLocation } from "../../redux/slices/loadingSlice";
 
 function CarRegistry() {
+  const pathLocation = useLocation();
   const { infoChartController } = chartStatisticHook();
-  const { setLocationState, setTypeState, loading } = loadingHook();
+  const { setLocationState, setTypeState, loading, location } = loadingHook();
   const [activeIndex, setActiveIndex] = useState<number>(3);
   const [timeOutIndex, setTimeOutIndex] = useState<number>(3);
   const handleButtonClick = (index: number) => {
@@ -51,9 +53,16 @@ function CarRegistry() {
       setActiveIndex(timeOutIndex);
     }
   }, [loading]);
+
   useEffect(() => {
-    setLocationState("car");
-  }, []);
+    if (pathLocation.pathname.includes("car")) {
+      setLocationState("car");
+    } else if (pathLocation.pathname.includes("center")) {
+      setLocationState("center");
+    } else if (pathLocation.pathname.includes("expired")) {
+      setLocationState("expired");
+    }
+  }, [pathLocation.pathname]);
 
   return (
     <div className="pageContainer">
@@ -67,9 +76,18 @@ function CarRegistry() {
         <div className="statsDisplayDiv">
           <div className="chart-button-container">
             <div className="car-registry-overview-container">
-              <h3 className="chart-button-description secondary-font">
-                Number of vehicles
-              </h3>
+              <div className="overview-text-containner">
+                <h3 className="overview-text secondary-font">
+                  {location === "car"
+                    ? "Registered of vehicles"
+                    : "Near-expired vehicles"}
+                </h3>
+                <p className="overview-description secondary-font">
+                  {location === "car"
+                    ? "View all registered vehicles within a date range."
+                    : "View vehicles that are about to be expired."}
+                </p>
+              </div>
               <div
                 className="overview-button"
                 style={{ marginTop: "0px", marginRight: "0px" }}
@@ -102,12 +120,13 @@ function CarRegistry() {
             </div>
             <div className="chartContainer">
               <InfoAreaChart />
+              <CarPieChart />
             </div>
           </div>
-          <div className="transitionTabDiv">
+          {/* <div className="transitionTabDiv">
             <div>
               <h3
-                className="chart-button-description secondary-font"
+                className="overview-text secondary-font"
                 style={{ textAlign: "center", marginBottom: "10px" }}
               >
                 Vehicle ratio
@@ -125,9 +144,8 @@ function CarRegistry() {
                 justifyContent: "center",
               }}
             >
-              <CarPieChart />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="tableContainer">

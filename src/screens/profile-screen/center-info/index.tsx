@@ -128,7 +128,7 @@ function CenterInfo({ showCenterInfo }: { showCenterInfo?: boolean }) {
                 onChange={(e) => changeEditables(e, "location")}
               />
             ) : (
-              <span>{centerProfile.location}</span>
+              <span>{centerProfile.fullAdress}</span>
             )}
           </span>
           {isEditAddress ? (

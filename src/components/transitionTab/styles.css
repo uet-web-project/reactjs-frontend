@@ -28,16 +28,16 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border-radius: 999px;
 }
 
-#transitionTabButton1{
+#transitionTabButton1 {
   border-radius: 15px 0px 0px 10px;
 }
 
-#transitionTabButton2{
-  
+#transitionTabButton2 {
 }
 
-#transitionTabButton3{
+#transitionTabButton3 {
   border-radius: 0px 15px 10px 0px;
 }

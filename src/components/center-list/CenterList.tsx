@@ -20,8 +20,8 @@ function CenterList() {
   };
 
   const onClose = () => {
-    dispatch(clearCenterProfile());
     toggleOpen();
+    dispatch(clearCenterProfile());
   };
 
   const handleClick = (selectedCenter: IRegistrationCenter) => {
@@ -34,9 +34,7 @@ function CenterList() {
   }, []);
   return (
     <div className="center-list-container">
-      {open ? (
-        <ProfileScreen open={open} onClose={onClose} showCenterInfo />
-      ) : null}
+      <ProfileScreen open={open} onClose={onClose} showCenterInfo />
       <div className="secondary-font center-list-header text-base text-gray-700 font-medium">
         Centers under this department
       </div>

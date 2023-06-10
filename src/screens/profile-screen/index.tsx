@@ -17,9 +17,13 @@ function ProfileScreen({
 }) {
   const { isDepLogin } = accountHook();
   return (
-    <Dialog fullWidth maxWidth="md" open={open} onClose={onClose}>
+    <Dialog fullWidth maxWidth="sm" open={open} onClose={onClose}>
       <DialogTitle sx={{ margin: "0 auto", fontWeight: "bold" }}>
-        {isDepLogin ? "Department information" : "Center information"}
+        {isDepLogin
+          ? showCenterInfo
+            ? "Center information"
+            : "Department information"
+          : "Center information"}
       </DialogTitle>
       <div className="secondary-font profile-container">
         {isDepLogin ? (
