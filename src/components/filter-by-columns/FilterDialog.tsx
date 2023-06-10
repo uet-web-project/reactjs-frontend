@@ -249,6 +249,7 @@ export default function FilterDialog(props: any) {
                 <FormControlLabel
                   control={
                     <Checkbox
+                    className="checkBoxContainer"
                       name="purpose"
                       onChange={handleSelect}
                       id="public_transportation"

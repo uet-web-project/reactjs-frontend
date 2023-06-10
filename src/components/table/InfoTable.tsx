@@ -21,6 +21,7 @@ import "./infoStyle.css";
 import { ICarInfoTable } from "../../redux/slices/tablesSlice";
 import FilterDialog from "../filter-by-columns/FilterDialog";
 import FilterCenterDialog from "../filter-by-columns/FilterCenterDialog";
+import filterColumn from "./columns/filterColumn";
 // car, registryCenter, expired
 
 export default function InfoTable(prop: any) {
@@ -34,6 +35,7 @@ export default function InfoTable(prop: any) {
   const [search, setSearch] = React.useState<Record<string, string[]>>({});
   const [searchAll, setSearchAll] = React.useState("");
   const [set, Set] = React.useState(false);
+  const [isFilterCol, setFilterCol] = React.useState(false);
   const [columns, setColumns] = React.useState<GridColDef[]>(
     "car" ? carColumns : "center" ? centerColumns : carColumns
   );
@@ -94,9 +96,50 @@ export default function InfoTable(prop: any) {
     setSearch({});
   }
   useEffect(() => {
-    console.log(Object.keys(search).length !== 0);
-  }, [set]);
+    // console.log(Object.keys(search).length !== 0);
+    if (isFilterCol) {
+      setColumns((current) => {
+        return current.map((item, index) => {
+          const isField = item.field === "purpose" ? true : false;
+          const width = isField ? { minWidth: 200 } : { minWidth: 100 };
+          return index >= 2
+            ? {
+                ...item,
+                minWidth:200,
+                renderHeader: () => (
+                  <TextField
+                    className="filterField"
+                    label="Standard"
+                    variant="standard"
+                    
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                ),
+                className: isFilterCol ? "column-animation" : "",
+              }
+            : { ...item, minWidth: 70 };
+        });
+      });
+    } else {
+      setColumns((current) => {
+        return current.map((item, index) => {
+          return {
+            ...item,
+            minWidth: 0,
+            renderHeader: undefined,
+            className: isFilterCol ? "column-animation" : "",
+          };
+        });
+      });
+    }
+  }, [isFilterCol]);
 
+  function onClick() {
+    // if (isFilterCol) setColumns(filterColumn() as GridColDef[]);
+    // else setColumns(carColumns);
+    // setFilterCol(!isFilterCol);
+    setFilterCol(!isFilterCol);
+  }
   return (
     <Paper
       className="paperContainer"
@@ -105,6 +148,7 @@ export default function InfoTable(prop: any) {
         whiteSpace: "nowrap",
       }}
     >
+      <button onClick={onClick}>click</button>
       <div className="firstPart">
         {tableInfo &&
           tableInfo[0] &&
@@ -144,6 +188,7 @@ export default function InfoTable(prop: any) {
       <div className="secondPart">
         <DataGrid
           className="dataGrid"
+          density="compact"
           rows={filterRows}
           columns={columns}
           slots={{
