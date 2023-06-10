@@ -37,7 +37,7 @@ export const chartStatisticHook = () => {
     carPieChart,
   } = useAppSelector((state: RootState) => state.chartStatistic);
 
-  const { type, date, location } = useAppSelector(
+  const { type, date, location, districtCode, provinceCode } = useAppSelector(
     (state: RootState) => state.loading
   );
 
@@ -161,23 +161,27 @@ export const chartStatisticHook = () => {
 
   //const
 
-  async function getChartDataOfRegisteredCar(
-    date: [string, string],
-    type = "all"
-  ) {
+  async function getChartDataOfCar(date: [string, string], type = "all") {
     dispatch(setLoading(true));
     try {
       const startDate = date[0];
       const endDate = date[1];
+      const districtCodeRequest:null|number=districtCode === 0 ? districtCode : null;
       let requestedData;
       if (location === "car") {
         requestedData =
           type === "all"
             ? {
+                provinceCode: provinceCode,
+                districtCode: ,
+                getNearExpired: false,
                 startDate: startDate,
                 endDate: endDate,
               }
             : {
+                provinceCode: provinceCode,
+                districtCode: districtCode === 0 ? districtCode : null,
+                getNearExpired: false,
                 vehicleType: type,
                 startDate: startDate,
                 endDate: endDate,
@@ -186,15 +190,22 @@ export const chartStatisticHook = () => {
         requestedData =
           type === "all"
             ? {
+                provinceCode: provinceCode,
+                districtCode: districtCode === 0 ? districtCode : null,
+                getNearExpired: true,
                 startDate: startDate,
                 endDate: endDate,
               }
             : {
+                provinceCode: provinceCode,
+                districtCode: districtCode === 0 ? districtCode : null,
+                getNearExpired: true,
                 vehicleType: type,
                 startDate: startDate,
                 endDate: endDate,
               };
       }
+      console.log(requestedData);
       const chartData = await axiosInstance.post(
         postAPI().registeredCarData,
         requestedData
@@ -216,12 +227,18 @@ export const chartStatisticHook = () => {
       const requestedData =
         location === "car"
           ? {
+              provinceCode: provinceCode,
+              districtCode: districtCode === 0 ? districtCode : null,
               filterType: "filter-by-date-range",
+              getNearExpired: false,
               startDate: startDate,
               endDate: endDate,
             }
           : {
+              provinceCode: provinceCode,
+              districtCode: districtCode === 0 ? districtCode : null,
               filterType: "filter-by-date-range",
+              getNearExpired: true,
               startDate: startDate,
               endDate: endDate,
             };
@@ -240,7 +257,7 @@ export const chartStatisticHook = () => {
     }
   }
   function infoChartController() {
-    getChartDataOfRegisteredCar(date, type);
+    getChartDataOfCar(date, type);
   }
 
   return {
@@ -256,7 +273,7 @@ export const chartStatisticHook = () => {
     getDataForMonthlyComparison,
     getCenterListData,
     getDataForCarTypeOverview,
-    getChartDataOfRegisteredCar,
+    getChartDataOfCar,
     infoChartController,
     getDataForCarPieChart,
     callClearAllData,
