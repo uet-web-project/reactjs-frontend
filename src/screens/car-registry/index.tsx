@@ -19,7 +19,17 @@ import { setLocation } from "../../redux/slices/loadingSlice";
 function CarRegistry() {
   const pathLocation = useLocation();
   const { infoChartController } = chartStatisticHook();
+
   const { setLocationState, setTypeState, loading, location } = loadingHook();
+  const {
+    setProvinceCodeState,
+    setDistrictCodeState,
+    setLocationState,
+    setTypeState,
+    loading,
+    location
+  } = loadingHook();
+  const [isGetData, setGetData] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(3);
   const [timeOutIndex, setTimeOutIndex] = useState<number>(3);
   const handleButtonClick = (index: number) => {
@@ -46,7 +56,7 @@ function CarRegistry() {
 
   useEffect(() => {
     infoChartController();
-  }, [timeOutIndex]);
+  }, [timeOutIndex, isGetData]);
 
   useEffect(() => {
     if (!loading) {
@@ -64,11 +74,25 @@ function CarRegistry() {
     }
   }, [pathLocation.pathname]);
 
+  function getDataByLocation(
+    isDistrict: boolean,
+    cityName: string,
+    cityCode: number,
+    districtName?: string,
+    districtCode = 0
+  ) {
+    if (isDistrict) {
+      setDistrictCodeState(districtCode);
+    } else {
+      setProvinceCodeState(cityCode);
+    }
+    setGetData(!isGetData);
+  }
   return (
     <div className="pageContainer">
       <div className="upperContainer">
         <div className="chartManager">
-          <DropDownLocation />
+          <DropDownLocation setState={getDataByLocation} />
           <div style={{ margin: "auto" }}>
             <DatePicker />
           </div>

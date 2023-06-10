@@ -20,10 +20,11 @@ export default function DropDownLocation({
   setState,
 }: {
   setState: (
+    isDistrict: boolean,
     cityName: string,
     cityCode: number,
-    districtName: string,
-    districtCode: number
+    districtName?: string,
+    districtCode?: number
   ) => void;
 }) {
   const { getLocationCode, locationCode } = locationHook();
@@ -39,11 +40,13 @@ export default function DropDownLocation({
   const handleCloseCity = () => {
     setAnchorEl(null);
   };
+
   const [searchCity, setSearchCity] = useState("");
   const [searchDistrict, setSearchDistrict] = useState("");
 
   useEffect(() => {
-    getLocationCode();
+    console.log(locationCode);
+    if (locationCode.length === 0) getLocationCode();
   }, []);
 
   let timeoutId: any;
@@ -57,6 +60,20 @@ export default function DropDownLocation({
       else setSearchDistrict(searchTerm);
     }, 1000);
   }
+
+  // handle passing data to ref function
+  function onDropDownItemClick(
+    cityName: string,
+    cityCode: number,
+    districtName?: string,
+    districtCode = 0,
+    isDistrict = false
+  ) {
+    setAnchorEl(null);
+    if (isDistrict) setState(true, cityName, cityCode);
+    else setState(false, cityName, cityCode, districtName, districtCode);
+  }
+
   return (
     <div>
       <Button content="contained" onClick={handleClickCity} />
@@ -77,42 +94,72 @@ export default function DropDownLocation({
         {Array.isArray(locationCode) && (
           <div>
             {locationCode
-              .filter((city) => {
-                return city.name
+              .filter((city) =>
+                city.name
                   .toLowerCase()
-                  .includes(searchCity.toString().toLowerCase().normalize());
-              })
+                  .normalize()
+                  .includes(searchCity.toString().toLowerCase().normalize())
+              )
               .map((city) => (
-                <NestedMenuItem label={city.name} parentMenuOpen={openCity}>
-                  {Array.isArray(city.districts) && (
-                    <div>
-                      <TextField
-                        id="district-drop-textField"
-                        className="locationsDropField"
-                        label="Districts"
-                        variant="standard"
-                        onChange={handleSearchTermChange}
-                        onKeyDown={(event) => event.stopPropagation()}
-                      />
-                      {city.districts
-                        .filter((district) => {
-                          return district.name
-                            .toLowerCase()
-                            .includes(
-                              searchDistrict
-                                .toString()
-                                .toLowerCase()
-                                .normalize()
-                            );
-                        })
-                        .map((district: any) => (
-                          <MenuItem onClick={handleCloseCity}>
-                            {district.name}
-                          </MenuItem>
-                        ))}
-                    </div>
-                  )}
-                </NestedMenuItem>
+                <div>
+                  <NestedMenuItem
+                    key={city.code}
+                    label={city.name}
+                    parentMenuOpen={openCity}
+                    onClick={() => onDropDownItemClick(city.name, city.code)}
+                  >
+                    {Array.isArray(city.districts) && (
+                      <div>
+                        <TextField
+                          id="district-drop-textField"
+                          className="locationsDropField"
+                          label="Districts"
+                          variant="standard"
+                          onChange={handleSearchTermChange}
+                          onKeyDown={(event) => event.stopPropagation()}
+                          InputLabelProps={{
+                            sx: {
+                              color: "black",
+                              "&.Mui-focused": { color: "black" },
+                            },
+                          }}
+                          style={{ backgroundColor: "white" }}
+                        />
+                        {city.districts
+                          .filter((district) =>
+                            district.name
+                              .toLowerCase()
+                              .normalize()
+                              .includes(
+                                searchDistrict
+                                  .toString()
+                                  .toLowerCase()
+                                  .normalize()
+                              )
+                          )
+                          .map((district: any) => (
+                            <MenuItem
+                              key={district.code}
+                              onClick={() =>
+                                onDropDownItemClick(
+                                  city.name,
+                                  city.code,
+                                  district.name,
+                                  district.code,
+                                  true
+                                )
+                              }
+                              sx={{
+                                backgroundColor: "white !important",
+                              }}
+                            >
+                              {district.name}
+                            </MenuItem>
+                          ))}
+                      </div>
+                    )}
+                  </NestedMenuItem>
+                </div>
               ))}
           </div>
         )}

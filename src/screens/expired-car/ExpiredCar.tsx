@@ -8,10 +8,18 @@ import InfoAreaChart from "../../components/area-chart/AreaChart";
 import CarPieChart from "../../components/pie-chart/CarPieChart";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
+import DropDownLocation from "../../components/dropDown-location/DropDownLocation";
 
 function CarRegistry() {
   const { infoChartController } = chartStatisticHook();
-  const { setLocationState, setTypeState, loading } = loadingHook();
+  const {
+    setProvinceCodeState,
+    setDistrictCodeState,
+    setLocationState,
+    setTypeState,
+    loading,
+  } = loadingHook();
+  const [isGetData, setGetData] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(3);
   const [timeOutIndex, setTimeOutIndex] = useState<number>(3);
   const handleButtonClick = (index: number) => {
@@ -38,7 +46,7 @@ function CarRegistry() {
 
   useEffect(() => {
     infoChartController();
-  }, [timeOutIndex]);
+  }, [timeOutIndex,isGetData]);
 
   useEffect(() => {
     if (!loading) {
@@ -50,10 +58,25 @@ function CarRegistry() {
     setLocationState("nearExpired");
   }, []);
 
+  function getDataByLocation(
+    isDistrict: boolean,
+    cityName: string,
+    cityCode: number,
+    districtName?: string,
+    districtCode = 0
+  ) {
+    if (isDistrict) {
+      setDistrictCodeState(districtCode);
+    } else {
+      setProvinceCodeState(cityCode);
+    }
+    setGetData(!isGetData);
+  }
   return (
     <div className="pageContainer">
       <div className="upperContainer">
         <div className="chartManager">
+          <DropDownLocation setState={getDataByLocation} />
           <div style={{ margin: "auto" }}>
             <DatePicker />
           </div>
