@@ -58,10 +58,26 @@ export const accountSlice = createSlice({
         phoneNumber: "",
       };
     },
+    clearCenterProfile(state) {
+      state.centerProfile = {
+        _id: "",
+        name: "",
+        centerId: "",
+        password: "",
+        registrationDep: "",
+        location: "",
+        phoneNumber: "",
+      };
+    },
   },
 });
 
-export const { setDepLoginState, setDepProfile, setCenterProfile, clearState } =
-  accountSlice.actions;
+export const {
+  setDepLoginState,
+  setDepProfile,
+  setCenterProfile,
+  clearState,
+  clearCenterProfile,
+} = accountSlice.actions;
 
 export default accountSlice.reducer;

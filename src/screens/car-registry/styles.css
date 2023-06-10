@@ -1,7 +1,4 @@
 /*phan tren*/
-.upperContainer {
-
-}
 
 .statsDisplayDiv {
   display: flex;
@@ -9,16 +6,21 @@
   min-width: 0;
   animation-name: slide-in-left;
   animation-duration: 1s;
+  justify-content: space-between;
 }
 .chartManager {
   display: flex;
 }
 
-.chart-button-container{
+.chart-button-container {
   min-width: none;
   overflow: hidden;
   flex: 4;
   order: 0;
+  background-color: white;
+  padding: 30px;
+  margin-top: 10px;
+  border-radius: 20px;
 }
 
 .transitionTabDiv {
@@ -30,6 +32,16 @@
   animation-name: slide-in-right;
   animation-duration: 1s;
   min-width: none;
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px;
+  padding-top: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.chart-button-description {
+  font-weight: 600;
+  font-family: sans-serif;
 }
 
 @keyframes slide-in-left {
@@ -76,7 +88,15 @@
   transform: translateY(-5px);
   transition-delay: 0.1s;
 }
-
+.car-registry-overview-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 #chartUpperBut1 {
   border-radius: 10px 0 0 0;
   border-right: 1px solid;
@@ -108,13 +128,17 @@
 }
 @media screen and (max-width: 900px) {
   .pageContainer {
-
   }
   .statsDisplayDiv {
     flex-direction: column;
   }
-
-  .chart-button-container{
+  .pieChartContainer {
+    border: none !important;
+  }
+  .car-pie-chart-container {
+    margin-top: 20px !important;
+  }
+  .chart-button-container {
     min-width: none;
     overflow: hidden;
     flex: 4;
@@ -125,8 +149,8 @@
     order: 0;
     padding: 10px;
     min-width: auto;
+    margin-left: 0px !important;
   }
-  .chartManager{
-   
+  .chartManager {
   }
 }

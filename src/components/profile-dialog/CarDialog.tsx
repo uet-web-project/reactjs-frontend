@@ -43,10 +43,6 @@ export default function CarDialog(props: any) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  useEffect(() => {
-    console.log(location);
-    console.log("fadfasdfdfdf");
-  }, []);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -56,7 +52,6 @@ export default function CarDialog(props: any) {
     reason: "backdropClick" | "escapeKeyDown"
   ) => {
     if (reason === "backdropClick") {
-      console.log(reason);
     } else {
       setOpen(false);
     }

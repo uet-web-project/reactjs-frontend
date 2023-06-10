@@ -62,7 +62,6 @@ export default function FilterCenterDialog(props: any) {
   const [search, setSearch] = React.useState<Record<string, string[]>>({});
 
   useEffect(() => {
-    console.log(search);
   }, [search]);
   const handleClickOpen = () => {
     setOpen(true);
@@ -73,7 +72,6 @@ export default function FilterCenterDialog(props: any) {
     reason: "backdropClick" | "escapeKeyDown"
   ) => {
     if (reason === "backdropClick") {
-      console.log(reason);
     } else {
       setOpen(false);
     }

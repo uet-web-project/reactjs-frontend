@@ -27,7 +27,6 @@ export const tableStatisticHook = () => {
           })
         );
         dispatch(setDataForTableInfo(moddedData));
-        console.log("ok");
       }
     } catch (err) {
       console.log(err);

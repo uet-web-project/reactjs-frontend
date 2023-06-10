@@ -61,7 +61,7 @@ const CarPieChart = () => {
   };
 
   return (
-    <div className="pie-chart-container" style={{ width: "99%", height: 200}}>
+    <div className="car-pie-chart-container" style={{ width: "99%", height: 200}}>
       <ResponsiveContainer>
         <PieChart className="pie-chart">
           <Legend

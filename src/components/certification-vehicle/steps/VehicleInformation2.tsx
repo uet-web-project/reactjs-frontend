@@ -38,13 +38,11 @@ function VehicleInformation2() {
   const [errorData, changeErrorData] = useState({
     registrationNumberError: "",
     registrationDateError: "",
-    registrationLocationError: "",
     purposeError: "",
   });
   const [iconState, changeIconState] = useState({
     registrationNumberState: false,
     registrationDateState: false,
-    registrationLocationState: false,
     purposeState: false,
   });
 
@@ -62,9 +60,6 @@ function VehicleInformation2() {
   useEffect(() => {
     if (certificateInformation.registrationNumber) {
       validateRegistrationNumber(certificateInformation.registrationNumber);
-    }
-    if (certificateInformation.registrationLocation) {
-      validateRegistrationLocation(certificateInformation.registrationLocation);
     }
     if (certificateInformation.registrationDate) {
       validateRegistrationDate(certificateInformation.registrationDate);
@@ -110,18 +105,6 @@ function VehicleInformation2() {
     }
   }
 
-  function validateRegistrationLocation(registrationLocation: string) {
-    if (registrationLocation.length == 0) {
-      makeErrorChange("registrationLocationError", "Required");
-      makeIconChange("registrationLocationState", false);
-      return false;
-    } else {
-      makeErrorChange("registrationLocationError", "");
-      makeIconChange("registrationLocationState", true);
-      return true;
-    }
-  }
-
   function validatePurpose(purpose: string) {
     if (purpose.length == 0) {
       makeErrorChange("purposeError", "Required");
@@ -139,9 +122,6 @@ function VehicleInformation2() {
     if (direction == "next") {
       if (
         validateRegistrationNumber(certificateInformation.registrationNumber) &&
-        validateRegistrationLocation(
-          certificateInformation.registrationLocation
-        ) &&
         validateRegistrationDate(certificateInformation.registrationDate) &&
         validatePurpose(certificateInformation.purpose) &&
         newStep < 3
@@ -160,7 +140,7 @@ function VehicleInformation2() {
     <div className="flex flex-col">
       <div className="bg-white my-2 p-1 flex ">
         <TextInput
-          style={{ width: "100%", marginRight: "30px" }}
+          style={{ width: "100%" }}
           fieldName="Registration number"
           type="text"
           value={certificateInformation.registrationNumber}
@@ -170,29 +150,11 @@ function VehicleInformation2() {
               registrationNumber: event.target.value,
             });
             makeErrorChange("registrationNumberError", "");
-            makeIconChange("registrationNumberState",false);
+            makeIconChange("registrationNumberState", false);
           }}
           placeholder="Registration number"
           error={errorData.registrationNumberError}
           showIcon={iconState.registrationNumberState}
-        />
-
-        <TextInput
-          style={{ width: "100%" }}
-          fieldName="Registration location"
-          type="text"
-          value={certificateInformation.registrationLocation}
-          onChange={(event) => {
-            setCertificateInformation({
-              ...certificateInformation,
-              registrationLocation: event.target.value,
-            });
-            makeErrorChange("registrationLocationError", "");
-            makeIconChange("registrationLocationState", false);
-          }}
-          placeholder="Registration location"
-          error={errorData.registrationLocationError}
-          showIcon={iconState.registrationLocationState}
         />
       </div>
       <div className="bg-white my-2 p-1 flex ">

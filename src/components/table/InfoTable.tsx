@@ -86,7 +86,6 @@ export default function InfoTable(prop: any) {
     clearTimeout(timeoutId);
 
     timeoutId = setTimeout(() => {
-      console.log(e.target.value);
       setSearchAll(e.target.value);
     }, 1000);
   }
@@ -100,15 +99,12 @@ export default function InfoTable(prop: any) {
         [e.target.id]: [value],
       }));
     }, 1000);
-    console.log(search);
   }
   function clearFilter() {
-    console.log(set);
     Set(!set);
     setSearch({});
   }
   useEffect(() => {
-    // console.log(Object.keys(search).length !== 0);
     if (isFilterCol) {
       setColumns((current) => {
         return current.map((item, index) => {

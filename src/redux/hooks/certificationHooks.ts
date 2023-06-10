@@ -23,7 +23,6 @@ export const certificationHook = () => {
       model: "",
       registrationNumber: "",
       registrationDate: new Date().toISOString(),
-      registrationLocation: "",
       vehicleType: "car",
       purpose: "personal_transportation",
       vin: "",

@@ -45,8 +45,7 @@ export const accountHook = () => {
           dispatch(setCenterProfile(res.data));
         }
       }
-    } catch (err) {
-    }
+    } catch (err) {}
   }
 
   async function updateProfile(data: any) {
@@ -124,7 +123,6 @@ export const accountHook = () => {
         navigate("/landing-page");
       }
     } catch (err: any) {
-
       if (err.response.data.message === depIdError) {
         showError("IdError", depIdError);
       } else if (err.response.data.message === passwordError) {

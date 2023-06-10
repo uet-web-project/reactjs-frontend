@@ -183,7 +183,7 @@ function VehicleInformation3() {
             makeErrorChange("widthError", "");
             makeIconChange("widthState", false);
           }}
-          placeholder="Width(mm)"
+          placeholder="Width (mm)"
           error={errorData.widthError}
           showIcon={iconState.widthState}
         />
@@ -202,7 +202,7 @@ function VehicleInformation3() {
             makeErrorChange("lengthError", "");
             makeIconChange("lengthState", false);
           }}
-          placeholder="Length(mm)"
+          placeholder="Length (mm)"
           error={errorData.lengthError}
           showIcon={iconState.lengthState}
         />

@@ -68,7 +68,6 @@ export default function DropZone(props: any) {
     reason: "backdropClick" | "escapeKeyDown"
   ) => {
     if (reason === "backdropClick") {
-      console.log(reason);
     } else {
       setOpen(false);
     }
@@ -88,7 +87,6 @@ export default function DropZone(props: any) {
 
       // Add new files to the myFiles array
       setMyFiles([...myFiles, ...newFiles]);
-      console.log(myFiles);
     },
     [myFiles]
   );
@@ -150,7 +148,7 @@ export default function DropZone(props: any) {
       <Button
         content="IMPORT DATA"
         onClick={handleClickOpen}
-        className="text-base text-gray-700 text-sm"
+        className="text-base text-gray-700 text-sm bg-blue-500 hover:bg-blue-600 transition-colors duration-300"
       />
       <Dialog
         PaperComponent={PaperComponent}

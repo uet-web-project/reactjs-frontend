@@ -14,13 +14,10 @@ export default function filterColumn(
   location?: string
 ) {
   const newColumns = columns.map((column: any) => {
-    console.log(isSet);
     if (!isSet) {
       delete column.renderHeader;
-      console.log(column);
       return column;
     }
-    console.log("22");
     return {
       ...column,
       renderHeader: () => {

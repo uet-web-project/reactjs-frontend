@@ -12,16 +12,18 @@ function TextInput({
   showIcon,
   placeholder,
   className,
+  onBlur
 }: {
   fieldName?: string;
   style?: CSS.Properties;
   type: string;
-  value: string | number ;
+  value: string | number;
   onChange: (event: any) => void;
   error?: string;
   showIcon?: boolean;
   placeholder?: string;
   className?: string;
+  onBlur?: (event?: any) => void;
 }) {
   return (
     <div style={style} className="input-container">
@@ -40,9 +42,12 @@ function TextInput({
         value={value}
         onChange={onChange}
         style={{ width: "100%" }}
-        className={`inputPlace placeholder-gray-500 text-sm ${className ? className : ""}`}
+        className={`inputPlace placeholder-gray-500 text-sm ${
+          className ? className : ""
+        }`}
         type={type}
         placeholder={placeholder}
+        onBlur={onBlur}
       />
     </div>
   );

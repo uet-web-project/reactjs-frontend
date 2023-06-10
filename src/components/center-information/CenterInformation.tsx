@@ -4,12 +4,14 @@ import { IRegistrationCenter } from "../../interfaces/registrationCenter.interfa
 function CenterInformation({
   centerData,
   index,
+  onClick,
 }: {
   centerData: IRegistrationCenter;
   index: number;
+  onClick: () => void;
 }) {
   return (
-    <div>
+    <div onClick={onClick}>
       <div className="center-information-container">
         <span
           style={{ fontWeight: "600" }}
