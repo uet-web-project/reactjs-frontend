@@ -90,6 +90,18 @@ export default function InfoTable(prop: any) {
       setSearchAll(e.target.value);
     }, 1000);
   }
+  function handleFiltersChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const value = e.target.value;
+    timeoutId = setTimeout(() => {
+      setSearch((prevState) => ({
+        ...prevState,
+        [e.target.id]: [value],
+      }));
+    }, 1000);
+    console.log(search);
+  }
   function clearFilter() {
     console.log(set);
     Set(!set);
@@ -100,18 +112,17 @@ export default function InfoTable(prop: any) {
     if (isFilterCol) {
       setColumns((current) => {
         return current.map((item, index) => {
-          const isField = item.field === "purpose" ? true : false;
-          const width = isField ? { minWidth: 200 } : { minWidth: 100 };
           return index >= 2
             ? {
                 ...item,
-                minWidth:200,
+                minWidth: 200,
                 renderHeader: () => (
                   <TextField
+                    id={item.field}
                     className="filterField"
                     label="Standard"
                     variant="standard"
-                    
+                    onChange={handleFiltersChange}
                     onKeyDown={(event) => event.stopPropagation()}
                   />
                 ),
