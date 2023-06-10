@@ -38,7 +38,7 @@ function MonthlyComparision() {
           </div>
         </div>
       </div>
-      <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ width: "100%", height: "100%"  }} className="">
         <MonthlySideInformation title="Number of cars registerd" />
       </div>
     </div>

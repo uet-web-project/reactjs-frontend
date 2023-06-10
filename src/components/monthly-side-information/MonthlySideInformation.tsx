@@ -23,7 +23,10 @@ function MonthlySideInformation({ title }: { title: string }) {
       : 0;
   return (
     <div className="monthly-registey-car">
-      <h3 className="secondary-font" style={{ textAlign: "center" }}>
+      <h3
+        className="secondary-font text-base text-gray-700 font-medium"
+        style={{ textAlign: "center" }}
+      >
         {title}
       </h3>
       <div>
