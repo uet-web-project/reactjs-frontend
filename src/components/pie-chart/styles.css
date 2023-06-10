@@ -1,3 +1,9 @@
-.car-pie-chart-container{
-    margin-top : 80px ;
+.car-pie-chart-container {
+  display: flex;
+  height: 100%;
+  border-radius: 20px;
+  background-color: #edf2ff;
+  padding: 20px;
+  flex: 1;
+  min-width: 10px;
 }

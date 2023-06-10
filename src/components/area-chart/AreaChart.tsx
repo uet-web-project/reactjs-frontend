@@ -18,7 +18,7 @@ export default function InfoAreaChart() {
   const { carStatsForChart } = chartStatisticHook();
   const interval: AxisInterval = "equidistantPreserveStart" as AxisInterval;
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div className="info-area-chart-container">
       <ResponsiveContainer>
         <AreaChart
           data={carStatsForChart}

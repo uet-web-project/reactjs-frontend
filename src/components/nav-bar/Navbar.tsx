@@ -115,9 +115,7 @@ function Navbar() {
   return (
     <AppBar position="static">
       <Container className="secondary-color nav-container">
-        {openProfile ? (
-          <ProfileScreen open={openProfile} onClose={handleClickProfile} />
-        ) : null}
+        <ProfileScreen open={openProfile} onClose={handleClickProfile} />
         <Toolbar disableGutters>
           <img
             src="/src/assets/icons/Myproject1.png"

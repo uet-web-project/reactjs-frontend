@@ -31,6 +31,7 @@
   color: gray;
   font-size: 14px;
   width: 180px;
+  line-height: 0;
 }
 
 .spacer {

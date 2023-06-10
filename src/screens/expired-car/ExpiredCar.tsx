@@ -1,21 +1,9 @@
-import {
-  GridColDef,
-  GridColumnHeaderParams,
-  GridRowParams,
-  GridValueGetterParams,
-} from "@mui/x-data-grid";
-import moment from "moment";
-import CarDialog from "../../components/profile-dialog/CarDialog";
-import Barchart from "../../components/bar-chart/TestBarChart";
-import SearchIcon from "@mui/icons-material/Search";
 import "./styles.css";
 import InfoTable from "../../components/table/InfoTable";
 import TransitionTab from "../../components/transitionTab/TransitionTab";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import DatePicker from "../../components/date-picker/DatePicker";
-import DropZone from "../../components/data-import/DropZone";
 import InfoAreaChart from "../../components/area-chart/AreaChart";
 import CarPieChart from "../../components/pie-chart/CarPieChart";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
@@ -96,9 +84,14 @@ function CarRegistry() {
         <div className="statsDisplayDiv">
           <div className="chart-button-container">
             <div className="car-registry-overview-container">
-              <h3 className="chart-button-description secondary-font">
-                Number of vehicles
-              </h3>
+              <div className="overview-text-containner">
+                <h3 className="overview-text secondary-font">
+                  Near-expired vehicles
+                </h3>
+                <p className="overview-description secondary-font">
+                  View vehicles that are about to be expired.
+                </p>
+              </div>
               <div
                 className="overview-button"
                 style={{ marginTop: "0px", marginRight: "0px" }}

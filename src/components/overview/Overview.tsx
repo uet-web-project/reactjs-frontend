@@ -9,7 +9,7 @@ import { accountHook } from "../../redux/hooks/accountHooks";
 function Overview() {
   const { getDataForCarTypeOverview, getDataForTotalOverviewChart } =
     chartStatisticHook();
-  const{isDepLogin} = accountHook()
+  const { isDepLogin } = accountHook();
   const [btnState, setBtnState] = useState("week");
   const changeToWeekData = () => {
     setBtnState("week");
@@ -29,10 +29,14 @@ function Overview() {
     getDataForTotalOverviewChart("year");
   };
   return (
-    <div className={`overview-container ${isDepLogin?"overview-dep-responsive":"overview-center-responsive"}`}>
+    <div
+      className={`overview-container ${
+        isDepLogin ? "overview-dep-responsive" : "overview-center-responsive"
+      }`}
+    >
       <div className="overview-title">
         <div className="overview-text-containner">
-          <h3 className="overview-text secondary-font"> Overview </h3>
+          <h3 className="overview-text secondary-font">Overview</h3>
           <p className="overview-description secondary-font">
             {" "}
             View all car registry and expired cars.

@@ -61,7 +61,7 @@ const CarPieChart = () => {
   };
 
   return (
-    <div className="car-pie-chart-container" style={{ width: "99%", height: 200}}>
+    <div className="car-pie-chart-container">
       <ResponsiveContainer>
         <PieChart className="pie-chart">
           <Legend
@@ -70,7 +70,7 @@ const CarPieChart = () => {
             wrapperStyle={{
               position: "absolute",
               right: "30px",
-              top: "190px",
+              top: "80%",
             }}
             align="center"
             verticalAlign="bottom"
@@ -89,7 +89,7 @@ const CarPieChart = () => {
           <Pie
             data={carPieChart}
             cx="50%"
-            cy="50%"
+            cy="40%"
             labelLine={false}
             label={renderCustomizedLabel}
             outerRadius={80}
