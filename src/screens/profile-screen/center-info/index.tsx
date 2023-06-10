@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { accountHook } from "../../../redux/hooks/accountHooks";
 import Button from "../../../components/button/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import TextInput from "../../../components/input/text-input/TextInput";
+import { IRegistrationCenter } from "../../../interfaces/registrationCenter.interface";
 
-function CenterInfo() {
+function CenterInfo({ showCenterInfo }: { showCenterInfo?: boolean }) {
   const { centerProfile, updateProfile } = accountHook();
   const [editables, setEditables] = useState({
     name: centerProfile.name,
@@ -59,26 +60,27 @@ function CenterInfo() {
                 <CloseIcon />
               </button>
             </div>
-          ) : (
+          ) : !showCenterInfo ? (
             <button onClick={() => setIsEditName(!isEditName)}>
               <EditIcon />
             </button>
-          )}
+          ) : null}
         </span>
-        <span className="info-span">
-          <Button
-            style={{
-              marginTop: "10px",
-              padding: "5px 20px",
-              fontWeight: "bold",
-              backgroundColor: "#f5f5f5",
-              color: "#ca3636",
-            }}
-            content="Change password"
-            onClick={() => {
-            }}
-          />
-        </span>
+        {!showCenterInfo ? (
+          <span className="info-span">
+            <Button
+              style={{
+                marginTop: "10px",
+                padding: "5px 20px",
+                fontWeight: "bold",
+                backgroundColor: "#f5f5f5",
+                color: "#ca3636",
+              }}
+              content="Change password"
+              onClick={() => {}}
+            />
+          </span>
+        ) : null}
       </div>
 
       <div className="spacer" />
@@ -110,11 +112,11 @@ function CenterInfo() {
                 <CloseIcon />
               </button>
             </div>
-          ) : (
+          ) : !showCenterInfo ? (
             <button onClick={() => setIsEditPhoneNum(!isEditPhoneNum)}>
               <EditIcon />
             </button>
-          )}
+          ) : null}
         </span>
         <span className="info-span">
           <span>
@@ -141,11 +143,11 @@ function CenterInfo() {
                 <CloseIcon />
               </button>
             </div>
-          ) : (
+          ) : !showCenterInfo ? (
             <button onClick={() => setIsEditAddress(!isEditAddress)}>
               <EditIcon />
             </button>
-          )}
+          ) : null}
         </span>
       </div>
     </div>

@@ -86,7 +86,7 @@ function LoginInformation({ isDepLogin }: { isDepLogin: boolean }) {
       <div className="login-header">
         <div className="responsive-bg"></div>
         <h1 className="welcome-back text-3xl">Welcome back</h1>
-        <p>Please enter your details.</p>
+        <p style={{fontWeight:"900", fontSize:"16px"}}>Please enter your details.</p>
         <h1 className="login">{`${
           isDepLogin ? "Department " : "Center "
         }login`}</h1>
@@ -122,7 +122,7 @@ function LoginInformation({ isDepLogin }: { isDepLogin: boolean }) {
       </div>
       {
         <Link
-          className="secondary-font linkto"
+          className="secondary-font linkto text-base text-gray-700 font-medium"
           to={`/auth/${isDepLogin ? "center-login" : "department-login"}`}
         >{`Log in as ${isDepLogin ? "center" : "department"}`}</Link>
       }

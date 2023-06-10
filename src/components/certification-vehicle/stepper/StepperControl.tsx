@@ -1,5 +1,6 @@
 import { current } from "@reduxjs/toolkit";
 import React from "react";
+import Button from "../../button/Button";
 
 function StepperControl({
   handleClick,
@@ -31,7 +32,7 @@ function StepperControl({
         className="text-white uppercase
          py-2 px-4 rounded-xl font-semibold 
          cursor-pointer hover:bg-slate-700 
-         hover:text-white transition duration-2oo ease-in-out"
+         hover:text-white transition duration-200 ease-in-out"
       >
         {currentStep == steps.length - 1 ? "Confirm" : "Next"}
       </button>

@@ -8,7 +8,6 @@ export interface IcertificationState {
   model: string;
   registrationNumber: string;
   registrationDate: string;
-  registrationLocation: string;
   vehicleType: string;
   purpose: string;
   vin: string;
@@ -32,7 +31,6 @@ const initialState = {
     model: "",
     registrationNumber: "",
     registrationDate: new Date().toISOString(),
-    registrationLocation: "",
     vehicleType: "car",
     purpose: "personal_transportation",
     vin: "",

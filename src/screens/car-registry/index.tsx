@@ -10,11 +10,12 @@ import InfoAreaChart from "../../components/area-chart/AreaChart";
 import CarPieChart from "../../components/pie-chart/CarPieChart";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
-import { locationHook } from "../../redux/hooks/locationCode";
+
 import DropDownLocation from "../../components/dropDown-location/DropDownLocation";
 
+import { Button } from "@mui/material";
+
 function CarRegistry() {
-  const { getLocationCode } = locationHook();
   const { infoChartController } = chartStatisticHook();
   const { setLocationState, setTypeState, loading } = loadingHook();
   const [activeIndex, setActiveIndex] = useState<number>(3);
@@ -52,7 +53,6 @@ function CarRegistry() {
   }, [loading]);
   useEffect(() => {
     setLocationState("car");
-    getLocationCode();
   }, []);
 
   return (
@@ -60,48 +60,44 @@ function CarRegistry() {
       <div className="upperContainer">
         <div className="chartManager">
           <DropDownLocation />
-          <p style={{ marginTop: "auto", marginBottom: "auto" }}>Manage</p>
           <div style={{ margin: "auto" }}>
             <DatePicker />
           </div>
         </div>
         <div className="statsDisplayDiv">
           <div className="chart-button-container">
-            <div className="chartUpperButDiv">
-              <div className="chartUpperButDivHolder">
-                <button
-                  id="chartUpperBut1"
-                  className={`chartUpperBut ${
-                    activeIndex === 0 ? "active" : ""
+            <div className="car-registry-overview-container">
+              <h3 className="chart-button-description secondary-font">
+                Number of vehicles
+              </h3>
+              <div
+                className="overview-button"
+                style={{ marginTop: "0px", marginRight: "0px" }}
+              >
+                <Button
+                  className={`week-button ${
+                    activeIndex === 0 ? "selected-button" : ""
                   }`}
                   onClick={() => handleButtonClick(0)}
                 >
-                  BUS
-                </button>
-                <span></span>
-              </div>
-              <div className="chartUpperButDivHolder">
-                <button
-                  id="chartUpperBut2"
-                  className={`chartUpperBut ${
-                    activeIndex === 1 ? "active" : ""
+                  Bus
+                </Button>
+                <Button
+                  className={`month-button ${
+                    activeIndex === 1 ? "selected-button" : ""
                   }`}
                   onClick={() => handleButtonClick(1)}
                 >
-                  CAR
-                </button>
-              </div>
-              <div className="chartUpperButDivHolder">
-                <button
-                  id="chartUpperBut3"
-                  className={`chartUpperBut ${
-                    activeIndex === 2 ? "active" : ""
+                  Car
+                </Button>
+                <Button
+                  className={`year-button ${
+                    activeIndex === 2 ? "selected-button" : ""
                   }`}
                   onClick={() => handleButtonClick(2)}
                 >
-                  TRUCK
-                </button>
-                <span></span>
+                  Truck
+                </Button>
               </div>
             </div>
             <div className="chartContainer">
@@ -109,15 +105,24 @@ function CarRegistry() {
             </div>
           </div>
           <div className="transitionTabDiv">
+            <div>
+              <h3
+                className="chart-button-description secondary-font"
+                style={{ textAlign: "center", marginBottom: "10px" }}
+              >
+                Vehicle ratio
+              </h3>
+            </div>
             <TransitionTab />
             <div
               className="pieChartContainer"
               style={{
-                border: "1px solid #62b7d3",
-                height: "220px",
+                borderRadius: "10px",
+                height: "90%",
                 width: "100%",
                 marginLeft: "auto",
                 marginRight: "auto",
+                justifyContent: "center",
               }}
             >
               <CarPieChart />

@@ -1,6 +1,6 @@
 .rs-calendar {
   font-size: 17px!important;
-  width: 400px!important;
+  width: 300px!important;
   min-width: none!important;
   transition: width 0.5s ease; /* Add transition properties */
 }

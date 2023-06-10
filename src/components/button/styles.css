@@ -6,7 +6,9 @@
   font-size: 14px;
   background-color: #62b7d3;
   box-sizing: border-box;
+  padding: 10px;
 }
 .button-style:hover {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: pointer;
 }

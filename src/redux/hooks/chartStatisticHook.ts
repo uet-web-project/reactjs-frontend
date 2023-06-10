@@ -200,7 +200,6 @@ export const chartStatisticHook = () => {
         requestedData
       );
       if (chartData.status === 200) {
-        console.log(chartData.data);
         dispatch(setDataForCarChart(chartData.data));
       }
     } catch (err) {
@@ -232,7 +231,6 @@ export const chartStatisticHook = () => {
         requestedData
       );
       if (chartData.status === 200) {
-        console.log(chartData.data);
         dispatch(setDataForCarPieChart(chartData.data));
       }
     } catch (err) {
@@ -242,8 +240,6 @@ export const chartStatisticHook = () => {
     }
   }
   function infoChartController() {
-    console.log(date);
-    console.log(type);
     getChartDataOfRegisteredCar(date, type);
   }
 

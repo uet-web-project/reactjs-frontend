@@ -138,7 +138,7 @@ function VehicleInformation4() {
             makeErrorChange("wheelBaseError", "");
             makeIconChange("wheelBaseState", false);
           }}
-          placeholder="Wheel Base"
+          placeholder="Wheel Base (mm)"
           error={errorData.wheelBaseError}
           showIcon={iconState.wheelBaseState}
         />
@@ -156,7 +156,7 @@ function VehicleInformation4() {
             makeErrorChange("emissionError", "");
             makeIconChange("emissionState", false);
           }}
-          placeholder="Emission"
+          placeholder="Emission (kg/km)"
           error={errorData.emissionError}
           showIcon={iconState.emissionState}
         />
@@ -175,7 +175,7 @@ function VehicleInformation4() {
             makeErrorChange("mileageError", "");
             makeIconChange("mileageState", false);
           }}
-          placeholder="Mileage(km)"
+          placeholder="Mileage (km)"
           error={errorData.mileageError}
           showIcon={iconState.mileageState}
         />

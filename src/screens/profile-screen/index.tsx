@@ -9,9 +9,11 @@ import "./styles.css";
 function ProfileScreen({
   open,
   onClose,
+  showCenterInfo,
 }: {
   open: boolean;
   onClose: () => void;
+  showCenterInfo?: boolean;
 }) {
   const { isDepLogin } = accountHook();
   return (
@@ -20,7 +22,15 @@ function ProfileScreen({
         {isDepLogin ? "Department information" : "Center information"}
       </DialogTitle>
       <div className="secondary-font profile-container">
-        {isDepLogin ? <DepInfo /> : <CenterInfo />}
+        {isDepLogin ? (
+          showCenterInfo ? (
+            <CenterInfo showCenterInfo />
+          ) : (
+            <DepInfo />
+          )
+        ) : (
+          <CenterInfo />
+        )}
       </div>
     </Dialog>
   );
