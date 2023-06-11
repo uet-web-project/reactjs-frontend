@@ -25,6 +25,7 @@ import filterColumn from "./columns/filterColumn";
 import IconFilterAlt from "@mui/icons-material/FilterAlt";
 import IconButton from "@mui/material/IconButton";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
+import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import Button from "../button/Button";
 
 // car, registryCenter, expired
@@ -37,6 +38,7 @@ export default function InfoTable(prop: any) {
     getNearExpiredCarTableData,
     tableInfo,
   } = tableStatisticHook();
+  const { getDataForDetailedTable } = chartStatisticHook();
   const [search, setSearch] = React.useState<Record<string, string[]>>({});
   const [searchAll, setSearchAll] = React.useState("");
   const [set, Set] = React.useState(false);
@@ -66,18 +68,16 @@ export default function InfoTable(prop: any) {
   useEffect(() => {
     switch (location) {
       case "car":
-        getCarTableData();
         setColumns(carColumns);
         break;
       case "center":
-        getCenterTableData();
         setColumns(centerColumns);
         break;
       case "nearExpired":
-        getNearExpiredCarTableData();
         setColumns(carColumns);
         break;
     }
+    getDataForDetailedTable();
   }, [location]);
 
   //filtering
@@ -206,7 +206,7 @@ export default function InfoTable(prop: any) {
       </div>
       <div className="secondPart">
         <DataGrid
-          className="dataGrid"
+          className="data-grid"
           density="compact"
           rows={filterRows}
           columns={columns}

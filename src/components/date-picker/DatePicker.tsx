@@ -121,11 +121,13 @@ export default function DatePicker() {
 
   return (
     <DateRangePicker
+      placement="auto"
+      className="custom-date-picker"
       value={value as [Date, Date]}
       ranges={predefinedRanges as RangeType[]}
       placeholder="Placement left"
       onChange={handleDateRangeChange}
-      style={{ color: "black" }}
+      style={{ color: "black !important" }}
     />
   );
 }

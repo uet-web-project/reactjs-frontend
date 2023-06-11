@@ -40,6 +40,8 @@ export default function RecentRegisteredCarTable() {
       width: rowWidth,
       editable: false,
       align: "center",
+      flex: 1,
+      minWidth: 100,
     },
     {
       field: "vehicleType",
@@ -48,6 +50,8 @@ export default function RecentRegisteredCarTable() {
       width: rowWidth,
       editable: false,
       align: "center",
+      flex: 1,
+      minWidth: 100,
     },
     {
       field: "manufacturer",
@@ -56,6 +60,8 @@ export default function RecentRegisteredCarTable() {
       width: rowWidth,
       editable: false,
       align: "center",
+      flex: 1,
+      minWidth: 100,
     },
     {
       field: "registrationDate",
@@ -65,6 +71,8 @@ export default function RecentRegisteredCarTable() {
       headerAlign: "center",
       width: rowWidth,
       align: "center",
+      flex: 1,
+      minWidth: 100,
       valueGetter: (params: GridValueGetterParams) =>
         `${moment(params.value).format("DD/MM/YYYY")}`,
     },
@@ -76,6 +84,8 @@ export default function RecentRegisteredCarTable() {
       headerAlign: "center",
       width: rowWidth,
       align: "center",
+      flex: 1,
+      minWidth: 100,
       valueGetter: (params: GridValueGetterParams) =>
         `${moment(params.value).format("DD/MM/YYYY")}`,
     },

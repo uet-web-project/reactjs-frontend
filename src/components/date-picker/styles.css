@@ -1,6 +1,7 @@
 .rs-calendar {
+  height: 37px !important;
   font-size: 17px !important;
-  width: 300px !important;
+  /* width: 300px !important; */
   min-width: none !important;
   transition: width 0.5s ease; /* Add transition properties */
 }
@@ -10,12 +11,22 @@
 .rs-calendar-month-dropdown-cell-content {
   font-size: 17px !important;
 }
-@media only screen and (max-width: 900px) {
+/* @media only screen and (max-width: 1000px) {
   .rs-calendar {
-    width: 350px !important;
+    width: 200px !important;
   }
-}
+} */
 
 .rs-picker-toggle.rs-btn.rs-btn-default {
+  border: 1px solid #edf2ff !important;
   border-radius: 99px;
+  height: 37px;
+}
+
+.rs-picker-toggle.rs-btn.rs-btn-default:hover {
+  border: 1px solid #62b7d3 !important;
+}
+
+.rs-picker-toggle-value {
+  color: black !important;
 }

@@ -169,11 +169,11 @@ export default function DropZone(props: any) {
         PaperComponent={PaperComponent}
         TransitionComponent={Transition}
         fullScreen={false}
-        maxWidth={false}
+        maxWidth="md"
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
-        style={{}}
+        fullWidth={true}
       >
         <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
           <Typography

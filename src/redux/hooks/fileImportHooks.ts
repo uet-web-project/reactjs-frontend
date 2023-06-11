@@ -1,16 +1,13 @@
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
-import { useAppSelector, RootState } from "../store";
 import { setLoading } from "../slices/loadingSlice";
 import axiosInstance from "../../utils/axios";
 import { postAPI } from "../../api/postAPI";
-import { FileWithPath } from "react-dropzone";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
 export const fileImportHooks = () => {
-  const loading = useAppSelector((state: RootState) => state.loading.loading);
   const dispatch = useDispatch();
 
   async function uploadFile(file: FormData) {
@@ -23,7 +20,6 @@ export const fileImportHooks = () => {
       });
 
       if (res.status === 200) {
-        console.log(res);
         Swal.fire({
           icon: "success",
           title: "Your work has been saved",
@@ -31,13 +27,12 @@ export const fileImportHooks = () => {
           timer: 2000,
         });
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      // console.log(err);
       Swal.fire({
-        position: "top-end",
         icon: "error",
         title: "Error",
-        text: "There is some issue with your file!",
+        text: err.response.data.message,
       });
     } finally {
       dispatch(setLoading(false));

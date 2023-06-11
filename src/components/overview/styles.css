@@ -15,14 +15,15 @@
 }
 
 .overview-button {
-  /* margin-top: 30px; */
-  /* margin-right: 30px; */
   height: fit-content;
   margin-left: auto;
   flex-wrap: nowrap;
-  border: 2px solid;
+  border: 1px solid #edf2ff;
   border-radius: 20px;
-  border-color: #edf2ff;
+}
+
+.overview-button:hover {
+  border: 1px solid #62b7d3;
 }
 
 .month-button,
@@ -37,7 +38,7 @@
   color: rgb(245, 245, 245) !important;
 }
 
-/* .overview-text-containner {
+/* .overview-text-container {
   margin-left: 30px;
   margin-top: 10px;
 } */

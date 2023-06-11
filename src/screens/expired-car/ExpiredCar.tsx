@@ -46,7 +46,7 @@ function CarRegistry() {
 
   useEffect(() => {
     infoChartController();
-  }, [timeOutIndex,isGetData]);
+  }, [timeOutIndex, isGetData]);
 
   useEffect(() => {
     if (!loading) {
@@ -84,7 +84,7 @@ function CarRegistry() {
         <div className="statsDisplayDiv">
           <div className="chart-button-container">
             <div className="car-registry-overview-container">
-              <div className="overview-text-containner">
+              <div className="overview-text-container">
                 <h3 className="overview-text secondary-font">
                   Near-expired vehicles
                 </h3>

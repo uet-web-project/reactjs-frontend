@@ -18,26 +18,25 @@
 
 .dropZoneContainer {
   padding: 20px;
-  min-width: 1000px;
+  width: 100%;
 }
 
-#importButton{
-  color:black;
-  background-color:white;
+#importButton {
+  color: black;
+  background-color: white;
   border: 1px solid #62b7d3;
   height: 30px;
   width: 100px;
   border-radius: 5px;
 }
 
-#importButton:hover{
-  color:white;
+#importButton:hover {
+  color: white;
   background-color: blue;
 }
-.import-data-btn:hover{
-  
+.import-data-btn:hover {
 }
 
-.my-swal{
+.my-swal {
   z-index: 2000;
 }

@@ -19,13 +19,13 @@ import { IMonthlyComparison } from "../slices/chartsSlice";
 import { setLoading } from "../slices/loadingSlice";
 import { postAPI } from "../../api/postAPI";
 import { accountHook } from "./accountHooks";
-import { useEffect, useState } from "react";
-import startOfMonth from "date-fns/startOfMonth";
-import addMonths from "date-fns/addMonths";
+import { loadingHook } from "./loadingHooks";
+import { ICarInfoTable, setDataForTableInfo } from "../slices/tablesSlice";
 
 export const chartStatisticHook = () => {
   const dispatch = useDispatch();
 
+  const { location, districtCode, provinceCode, date, type } = loadingHook();
   const { isDepLogin, depProfile } = accountHook();
   const {
     totalOverviewChartData,
@@ -36,10 +36,6 @@ export const chartStatisticHook = () => {
     carStatsForChart,
     carPieChart,
   } = useAppSelector((state: RootState) => state.chartStatistic);
-
-  const { type, date, location, districtCode, provinceCode } = useAppSelector(
-    (state: RootState) => state.loading
-  );
 
   function callClearAllData() {
     dispatch(clearAllData());
@@ -129,8 +125,8 @@ export const chartStatisticHook = () => {
 
   async function getCenterListData() {
     dispatch(setLoading(true));
+    const depId = depProfile._id;
     try {
-      const depId = depProfile._id;
       const res = await axiosInstance.get(getAPI("", depId).getCenterListById);
       if (res.status === 200) {
         dispatch(setDataForCenterList(res.data));
@@ -260,6 +256,41 @@ export const chartStatisticHook = () => {
       dispatch(setLoading(false));
     }
   }
+
+  async function getDataForDetailedTable() {
+    dispatch(setLoading(true));
+    const depId = depProfile._id;
+    let reqUrl = "";
+    if (location === "car") {
+      if (isDepLogin) {
+        reqUrl = getAPI().getAllVehicleByDep;
+      } else {
+        reqUrl = getAPI().getAllVehicleByCenter;
+      }
+    } else if (location === "center") {
+      reqUrl = getAPI("", depId).getCenterListById;
+    } else if (location === "nearExpired") {
+      reqUrl = getAPI().getAllNearExpiredVehicles;
+    }
+    try {
+      const res = await axiosInstance.get(reqUrl);
+
+      if (res.status === 200) {
+        const moddedData: ICarInfoTable[] = res.data.map(
+          (item: IVehicle, index: number) => ({
+            ...item,
+            id: item._id,
+            index: index + 1,
+          })
+        );
+        dispatch(setDataForTableInfo(moddedData));
+      }
+    } catch (err) {
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+
   function infoChartController() {
     getChartDataOfCar(date, type);
     getDataForCarPieChart();
@@ -282,5 +313,6 @@ export const chartStatisticHook = () => {
     infoChartController,
     getDataForCarPieChart,
     callClearAllData,
+    getDataForDetailedTable,
   };
 };

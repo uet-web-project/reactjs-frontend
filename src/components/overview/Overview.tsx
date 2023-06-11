@@ -35,7 +35,7 @@ function Overview() {
       }`}
     >
       <div className="overview-title">
-        <div className="overview-text-containner">
+        <div className="overview-text-container">
           <h3 className="overview-text secondary-font">Overview</h3>
           <p className="overview-description secondary-font">
             {" "}

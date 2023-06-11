@@ -71,8 +71,6 @@ function CarRegistry() {
     } else if (pathLocation.pathname.includes("expired")) {
       setLocationState("nearExpired");
     }
-    if (locationCode.length === 0) getLocationCode();
-    console.log(pathLocation.pathname);
   }, [pathLocation.pathname]);
 
   function getDataByLocation(
@@ -97,7 +95,7 @@ function CarRegistry() {
       {location !== "center" && (
         <div className="chart-button-container">
           <div className="car-registry-overview-container">
-            <div className="overview-text-containner">
+            <div className="overview-text-container">
               <h3 className="overview-text secondary-font">
                 {location === "car"
                   ? "Registered of vehicles"
@@ -109,42 +107,45 @@ function CarRegistry() {
                   : "View vehicles that are about to be expired."}
               </p>
             </div>
-            <div className="chartManager">
-              <div>
-                <DropDownLocation setState={getDataByLocation} />
-              </div>
-              <div style={{ marginLeft: "5px" }}>
+            <div className="chart-controller">
+              <div className="chartManager">
+                <div className="location-dropdown-container">
+                  <DropDownLocation setState={getDataByLocation} />
+                </div>
                 <DatePicker />
               </div>
-            </div>
-            <div
-              className="overview-button"
-              style={{ marginTop: "0px", marginRight: "0px" }}
-            >
-              <Button
-                className={`week-button ${
-                  activeIndex === 0 ? "selected-button" : ""
-                }`}
-                onClick={() => handleButtonClick(0)}
+              <div
+                className="overview-button"
+                style={{
+                  marginLeft: "10px",
+                  display: "inline-block",
+                }}
               >
-                Bus
-              </Button>
-              <Button
-                className={`month-button ${
-                  activeIndex === 1 ? "selected-button" : ""
-                }`}
-                onClick={() => handleButtonClick(1)}
-              >
-                Car
-              </Button>
-              <Button
-                className={`year-button ${
-                  activeIndex === 2 ? "selected-button" : ""
-                }`}
-                onClick={() => handleButtonClick(2)}
-              >
-                Truck
-              </Button>
+                <Button
+                  className={`week-button ${
+                    activeIndex === 0 ? "selected-button" : ""
+                  }`}
+                  onClick={() => handleButtonClick(0)}
+                >
+                  Bus
+                </Button>
+                <Button
+                  className={`month-button ${
+                    activeIndex === 1 ? "selected-button" : ""
+                  }`}
+                  onClick={() => handleButtonClick(1)}
+                >
+                  Car
+                </Button>
+                <Button
+                  className={`year-button ${
+                    activeIndex === 2 ? "selected-button" : ""
+                  }`}
+                  onClick={() => handleButtonClick(2)}
+                >
+                  Truck
+                </Button>
+              </div>
             </div>
           </div>
           <div className="chartContainer">

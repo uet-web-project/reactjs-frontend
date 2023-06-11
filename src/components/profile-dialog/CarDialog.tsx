@@ -16,9 +16,10 @@ import { TransitionProps } from "@mui/material/transitions";
 import { PaperProps } from "@mui/material/Paper";
 import Draggable from "react-draggable";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
-import AddIcon from "@mui/icons-material/Add";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CloseIcon from "@mui/icons-material/Close";
+import moment from "moment";
 
 function PaperComponent(props: PaperProps) {
   return (
@@ -53,15 +54,9 @@ export default function CarDialog(props: any) {
     if (location === "center") setViewDetail(true);
   };
 
-  const handleClose = (
-    event: {},
-    reason: "backdropClick" | "escapeKeyDown"
-  ) => {
-    if (reason === "backdropClick") {
-    } else {
-      setOpen(false);
-      setViewDetail(false);
-    }
+  const handleClose = (event: {}, reason: "escapeKeyDown") => {
+    setOpen(false);
+    setViewDetail(false);
   };
 
   function onCloseButtonClick() {
@@ -86,7 +81,6 @@ export default function CarDialog(props: any) {
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
-        style={{}}
       >
         <IconButton onClick={onCloseButtonClick}>
           <CloseIcon />
@@ -99,14 +93,15 @@ export default function CarDialog(props: any) {
                 <div className="simple-info">
                   {Object.entries(data).map(
                     ([key, value]: [string, unknown]) => {
+                      if (typeof value === "string") {
+                        value = value.replace("_", " ");
+                      }
                       if (
                         key === "registrationDate" ||
                         key === "registrationExpirationDate"
                       ) {
                         const date = new Date(value as string);
-                        const formattedDate = `${date.getDate()}/${
-                          date.getMonth() + 1
-                        }/${date.getFullYear()}`;
+                        const formattedDate = moment(date).format("DD/MM/YYYY");
                         value = formattedDate;
                       }
 
@@ -160,10 +155,14 @@ export default function CarDialog(props: any) {
                           fontWeight: "bold",
                         }}
                       >
-                        more details
+                        More details
                       </Typography>
                       <Typography style={{ wordBreak: "break-all" }}>
-                        {isDetail ? <AddIcon /> : <ExpandMoreIcon />}
+                        {isDetail ? (
+                          <KeyboardArrowDownIcon />
+                        ) : (
+                          <KeyboardArrowRightIcon />
+                        )}
                       </Typography>
                     </Box>
                   </Box>
@@ -217,8 +216,17 @@ export default function CarDialog(props: any) {
             )}
             {isDetail && (
               <Box className={`Info ${isDetail ? "open" : ""}`}>
-                <Typography variant="h5">Detail Info</Typography>
+                <Typography
+                  sx={{ fontWeight: "bold", marginBottom: "20px" }}
+                  variant="h5"
+                >
+                  Detail Info
+                </Typography>
                 {Object.entries(data).map(([key, value]: [string, unknown]) => {
+                  if (typeof value === "string") {
+                    value = value.replace("_", " ");
+                  }
+                  // filter out unneccessary fields
                   if (
                     [
                       "_v",
@@ -235,17 +243,17 @@ export default function CarDialog(props: any) {
                     return null;
                   }
 
+                  // format date
                   if (
                     key === "registrationDate" ||
                     key === "registrationExpirationDate"
                   ) {
                     const date = new Date(value as string);
-                    const formattedDate = `${date.getDate()}/${
-                      date.getMonth() + 1
-                    }/${date.getFullYear()}`;
+                    const formattedDate = moment(date).format("DD/MM/YYYY");
                     value = formattedDate;
                   }
 
+                  // format number (add measurement unit)
                   if (
                     [
                       "width",
@@ -264,7 +272,7 @@ export default function CarDialog(props: any) {
                       key={key}
                       sx={{ textTransform: "capitalize" }}
                     >
-                      <Box className="left">
+                      <Box className="left primary-font">
                         <Typography
                           style={{
                             wordBreak: "break-all",

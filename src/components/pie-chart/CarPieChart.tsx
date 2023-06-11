@@ -62,6 +62,12 @@ const CarPieChart = () => {
 
   return (
     <div className="car-pie-chart-container">
+      <div
+        style={{ textAlign: "center" }}
+        className="monthly-average-text secondary-font"
+      >
+        Vehicle type distribution
+      </div>
       <ResponsiveContainer>
         <PieChart className="pie-chart">
           <Legend

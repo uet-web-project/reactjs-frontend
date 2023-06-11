@@ -185,6 +185,14 @@ export const accountHook = () => {
       return true;
     }
   }
+  function validateProvinceCode(
+    showError: (errorField: string, errorMessage: string) => void,
+    showIcon: (errorField: string, state: boolean) => void
+  ) {}
+  function validateDistrictCode(
+    showError: (errorField: string, errorMessage: string) => void,
+    showIcon: (errorField: string, state: boolean) => void
+  ) {}
   function validateLocation(
     signUpData: {
       centerId: string;
@@ -293,6 +301,8 @@ export const accountHook = () => {
       centerId: string;
       password: string;
       name: string;
+      provinceCode: number;
+      districtCode: number;
       location: string;
       phoneNumber: string;
     },
@@ -312,6 +322,8 @@ export const accountHook = () => {
         validatePassword(signUpData, showError, showIcon);
         validateRePassword(signUpData, repassword, showError, showIcon);
         validateName(signUpData, showError, showIcon);
+        validateProvinceCode(showError, showIcon); // TODO
+        validateDistrictCode(showError, showIcon); // TODO
         validateLocation(signUpData, showError, showIcon);
         validatePhoneNumber(signUpData, showError, showIcon);
         if (
