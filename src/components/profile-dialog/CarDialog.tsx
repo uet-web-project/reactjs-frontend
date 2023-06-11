@@ -198,7 +198,7 @@ export default function CarDialog(props: any) {
                           alt=""
                           className="info-image"
                         />
-                      ) : data.vehicleType === "bus" ? (
+                      ) : data.vehicleType === "truck" ? (
                         <img
                           src="/src/assets/images/CarDialog/truckImage.jpg"
                           alt=""
