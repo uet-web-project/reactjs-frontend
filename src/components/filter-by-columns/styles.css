@@ -22,16 +22,22 @@
   flex-direction: row;
   justify-items: center;
   align-items: center;
-  padding: 10px;
+
+  margin: auto;
+}
+.primary-textField{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #4bacbd;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 .filterTextField {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px;
-  border: 1px solid #4bacbd;
-  border-radius: 10px;
-  min-width: 250px;
+  min-width: 230px;
   height: 70px;
   padding: 5px;
 }
@@ -39,7 +45,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
   margin: 10px;
+}
+.filterCheckBox{
+  border-radius: 10px;
+  align-items: center;
+  padding-left: 15px;
+  border: 1px solid #4bacbd;
 }
 

@@ -91,9 +91,30 @@ export default function DatePicker() {
     event: React.SyntheticEvent<Element, Event>
   ) => {
     if (value !== null) {
-      const startDate = value[0].toISOString().split("T")[0];
-      const endDate = value[1].toISOString().split("T")[0];
-      setDateState([startDate, endDate]);
+      // const startDate = value[0].toISOString().split("T")[0];
+      // const endDate = value[1].toISOString().split("T")[0];
+      // console.log(  value[0].toLocaleDateString(),   value[1].toLocaleDateString());
+      const dateStart = value[0].toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
+
+      const formattedDateStart = dateStart.replace(
+        /(\d+)\/(\d+)\/(\d+)/,
+        "$3-$2-$1"
+      );
+      const dateEnd = value[1].toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
+
+      const formattedDateEnd = dateEnd.replace(
+        /(\d+)\/(\d+)\/(\d+)/,
+        "$3-$2-$1"
+      );
+      setDateState([formattedDateStart, formattedDateEnd]);
       setValue(value as [Date, Date]);
     }
   };

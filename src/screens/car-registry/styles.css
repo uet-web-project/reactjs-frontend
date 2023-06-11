@@ -1,18 +1,20 @@
 /*phan tren*/
 
 .statsDisplayDiv {
-  display: flex;
-  flex-direction: row;
+  
   min-width: 0;
-  animation-name: slide-in-left;
-  animation-duration: 1s;
+
+  
   justify-content: space-between;
-}
-.chartManager {
-  display: flex;
 }
 
 .chart-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  animation-name: slide-in-left;
+  animation-duration: 1s;
   min-width: none;
   overflow: hidden;
   flex: 4;
@@ -97,13 +99,17 @@
   align-items: center;
   width: 100%;
 }
-#chartUpperBut1 {
-  border-radius: 10px 0 0 0;
-  border-right: 1px solid;
+.overview-text-containner {
+  flex: 1;
+  order: 1;
 }
-#chartUpperBut3 {
-  border-radius: 0 10px 0 0;
-  border-left: 1px solid;
+.chartManager {
+  display: flex;
+  flex: 1;
+  order: 2;
+}
+.overview-button {
+  order: 3;
 }
 .chartContainer {
   display: flex;
@@ -151,25 +157,63 @@
   } */
   .pageContainer {
   }
-  .statsDisplayDiv {
-    flex-direction: column;
+  .chart-button-container {
+    
   }
   .pieChartContainer {
     border: none !important;
   }
-  .chart-button-container {
-    min-width: none;
-    overflow: hidden;
-    flex: 4;
-    order: 1;
+  .car-registry-overview-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-
-  .transitionTabDiv {
-    order: 0;
-    padding: 10px;
-    min-width: auto;
-    margin-left: 0px !important;
+  .overview-button{
+    margin-top: 10px!important;
+    margin-left: 0px;
   }
   .chartManager {
+    margin-top: 10px!important;
   }
 }
+
+
+@media screen and (max-width: 500px) {
+  /* .chartContainer {
+    flex-direction: column-reverse;
+    height: 100%;
+  }
+  .car-pie-chart-container {
+    flex: 1 !important;
+    margin: 0 !important;
+  }
+  .info-area-chart-container {
+    flex: 1 !important;
+    margin: 0 !important;
+  } */
+  .pageContainer {
+  }
+  .chart-button-container {
+    
+  }
+  .pieChartContainer {
+    border: none !important;
+  }
+  .car-registry-overview-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .overview-button{
+    margin-top: 10px!important;
+    margin-left: 0px;
+  }
+  .chartManager {
+    margin-top: 10px!important;
+  }
+  .chartContainer{
+    display: flex;
+    flex-direction: row;
+  }
+}
+

@@ -9,7 +9,6 @@ import {
 import "./styles.css";
 import {
   Box,
-  Button,
   Checkbox,
   Dialog,
   FormControlLabel,
@@ -33,6 +32,7 @@ import { fileImportHooks } from "../../redux/hooks/fileImportHooks";
 import { TransitionProps } from "@mui/material/transitions";
 import { PaperProps } from "@mui/material/Paper";
 import Draggable from "react-draggable";
+import Button from "../button/Button";
 
 function PaperComponent(props: PaperProps) {
   return (
@@ -61,8 +61,7 @@ export default function FilterCenterDialog(props: any) {
   const theme = useTheme();
   const [search, setSearch] = React.useState<Record<string, string[]>>({});
 
-  useEffect(() => {
-  }, [search]);
+  useEffect(() => {}, [search]);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -123,9 +122,7 @@ export default function FilterCenterDialog(props: any) {
   }
   return (
     <React.Fragment>
-      <button id="filterByColumns" onClick={handleClickOpen}>
-        Filter
-      </button>
+      <Button content="Filter" onClick={handleClickOpen} />
       <Dialog
         PaperComponent={PaperComponent}
         TransitionComponent={Transition}
@@ -180,7 +177,7 @@ export default function FilterCenterDialog(props: any) {
                   variant="standard"
                   label="Location"
                   type="text"
-                  name="location"
+                  name="fullAdress"
                   onChange={handleFiltersChange}
                   onKeyDown={(event) => event.stopPropagation()}
                 />
@@ -207,27 +204,8 @@ export default function FilterCenterDialog(props: any) {
               </div>
             </div>
             <Box display="flex" justifyContent="flex-end">
-              <Button
-                onClick={onCloseButtonClick}
-                variant="contained"
-                style={{
-                  marginTop: "10px",
-                  backgroundColor: "#62b7d3",
-                }}
-              >
-                cancel
-              </Button>
-              <Button
-                onClick={onFilterButtonClick}
-                variant="contained"
-                style={{
-                  marginLeft: "10px",
-                  marginTop: "10px",
-                  backgroundColor: "#62b7d3",
-                }}
-              >
-                Filter
-              </Button>
+              <Button content="Close" onClick={onCloseButtonClick} style={{marginRight:"10px"}}/>
+              <Button content="Filter" onClick={onFilterButtonClick} />
             </Box>
           </div>
         )}

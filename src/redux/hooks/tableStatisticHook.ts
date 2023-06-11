@@ -6,10 +6,12 @@ import { useDispatch } from "react-redux";
 import axiosInstance from "../../utils/axios";
 import { getAPI } from "../../api/getAPI";
 import { setLoading } from "../slices/loadingSlice";
+import { accountHook } from "./accountHooks";
 
 export const tableStatisticHook = () => {
   const dispatch = useDispatch();
 
+  const { isDepLogin, depProfile } = accountHook();
   const { tableInfo } = useAppSelector(
     (state: RootState) => state.tableStatistic
   );
@@ -17,7 +19,10 @@ export const tableStatisticHook = () => {
   async function getCarTableData() {
     dispatch(setLoading(true));
     try {
-      const res = await axiosInstance.get(getAPI().getAllVehicles);
+      let requestedData;
+      if (isDepLogin) requestedData = getAPI().getAllVehiclesByDep;
+      else requestedData = getAPI().getAllVehiclesByCenter;
+      const res = await axiosInstance.get(requestedData);
       if (res.status === 200) {
         const moddedData: ICarInfoTable[] = res.data.map(
           (item: IVehicle, index: number) => ({
@@ -48,7 +53,6 @@ export const tableStatisticHook = () => {
           })
         );
         dispatch(setDataForTableInfo(moddedData));
-        console.log(moddedData);
       }
     } catch (err) {
       console.log(err);
@@ -56,11 +60,12 @@ export const tableStatisticHook = () => {
       dispatch(setLoading(false));
     }
   }
-  
+
   async function getCenterTableData() {
     dispatch(setLoading(true));
     try {
-      const res = await axiosInstance.get(getAPI().getAllCenter);
+      const depId = depProfile._id;
+      const res = await axiosInstance.get(getAPI("", depId).getCenterListById);
       if (res.status === 200) {
         const moddedData: ICarInfoTable[] = res.data.map(
           (item: IVehicle, index: number) => ({

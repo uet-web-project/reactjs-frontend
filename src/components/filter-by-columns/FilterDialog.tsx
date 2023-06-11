@@ -9,7 +9,6 @@ import {
 import "./styles.css";
 import {
   Box,
-  Button,
   Checkbox,
   Dialog,
   FormControlLabel,
@@ -27,6 +26,7 @@ import { TransitionProps } from "@mui/material/transitions";
 import { PaperProps } from "@mui/material/Paper";
 import Draggable from "react-draggable";
 import DialogTitle from "@mui/material/DialogTitle";
+import Button from "../button/Button";
 
 function PaperComponent(props: PaperProps) {
   return (
@@ -55,8 +55,7 @@ export default function FilterDialog(props: any) {
   const theme = useTheme();
   const [search, setSearch] = React.useState<Record<string, string[]>>({});
 
-  useEffect(() => {
-  }, [search]);
+  useEffect(() => {}, [search]);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -117,14 +116,12 @@ export default function FilterDialog(props: any) {
   }
   return (
     <React.Fragment>
-      <button id="filterByColumns" onClick={handleClickOpen}>
-        Filter
-      </button>
+      <Button content="Filter" onClick={handleClickOpen} />
       <Dialog
         PaperComponent={PaperComponent}
         TransitionComponent={Transition}
         fullScreen={false}
-        fullWidth={true}
+        fullWidth={false}
         maxWidth={"md"}
         open={open}
         onClose={handleClose}
@@ -136,104 +133,106 @@ export default function FilterDialog(props: any) {
             <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
               <Typography variant="h4">Filter</Typography>
             </DialogTitle>
-            <div className="column">
-              <div className="filterTextField">
-                <TextField
-                  variant="standard"
-                  label="License Plate"
-                  type="text"
-                  name="licensePlate"
-                  onChange={handleFiltersChange}
-                  onKeyDown={(event) => event.stopPropagation()}
-                />
+            <div className="primary-textField">
+              <div className="column">
+                <div className="filterTextField">
+                  <TextField
+                    variant="standard"
+                    label="License Plate"
+                    type="text"
+                    name="licensePlate"
+                    onChange={handleFiltersChange}
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                </div>
+                <div className="filterTextField">
+                  <TextField
+                    variant="standard"
+                    label="Manufacturer"
+                    type="text"
+                    name="manufacturer"
+                    onChange={handleFiltersChange}
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                </div>
+                <div className="filterTextField">
+                  <TextField
+                    variant="standard"
+                    label="Registration Location"
+                    type="text"
+                    name="registrationLocation"
+                    onChange={handleFiltersChange}
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                </div>
               </div>
-              <div className="filterTextField">
-                <TextField
-                  variant="standard"
-                  label="Manufacturer"
-                  type="text"
-                  name="manufacturer"
-                  onChange={handleFiltersChange}
-                  onKeyDown={(event) => event.stopPropagation()}
-                />
+              <div className="column">
+                <div className="filterTextField">
+                  <TextField
+                    variant="standard"
+                    label="Registration Number"
+                    type="text"
+                    name="registrationNumber"
+                    onChange={handleFiltersChange}
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                </div>
+                <div className="filterTextField">
+                  <TextField
+                    variant="standard"
+                    label="Registration Date"
+                    type="text"
+                    name="registrationDate"
+                    onChange={handleFiltersChange}
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                </div>
+                <div className="filterTextField">
+                  <TextField
+                    variant="standard"
+                    label="Registration Expiration Date"
+                    type="text"
+                    name="registrationExpirationDate"
+                    onChange={handleFiltersChange}
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                </div>
               </div>
-              <div className="filterTextField">
-                <TextField
-                  variant="standard"
-                  label="Registration Location"
-                  type="text"
-                  name="registrationLocation"
-                  onChange={handleFiltersChange}
-                  onKeyDown={(event) => event.stopPropagation()}
-                />
+              <div className="column">
+                <div className="filterTextField">
+                  <TextField
+                    variant="standard"
+                    label="Model"
+                    type="text"
+                    name="model"
+                    onChange={handleFiltersChange}
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                </div>
+                <div className="filterTextField">
+                  <TextField
+                    variant="standard"
+                    label="Version"
+                    type="text"
+                    name="version"
+                    onChange={handleFiltersChange}
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                </div>
+                <div className="filterTextField">
+                  <TextField
+                    variant="standard"
+                    label="Vehicle Owner Cid"
+                    type="text"
+                    name="vehicleOwnerCid"
+                    onChange={handleFiltersChange}
+                    onKeyDown={(event) => event.stopPropagation()}
+                  />
+                </div>
               </div>
             </div>
             <div className="column">
-              <div className="filterTextField">
-                <TextField
-                  variant="standard"
-                  label="Registration Number"
-                  type="text"
-                  name="registrationNumber"
-                  onChange={handleFiltersChange}
-                  onKeyDown={(event) => event.stopPropagation()}
-                />
-              </div>
-              <div className="filterTextField">
-                <TextField
-                  variant="standard"
-                  label="Registration Date"
-                  type="text"
-                  name="registrationDate"
-                  onChange={handleFiltersChange}
-                  onKeyDown={(event) => event.stopPropagation()}
-                />
-              </div>
-              <div className="filterTextField">
-                <TextField
-                  variant="standard"
-                  label="Registration Expiration Date"
-                  type="text"
-                  name="registrationExpirationDate"
-                  onChange={handleFiltersChange}
-                  onKeyDown={(event) => event.stopPropagation()}
-                />
-              </div>
-            </div>
-            <div className="column">
-              <div className="filterTextField">
-                <TextField
-                  variant="standard"
-                  label="Model"
-                  type="text"
-                  name="model"
-                  onChange={handleFiltersChange}
-                  onKeyDown={(event) => event.stopPropagation()}
-                />
-              </div>
-              <div className="filterTextField">
-                <TextField
-                  variant="standard"
-                  label="Version"
-                  type="text"
-                  name="version"
-                  onChange={handleFiltersChange}
-                  onKeyDown={(event) => event.stopPropagation()}
-                />
-              </div>
-              <div className="filterTextField">
-                <TextField
-                  variant="standard"
-                  label="Vehicle Owner Cid"
-                  type="text"
-                  name="vehicleOwnerCid"
-                  onChange={handleFiltersChange}
-                  onKeyDown={(event) => event.stopPropagation()}
-                />
-              </div>
-            </div>
-            <div className="column">
-              <div className="filterTextField">
+              <div className="filterCheckBox">
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -247,7 +246,7 @@ export default function FilterDialog(props: any) {
                 <FormControlLabel
                   control={
                     <Checkbox
-                    className="checkBoxContainer"
+                      className="checkBoxContainer"
                       name="purpose"
                       onChange={handleSelect}
                       id="public_transportation"
@@ -265,8 +264,6 @@ export default function FilterDialog(props: any) {
                   }
                   label="Delivery"
                 />
-              </div>
-              <div className="filterTextField">
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -330,6 +327,8 @@ export default function FilterDialog(props: any) {
                   onKeyDown={(event) => event.stopPropagation()}
                 />
               </div>
+            </div>
+            <div className="column">
               <div className="filterTextField1">
                 <TextField
                   variant="standard"
@@ -340,8 +339,6 @@ export default function FilterDialog(props: any) {
                   onKeyDown={(event) => event.stopPropagation()}
                 />
               </div>
-            </div>
-            <div className="column">
               <div className="filterTextField1">
                 <TextField
                   variant="standard"
@@ -365,26 +362,11 @@ export default function FilterDialog(props: any) {
             </div>
             <Box display="flex" justifyContent="flex-end">
               <Button
+                content="Close"
                 onClick={onCloseButtonClick}
-                variant="contained"
-                style={{
-                  marginTop: "10px",
-                  backgroundColor: "#62b7d3",
-                }}
-              >
-                cancel
-              </Button>
-              <Button
-                onClick={onFilterButtonClick}
-                variant="contained"
-                style={{
-                  marginLeft: "10px",
-                  marginTop: "10px",
-                  backgroundColor: "#62b7d3",
-                }}
-              >
-                Filter
-              </Button>
+                style={{ marginRight: "10px" }}
+              />
+              <Button content="Filter" onClick={onFilterButtonClick} />
             </Box>
           </div>
         )}

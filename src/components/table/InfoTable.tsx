@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { tableStatisticHook } from "../../redux/hooks/tableStatisticHook";
 import moment from "moment";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import CarDialog from "../profile-dialog/CarDialog";
 import DropZone from "../data-import/DropZone";
 import { Box, TextField } from "@mui/material";
@@ -22,10 +22,15 @@ import { ICarInfoTable } from "../../redux/slices/tablesSlice";
 import FilterDialog from "../filter-by-columns/FilterDialog";
 import FilterCenterDialog from "../filter-by-columns/FilterCenterDialog";
 import filterColumn from "./columns/filterColumn";
+import IconFilterAlt from "@mui/icons-material/FilterAlt";
+import IconButton from "@mui/material/IconButton";
+import { loadingHook } from "../../redux/hooks/loadingHooks";
+import Button from "../button/Button";
+
 // car, registryCenter, expired
 
 export default function InfoTable(prop: any) {
-  const location = prop.location;
+  const { location } = loadingHook();
   const {
     getCarTableData,
     getCenterTableData,
@@ -73,7 +78,7 @@ export default function InfoTable(prop: any) {
         setColumns(carColumns);
         break;
     }
-  }, []);
+  }, [location]);
 
   //filtering
   function inputSearch(searchFilter: Record<string, string[]>) {
@@ -111,20 +116,22 @@ export default function InfoTable(prop: any) {
           return index >= 2
             ? {
                 ...item,
-                minWidth: 300,
+                hideSortIcons: true,
                 renderHeader: () => (
                   <TextField
                     id={item.field}
                     className="filterField"
-                    label="Standard"
+                    label={item.headerName}
                     variant="standard"
                     onChange={handleFiltersChange}
                     onKeyDown={(event) => event.stopPropagation()}
+                    onClick={(event) => event.stopPropagation()}
+                    size="small"
                   />
                 ),
                 className: isFilterCol ? "column-animation" : "",
               }
-            : { ...item, minWidth: 70 };
+            : { ...item, hideSortIcons: false };
         });
       });
     } else {
@@ -132,7 +139,7 @@ export default function InfoTable(prop: any) {
         return current.map((item, index) => {
           return {
             ...item,
-            minWidth: 200,
+            hideSortIcons: false,
             renderHeader: undefined,
             className: isFilterCol ? "column-animation" : "",
           };
@@ -141,12 +148,13 @@ export default function InfoTable(prop: any) {
     }
   }, [isFilterCol]);
 
-  function onClick() {
-    // if (isFilterCol) setColumns(filterColumn() as GridColDef[]);
-    // else setColumns(carColumns);
-    // setFilterCol(!isFilterCol);
-    setFilterCol(!isFilterCol);
-  }
+  const carInvisibility = {
+    width: false,
+    length: false,
+    emission: false,
+    mileage: false,
+    wheelBase: false,
+  };
   return (
     <Paper
       className="paperContainer"
@@ -155,8 +163,10 @@ export default function InfoTable(prop: any) {
         whiteSpace: "nowrap",
       }}
     >
-      <button onClick={onClick}>click</button>
       <div className="firstPart">
+        <IconButton onClick={() => setFilterCol((current) => !current)}>
+          <IconFilterAlt color={isFilterCol ? "primary" : "action"} />
+        </IconButton>
         {tableInfo &&
           tableInfo[0] &&
           (location === "center" ? (
@@ -171,9 +181,11 @@ export default function InfoTable(prop: any) {
             />
           ))}
         {set && Object.keys(search).length !== 0 && (
-          <button id="clearFilterBut" onClick={clearFilter}>
-            clear filter
-          </button>
+          <Button
+            content="Clear Filter"
+            onClick={clearFilter}
+            style={{ marginLeft: "5px" }}
+          />
         )}
         <div className="generalInputContainer">
           <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -205,6 +217,9 @@ export default function InfoTable(prop: any) {
             pagination: {
               paginationModel: { page: 0, pageSize: 25 },
             },
+            columns: {
+              columnVisibilityModel: carInvisibility,
+            },
           }}
           pageSizeOptions={[5, 10, 25, 50, 100, 1000, 10000]}
           disableRowSelectionOnClick
@@ -227,56 +242,57 @@ const carColumns: GridColDef[] = [
   {
     field: "index",
     headerName: "Index",
-    headerAlign: "center",
-    minWidth: 20,
+    headerAlign: "left",
+    minWidth: 50,
     flex: 1,
     editable: false,
-    align: "center",
+    sortable: false,
+    align: "left",
   },
   {
     field: "licensePlate",
     headerName: "License Plate",
-    headerAlign: "center",
+    headerAlign: "left",
     minWidth: 100,
     flex: 2,
     editable: false,
-    align: "center",
+    align: "left",
   },
   {
     field: "vehicleType",
     headerName: "Vehicle Type",
-    headerAlign: "center",
+    headerAlign: "left",
     minWidth: 100,
     flex: 2,
     editable: false,
-    align: "center",
+    align: "left",
   },
   {
     field: "manufacturer",
     headerName: "Manufacturer",
-    headerAlign: "center",
+    headerAlign: "left",
     minWidth: 100,
     flex: 2,
     editable: false,
-    align: "center",
+    align: "left",
   },
   {
     field: "model",
     headerName: "Model",
-    headerAlign: "center",
-    minWidth: 100,
+    headerAlign: "left",
+    minWidth: 130,
     flex: 1,
     editable: false,
-    align: "center",
+    align: "left",
   },
   {
     field: "purpose",
     headerName: "Purpose",
-    headerAlign: "center",
-    minWidth: 100,
+    headerAlign: "left",
+    minWidth: 170,
     flex: 1,
     editable: false,
-    align: "center",
+    align: "left",
     renderCell: (params) => {
       const formattedValue = params.value
         ? params.value.replace(/_/g, " ")
@@ -297,20 +313,21 @@ const carColumns: GridColDef[] = [
   {
     field: "registrationLocation",
     headerName: "Registration Location",
-    headerAlign: "center",
-    minWidth: 120,
-    flex: 1,
+    headerAlign: "left",
+    minWidth: 300,
+    flex: 3,
     editable: false,
-    align: "center",
+    align: "left",
   },
   {
     field: "registrationDate",
     headerName: "Registration Date",
     description: "This column has a value getter and is not sortable.",
     sortable: false,
-    headerAlign: "center",
+    headerAlign: "left",
+    minWidth: 130,
     flex: 2,
-    align: "center",
+    align: "left",
     valueGetter: (params: GridValueGetterParams) =>
       `${moment(params.value).format("DD/MM/YYYY")}`,
   },
@@ -319,9 +336,10 @@ const carColumns: GridColDef[] = [
     headerName: "Registration Expiration Date",
     description: "This column has a value getter and is not sortable.",
     sortable: false,
-    headerAlign: "center",
+    headerAlign: "left",
+    minWidth: 190,
     flex: 2,
-    align: "center",
+    align: "left",
     valueGetter: (params: GridValueGetterParams) =>
       `${moment(params.value).format("DD/MM/YYYY")}`,
     renderHeader(params) {
@@ -345,45 +363,51 @@ const carColumns: GridColDef[] = [
   },
   {
     field: "width",
-    headerName: "Width",
-    headerAlign: "center",
+    headerName: "Width(mm)",
+    headerAlign: "left",
+    minWidth: 80,
     flex: 1,
-    align: "center",
+    align: "left",
   },
   {
     field: "length",
-    headerName: "Length",
-    headerAlign: "center",
+    headerName: "Length(mm)",
+    headerAlign: "left",
+    minWidth: 100,
     flex: 1,
-    align: "center",
+    align: "left",
   },
   {
     field: "wheelBase",
-    headerName: "Wheel Base",
-    headerAlign: "center",
+    headerName: "Wheel Base(mm)",
+    headerAlign: "left",
+    minWidth: 125,
     flex: 1,
-    align: "center",
+    align: "left",
   },
   {
     field: "emission",
-    headerName: "Emission",
-    headerAlign: "center",
+    headerName: "Emission(kgCo2/km)",
+    headerAlign: "left",
+    minWidth: 150,
     flex: 1,
-    align: "center",
+    align: "left",
   },
   {
     field: "mileage",
-    headerName: "Mileage",
-    headerAlign: "center",
+    headerName: "Mileage(mm)",
+    headerAlign: "left",
+    minWidth: 100,
     flex: 1,
-    align: "center",
+    align: "left",
   },
   {
     field: "registrationCenterId",
     headerName: "Registration Center ID",
-    headerAlign: "center",
+    headerAlign: "left",
+    minWidth: 160,
     flex: 1,
-    align: "center",
+    align: "left",
   },
 ];
 
@@ -402,49 +426,49 @@ const centerColumns: GridColDef[] = [
   {
     field: "centerId",
     headerName: "Center ID",
-    headerAlign: "center",
-    minWidth: 100,
+    headerAlign: "left",
+    minWidth: 70,
     flex: 1,
-    align: "center",
+    align: "left",
   },
   {
     field: "password",
     headerName: "Password",
-    headerAlign: "center",
-    minWidth: 100,
+    headerAlign: "left",
+    minWidth: 200,
     flex: 2,
-    align: "center",
+    align: "left",
   },
   {
     field: "name",
     headerName: "Name",
-    headerAlign: "center",
-    minWidth: 100,
+    headerAlign: "left",
+    minWidth: 300,
     flex: 2,
-    align: "center",
+    align: "left",
   },
   {
-    field: "location",
+    field: "fullAdress",
     headerName: "Location",
-    headerAlign: "center",
-    minWidth: 100,
-    flex: 1,
-    align: "center",
+    headerAlign: "left",
+    minWidth: 330,
+    flex: 4,
+    align: "left",
   },
   {
     field: "phoneNumber",
     headerName: "Phone Number",
-    headerAlign: "center",
-    minWidth: 100,
+    headerAlign: "left",
+    minWidth: 120,
     flex: 1,
-    align: "center",
+    align: "left",
   },
   {
     field: "registrationDep",
     headerName: "Registration Department",
-    headerAlign: "center",
-    minWidth: 100,
+    headerAlign: "left",
+    minWidth: 210,
     flex: 2,
-    align: "center",
+    align: "left",
   },
 ];

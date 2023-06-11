@@ -23,8 +23,12 @@ import axiosInstance from "../../utils/axios";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ProfileScreen from "../../screens/profile-screen";
+import { loadingHook } from "../../redux/hooks/loadingHooks";
 
 function Navbar() {
+  const {
+    setLocationState,
+  } = loadingHook();
   const { callClearAllData } = chartStatisticHook();
   const { isDepLogin, setDepLogin, clearAllData } = accountHook();
   const navigagte = useNavigate();
@@ -84,14 +88,17 @@ function Navbar() {
   //navigate function to 3 info stage
   function navigateToCarPage() {
     navigagte("/stats/cars");
+    setLocationState("car");
     handleClose();
   }
   function navigateToCenterPage() {
     navigagte("/stats/centers");
+    setLocationState("center")
     handleClose();
   }
   function navigateToNearExpiredPage() {
     navigagte("/stats/expired");
+    setLocationState("nearExpired");
     handleClose();
   }
 

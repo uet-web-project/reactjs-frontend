@@ -48,9 +48,18 @@
 }
 /*table*/
 
-
 /*animation*/
 .column-animation {
   transition: transform 0.3s ease-out;
   transform: translateX(-100%);
+}
+
+.css-1iyq7zh-MuiDataGrid-columnHeaders {
+  height: 60px!important;
+  max-height: 60px!important;
+}
+
+.MuiDataGrid-columnHeader{
+  height: 60px!important;
+  max-height: 60px!important;
 }

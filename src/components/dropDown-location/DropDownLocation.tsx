@@ -15,6 +15,7 @@ import { NestedMenuItem } from "mui-nested-menu";
 import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import "./styles.css";
+import { loadingHook } from "../../redux/hooks/loadingHooks";
 
 export default function DropDownLocation({
   setState,
@@ -27,11 +28,37 @@ export default function DropDownLocation({
     districtCode?: number
   ) => void;
 }) {
-  const { getLocationCode, locationCode } = locationHook();
+  const { locationCode } = locationHook();
+  const { provinceCode } = loadingHook();
+
   const [anchorEl, setAnchorEl] = React.useState<
     null | HTMLElement | undefined
   >(null);
-  const openCity = Boolean(anchorEl);
+
+  const [searchCity, setSearchCity] = useState("");
+  const [searchDistrict, setSearchDistrict] = useState("");
+  const [content, setContent] = useState("Filter By");
+  const [cityCode, setCityCode] = useState(0);
+  const [districtCode, setDistrictCode] = useState(0);
+  const [cityName, setCityName] = useState("");
+  const [districtName, setDistrictName] = useState("");
+  const [isSetAction, setAction] = useState(false);
+  const openDrop = Boolean(anchorEl);
+
+  //handle return data
+  useEffect(() => {
+    if (isSetAction) {
+      if (districtCode === 0) {
+        setState(false, cityName, cityCode);
+        if (cityName.length !== 0) setContent(cityName);
+      } else {
+        setState(true, cityName, cityCode, cityName, districtCode);
+        if (cityName.length !== 0) setContent(districtName);
+      }
+      setAction(false);
+    }
+  }, [openDrop]);
+
   const handleClickCity = (
     event: React.MouseEvent<HTMLElement> | undefined
   ) => {
@@ -41,14 +68,6 @@ export default function DropDownLocation({
     setAnchorEl(null);
   };
 
-  const [searchCity, setSearchCity] = useState("");
-  const [searchDistrict, setSearchDistrict] = useState("");
-
-  useEffect(() => {
-    console.log(locationCode);
-    if (locationCode.length === 0) getLocationCode();
-  }, []);
-
   let timeoutId: any;
   function handleSearchTermChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -56,7 +75,7 @@ export default function DropDownLocation({
     clearTimeout(timeoutId);
     const searchTerm = e.target.value;
     timeoutId = setTimeout(() => {
-      if (e.target.id === "city-drop-textField") setSearchCity(searchTerm);
+      if (e.target.name === "city-drop-textField") setSearchCity(searchTerm);
       else setSearchDistrict(searchTerm);
     }, 1000);
   }
@@ -69,28 +88,54 @@ export default function DropDownLocation({
     districtCode = 0,
     isDistrict = false
   ) {
+    setCityCode(cityCode);
+    setDistrictName(districtName === undefined ? "" : districtName);
+    setDistrictCode(districtCode);
+    setCityName(cityName);
     setAnchorEl(null);
-    if (isDistrict) setState(true, cityName, cityCode);
-    else setState(false, cityName, cityCode, districtName, districtCode);
+    setAction(true);
+  }
+
+  function onRemoveFilter() {
+    setCityCode(0);
+    setDistrictName("");
+    setDistrictCode(0);
+    setCityName("");
+    setContent("Filter By");
+    setAnchorEl(null);
+    setAction(true);
   }
 
   return (
     <div>
-      <Button content="contained" onClick={handleClickCity} />
+      <Button content={content} onClick={handleClickCity} />
       <Menu
         sx={{ "& .MuiMenu-paper": { backgroundColor: "white !important" } }}
         anchorEl={anchorEl}
-        open={openCity}
+        open={openDrop}
         onClose={handleCloseCity}
       >
-        <TextField
-          id="city-drop-textField"
-          className="locationsDropField"
-          label="Cities"
-          variant="standard"
-          onChange={handleSearchTermChange}
-          onKeyDown={(event) => event.stopPropagation()}
-        />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div>
+            {provinceCode !== 0 && (
+              <Button
+                content="Remove"
+                onClick={onRemoveFilter}
+                style={{ width: "100%" }}
+              />
+            )}
+          </div>
+
+          <TextField
+            id="dropdown1"
+            name="city-drop-textField"
+            className="locationsDropField"
+            label="Cities"
+            variant="standard"
+            onChange={handleSearchTermChange}
+            onKeyDown={(event) => event.stopPropagation()}
+          />
+        </div>
         {Array.isArray(locationCode) && (
           <div>
             {locationCode
@@ -101,17 +146,18 @@ export default function DropDownLocation({
                   .includes(searchCity.toString().toLowerCase().normalize())
               )
               .map((city) => (
-                <div>
+                <div key={city.code}>
                   <NestedMenuItem
                     key={city.code}
                     label={city.name}
-                    parentMenuOpen={openCity}
+                    parentMenuOpen={openDrop}
                     onClick={() => onDropDownItemClick(city.name, city.code)}
                   >
                     {Array.isArray(city.districts) && (
                       <div>
                         <TextField
-                          id="district-drop-textField"
+                          id="dropdown2"
+                          name="district-drop-textField"
                           className="locationsDropField"
                           label="Districts"
                           variant="standard"

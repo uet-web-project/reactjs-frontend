@@ -66,7 +66,7 @@ const router = createBrowserRouter([
       },
       {
         path: "centers",
-        element: <RegistryCenter />,
+        element: <CarRegistry />,
       },
       {
         path: "expired",

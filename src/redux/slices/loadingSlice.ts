@@ -8,8 +8,20 @@ const pastMonthStart = startOfMonth(addMonths(today, 0));
 const initialState = {
   loading: false,
   date: [
-    pastMonthStart.toISOString().split("T")[0],
-    today.toISOString().split("T")[0],
+    pastMonthStart
+      .toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .replace(/(\d+)\/(\d+)\/(\d+)/, "$3-$2-$1"),
+    today
+      .toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      })
+      .replace(/(\d+)\/(\d+)\/(\d+)/, "$3-$2-$1"),
   ] as [string, string],
   type: "all",
   location: "car",

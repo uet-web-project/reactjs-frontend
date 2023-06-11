@@ -5,6 +5,7 @@ import {
   Button,
   Dialog,
   DialogTitle,
+  IconButton,
   Paper,
   Slide,
   Typography,
@@ -15,6 +16,9 @@ import { TransitionProps } from "@mui/material/transitions";
 import { PaperProps } from "@mui/material/Paper";
 import Draggable from "react-draggable";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
+import AddIcon from "@mui/icons-material/Add";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CloseIcon from "@mui/icons-material/Close";
 
 function PaperComponent(props: PaperProps) {
   return (
@@ -42,6 +46,7 @@ export default function CarDialog(props: any) {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const [isDetail, setViewDetail] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -54,13 +59,18 @@ export default function CarDialog(props: any) {
     if (reason === "backdropClick") {
     } else {
       setOpen(false);
+      setViewDetail(false);
     }
   };
 
   function onCloseButtonClick() {
     setOpen(false);
+    setViewDetail(false);
   }
 
+  function onDetailClick() {
+    setViewDetail(!isDetail);
+  }
   return (
     <React.Fragment>
       <button id="viewDetailBut" onClick={handleClickOpen}>
@@ -71,96 +81,189 @@ export default function CarDialog(props: any) {
         PaperComponent={PaperComponent}
         fullScreen={false}
         fullWidth={false}
-        maxWidth={"sm"}
+        maxWidth={"md"}
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
         style={{}}
       >
+        <IconButton onClick={onCloseButtonClick}>
+          <CloseIcon />
+        </IconButton>
+
         {open && (
-          <Box className="dialogContainer">
+          <Box className={`dialogContainer ${open ? "open" : ""}`}>
             <Box className="nameAndPicture">
-              <DialogTitle
-                style={{ cursor: "move" }}
-                id="draggable-dialog-title"
-              >
-                {location === "car" ? (
-                  <Typography variant="h4">
-                    {data.vehicleType}: {data.manufacturer} {data.model}{" "}
-                    {data.version}
-                  </Typography>
-                ) : (
-                  <Typography variant="h4">{data.name}</Typography>
-                )}
-              </DialogTitle>
-              <Box className="pictureHolder">
-                {location !== "center" && (
-                  <img
-                    src="/src/assets/images/CarDialog/carImage.jpg"
-                    alt=""
-                    className="carImage"
-                  />
-                )}
-              </Box>
-            </Box>
-            <Box className="Info">
-              <h4>Info</h4>
-              {Object.entries(data).map(([key, value]: [string, unknown]) => {
-                if (
-                  [
-                    "_v",
-                    "id",
-                    "index",
-                    "model",
-                    "version",
-                    "_id",
-                    "__v",
-                    "vehicleType",
-                    "manufacturer",
-                  ].includes(key)
-                ) {
-                  return null;
-                }
+              <div className="simple-info">
+                {Object.entries(data).map(([key, value]: [string, unknown]) => {
+                  if (
+                    key === "registrationDate" ||
+                    key === "registrationExpirationDate"
+                  ) {
+                    const date = new Date(value as string);
+                    const formattedDate = `${date.getDate()}/${
+                      date.getMonth() + 1
+                    }/${date.getFullYear()}`;
+                    value = formattedDate;
+                  }
 
-                if (
-                  key === "registrationDate" ||
-                  key === "registrationExpirationDate"
-                ) {
-                  const date = new Date(value as string);
-                  const formattedDate = `${date.getDate()}/${
-                    date.getMonth() + 1
-                  }/${date.getFullYear()}`;
-                  value = formattedDate;
-                }
+                  if (
+                    [
+                      "registrationNumber",
+                      "registrationDate",
+                      "registrationExpirationDate",
+                      "licensePlate",
+                      "purpose",
+                    ].includes(key)
+                  ) {
+                    return (
+                      <Box
+                        className="item"
+                        key={key}
+                        sx={{ textTransform: "capitalize" }}
+                      >
+                        <Box className="simple-left">
+                          <Typography style={{ wordBreak: "break-all" }}>
+                            {key.replace(/([a-z])([A-Z])/g, "$1 $2")}
+                          </Typography>
+                        </Box>
+                        <Box className="simple-right">
+                          <Typography style={{ wordBreak: "break-all" }}>
+                            {value as React.ReactNode}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    );
+                  }
+                })}
 
-                if (
-                  [
-                    "width",
-                    "length",
-                    "wheelBase",
-                    "emission",
-                    "mileage",
-                  ].includes(key)
-                ) {
-                  key += " (mm)";
-                }
-
-                return (
-                  <Box className="item" key={key}>
-                    <Box className="left">
-                      <Typography style={{ wordBreak: "break-all" }}>
-                        {key}
-                      </Typography>
-                    </Box>
-                    <Box className="right">
-                      <Typography style={{ wordBreak: "break-all" }}>
-                        {value as React.ReactNode}
-                      </Typography>
-                    </Box>
+                <Box className="item" onClick={onDetailClick}>
+                  <Box
+                    style={{
+                      display: "flex",
+                      margin: "auto",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <Typography style={{ wordBreak: "break-all" }}>
+                      more details
+                    </Typography>
+                    <Typography style={{ wordBreak: "break-all" }}>
+                      {isDetail ? <AddIcon /> : <ExpandMoreIcon />}
+                    </Typography>
                   </Box>
-                );
-              })}
+                </Box>
+              </div>
+              <div className="title-picture">
+                <DialogTitle
+                  style={{ cursor: "move" }}
+                  id="draggable-dialog-title"
+                >
+                  {location === "car" ? (
+                    <Typography
+                      variant="h5"
+                      sx={{ textTransform: "capitalize" }}
+                    >
+                      {data.vehicleType}: {data.manufacturer} {data.model}{" "}
+                      {data.version}
+                    </Typography>
+                  ) : (
+                    <Typography
+                      variant="h5"
+                      sx={{ textTransform: "capitalize" }}
+                    >
+                      {data.name}
+                    </Typography>
+                  )}
+                </DialogTitle>
+                <Box className="pictureHolder">
+                  {location !== "center" &&
+                    (data.vehicleType === "car" ? (
+                      <img
+                        src="/src/assets/images/CarDialog/carImage.jpg"
+                        alt=""
+                        className="info-image"
+                      />
+                    ) : data.vehicleType === "bus" ? (
+                      <img
+                        src="/src/assets/images/CarDialog/truckImage.jpg"
+                        alt=""
+                        className="info-image"
+                      />
+                    ) : (
+                      <img
+                        src="/src/assets/images/CarDialog/busImage.jpg"
+                        alt=""
+                        className="info-image"
+                      />
+                    ))}
+                </Box>
+              </div>
             </Box>
+            {isDetail && (
+              <Box className={`Info ${isDetail ? "open" : ""}`}>
+                <Typography variant="h5">Detail Info</Typography>
+                {Object.entries(data).map(([key, value]: [string, unknown]) => {
+                  if (
+                    [
+                      "_v",
+                      "id",
+                      "index",
+                      "model",
+                      "version",
+                      "_id",
+                      "__v",
+                      "vehicleType",
+                      "manufacturer",
+                    ].includes(key)
+                  ) {
+                    return null;
+                  }
+
+                  if (
+                    key === "registrationDate" ||
+                    key === "registrationExpirationDate"
+                  ) {
+                    const date = new Date(value as string);
+                    const formattedDate = `${date.getDate()}/${
+                      date.getMonth() + 1
+                    }/${date.getFullYear()}`;
+                    value = formattedDate;
+                  }
+
+                  if (
+                    [
+                      "width",
+                      "length",
+                      "wheelBase",
+                      "emission",
+                      "mileage",
+                    ].includes(key)
+                  ) {
+                    key += " (mm)";
+                  }
+
+                  return (
+                    <Box
+                      className="item"
+                      key={key}
+                      sx={{ textTransform: "capitalize" }}
+                    >
+                      <Box className="left">
+                        <Typography style={{ wordBreak: "break-all" }}>
+                          {key.replace(/([a-z])([A-Z])/g, "$1 $2")}
+                        </Typography>
+                      </Box>
+                      <Box className="right">
+                        <Typography style={{ wordBreak: "break-all" }}>
+                          {value as React.ReactNode}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  );
+                })}
+              </Box>
+            )}
           </Box>
         )}
       </Dialog>

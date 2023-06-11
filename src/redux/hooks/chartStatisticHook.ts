@@ -166,21 +166,22 @@ export const chartStatisticHook = () => {
     try {
       const startDate = date[0];
       const endDate = date[1];
-      const districtCodeRequest:null|number=districtCode === 0 ? districtCode : null;
+      const districtCodeRequest: null | number =
+        districtCode === 0 ? null : districtCode;
       let requestedData;
       if (location === "car") {
         requestedData =
           type === "all"
             ? {
                 provinceCode: provinceCode,
-                districtCode: ,
+                districtCode: districtCodeRequest,
                 getNearExpired: false,
                 startDate: startDate,
                 endDate: endDate,
               }
             : {
                 provinceCode: provinceCode,
-                districtCode: districtCode === 0 ? districtCode : null,
+                districtCode: districtCodeRequest,
                 getNearExpired: false,
                 vehicleType: type,
                 startDate: startDate,
@@ -191,14 +192,14 @@ export const chartStatisticHook = () => {
           type === "all"
             ? {
                 provinceCode: provinceCode,
-                districtCode: districtCode === 0 ? districtCode : null,
+                districtCode: districtCodeRequest,
                 getNearExpired: true,
                 startDate: startDate,
                 endDate: endDate,
               }
             : {
                 provinceCode: provinceCode,
-                districtCode: districtCode === 0 ? districtCode : null,
+                districtCode: districtCodeRequest,
                 getNearExpired: true,
                 vehicleType: type,
                 startDate: startDate,
@@ -222,13 +223,16 @@ export const chartStatisticHook = () => {
   async function getDataForCarPieChart() {
     dispatch(setLoading(true));
     try {
+      console.log(districtCode);
+      const districtCodeRequest: null | number =
+        districtCode === 0 ? null : districtCode;
       const startDate = date[0];
       const endDate = date[1];
       const requestedData =
         location === "car"
           ? {
               provinceCode: provinceCode,
-              districtCode: districtCode === 0 ? districtCode : null,
+              districtCode: districtCodeRequest,
               filterType: "filter-by-date-range",
               getNearExpired: false,
               startDate: startDate,
@@ -236,7 +240,7 @@ export const chartStatisticHook = () => {
             }
           : {
               provinceCode: provinceCode,
-              districtCode: districtCode === 0 ? districtCode : null,
+              districtCode: districtCodeRequest,
               filterType: "filter-by-date-range",
               getNearExpired: true,
               startDate: startDate,
@@ -258,6 +262,7 @@ export const chartStatisticHook = () => {
   }
   function infoChartController() {
     getChartDataOfCar(date, type);
+    getDataForCarPieChart();
   }
 
   return {
