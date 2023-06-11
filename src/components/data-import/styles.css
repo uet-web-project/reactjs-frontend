@@ -37,3 +37,7 @@
 .import-data-btn:hover{
   
 }
+
+.my-swal{
+  z-index: 2000;
+}

@@ -31,6 +31,7 @@ import { fileImportHooks } from "../../redux/hooks/fileImportHooks";
 import { TransitionProps } from "@mui/material/transitions";
 import { PaperProps } from "@mui/material/Paper";
 import Draggable from "react-draggable";
+import Swal from "sweetalert2";
 
 function PaperComponent(props: PaperProps) {
   return (
@@ -132,13 +133,27 @@ export default function DropZone(props: any) {
   }
 
   function onUploadButtonClick() {
-    const formData = new FormData();
-    myFiles.forEach((fileWithPath) => {
-      formData.append("file", fileWithPath);
+    Swal.fire({
+      customClass: {
+        container: "my-swal",
+      },
+      title: "Do you want to upload the Files?",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Upload",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const formData = new FormData();
+        myFiles.forEach((fileWithPath) => {
+          formData.append("file", fileWithPath);
+        });
+        uploadFile(formData);
+        setOpen(false);
+        removeAll();
+      }
     });
-    uploadFile(formData);
-    setOpen(false);
-    removeAll();
   }
   return (
     <React.Fragment>

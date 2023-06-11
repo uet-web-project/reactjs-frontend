@@ -50,6 +50,7 @@ export default function CarDialog(props: any) {
 
   const handleClickOpen = () => {
     setOpen(true);
+    if (location === "center") setViewDetail(true);
   };
 
   const handleClose = (
@@ -93,113 +94,127 @@ export default function CarDialog(props: any) {
 
         {open && (
           <Box className={`dialogContainer ${open ? "open" : ""}`}>
-            <Box className="nameAndPicture">
-              <div className="simple-info">
-                {Object.entries(data).map(([key, value]: [string, unknown]) => {
-                  if (
-                    key === "registrationDate" ||
-                    key === "registrationExpirationDate"
-                  ) {
-                    const date = new Date(value as string);
-                    const formattedDate = `${date.getDate()}/${
-                      date.getMonth() + 1
-                    }/${date.getFullYear()}`;
-                    value = formattedDate;
-                  }
+            {location !== "center" && (
+              <Box className="nameAndPicture">
+                <div className="simple-info">
+                  {Object.entries(data).map(
+                    ([key, value]: [string, unknown]) => {
+                      if (
+                        key === "registrationDate" ||
+                        key === "registrationExpirationDate"
+                      ) {
+                        const date = new Date(value as string);
+                        const formattedDate = `${date.getDate()}/${
+                          date.getMonth() + 1
+                        }/${date.getFullYear()}`;
+                        value = formattedDate;
+                      }
 
-                  if (
-                    [
-                      "registrationNumber",
-                      "registrationDate",
-                      "registrationExpirationDate",
-                      "licensePlate",
-                      "purpose",
-                    ].includes(key)
-                  ) {
-                    return (
-                      <Box
-                        className="item"
-                        key={key}
+                      if (
+                        [
+                          "registrationNumber",
+                          "registrationDate",
+                          "registrationExpirationDate",
+                          "licensePlate",
+                          "purpose",
+                        ].includes(key)
+                      ) {
+                        return (
+                          <Box
+                            className="item"
+                            key={key}
+                            sx={{ textTransform: "capitalize" }}
+                          >
+                            <Box className="simple-left">
+                              <Typography
+                                style={{
+                                  wordBreak: "break-all",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                {key.replace(/([a-z])([A-Z])/g, "$1 $2")}
+                              </Typography>
+                            </Box>
+                            <Box className="simple-right">
+                              <Typography style={{ wordBreak: "break-all" }}>
+                                {value as React.ReactNode}
+                              </Typography>
+                            </Box>
+                          </Box>
+                        );
+                      }
+                    }
+                  )}
+
+                  <Box className="item" onClick={onDetailClick}>
+                    <Box
+                      style={{
+                        display: "flex",
+                        margin: "auto",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          wordBreak: "break-all",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        more details
+                      </Typography>
+                      <Typography style={{ wordBreak: "break-all" }}>
+                        {isDetail ? <AddIcon /> : <ExpandMoreIcon />}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </div>
+                <div className="title-picture">
+                  <DialogTitle
+                    style={{ cursor: "move" }}
+                    id="draggable-dialog-title"
+                  >
+                    {location === "car" ? (
+                      <Typography
+                        variant="h5"
                         sx={{ textTransform: "capitalize" }}
                       >
-                        <Box className="simple-left">
-                          <Typography style={{ wordBreak: "break-all" }}>
-                            {key.replace(/([a-z])([A-Z])/g, "$1 $2")}
-                          </Typography>
-                        </Box>
-                        <Box className="simple-right">
-                          <Typography style={{ wordBreak: "break-all" }}>
-                            {value as React.ReactNode}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    );
-                  }
-                })}
-
-                <Box className="item" onClick={onDetailClick}>
-                  <Box
-                    style={{
-                      display: "flex",
-                      margin: "auto",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <Typography style={{ wordBreak: "break-all" }}>
-                      more details
-                    </Typography>
-                    <Typography style={{ wordBreak: "break-all" }}>
-                      {isDetail ? <AddIcon /> : <ExpandMoreIcon />}
-                    </Typography>
-                  </Box>
-                </Box>
-              </div>
-              <div className="title-picture">
-                <DialogTitle
-                  style={{ cursor: "move" }}
-                  id="draggable-dialog-title"
-                >
-                  {location === "car" ? (
-                    <Typography
-                      variant="h5"
-                      sx={{ textTransform: "capitalize" }}
-                    >
-                      {data.vehicleType}: {data.manufacturer} {data.model}{" "}
-                      {data.version}
-                    </Typography>
-                  ) : (
-                    <Typography
-                      variant="h5"
-                      sx={{ textTransform: "capitalize" }}
-                    >
-                      {data.name}
-                    </Typography>
-                  )}
-                </DialogTitle>
-                <Box className="pictureHolder">
-                  {location !== "center" &&
-                    (data.vehicleType === "car" ? (
-                      <img
-                        src="/src/assets/images/CarDialog/carImage.jpg"
-                        alt=""
-                        className="info-image"
-                      />
-                    ) : data.vehicleType === "bus" ? (
-                      <img
-                        src="/src/assets/images/CarDialog/truckImage.jpg"
-                        alt=""
-                        className="info-image"
-                      />
+                        {data.vehicleType}: {data.manufacturer} {data.model}{" "}
+                        {data.version}
+                      </Typography>
                     ) : (
-                      <img
-                        src="/src/assets/images/CarDialog/busImage.jpg"
-                        alt=""
-                        className="info-image"
-                      />
-                    ))}
-                </Box>
-              </div>
-            </Box>
+                      <Typography
+                        variant="h5"
+                        sx={{ textTransform: "capitalize" }}
+                      >
+                        {data.name}
+                      </Typography>
+                    )}
+                  </DialogTitle>
+                  <Box className="pictureHolder">
+                    {location !== "center" &&
+                      (data.vehicleType === "car" ? (
+                        <img
+                          src="/src/assets/images/CarDialog/carImage.jpg"
+                          alt=""
+                          className="info-image"
+                        />
+                      ) : data.vehicleType === "bus" ? (
+                        <img
+                          src="/src/assets/images/CarDialog/truckImage.jpg"
+                          alt=""
+                          className="info-image"
+                        />
+                      ) : (
+                        <img
+                          src="/src/assets/images/CarDialog/busImage.jpg"
+                          alt=""
+                          className="info-image"
+                        />
+                      ))}
+                  </Box>
+                </div>
+              </Box>
+            )}
             {isDetail && (
               <Box className={`Info ${isDetail ? "open" : ""}`}>
                 <Typography variant="h5">Detail Info</Typography>
@@ -250,7 +265,12 @@ export default function CarDialog(props: any) {
                       sx={{ textTransform: "capitalize" }}
                     >
                       <Box className="left">
-                        <Typography style={{ wordBreak: "break-all" }}>
+                        <Typography
+                          style={{
+                            wordBreak: "break-all",
+                            fontWeight: "bold",
+                          }}
+                        >
                           {key.replace(/([a-z])([A-Z])/g, "$1 $2")}
                         </Typography>
                       </Box>
