@@ -290,8 +290,6 @@ export const chartStatisticHook = () => {
       reqUrl = postAPI().getVehicleByFilter;
     } else if (location === "center") {
       reqUrl = getAPI("", depId).getCenterListById;
-    } else if (location === "nearExpired") {
-      reqUrl = getAPI().getAllNearExpiredVehicles;
     }
     try {
       const res =
@@ -317,6 +315,7 @@ export const chartStatisticHook = () => {
         dispatch(setDataForTableInfo(moddedData));
       }
     } catch (err) {
+      console.log(err)
     } finally {
       dispatch(setLoading(false));
     }
