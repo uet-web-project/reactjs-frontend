@@ -12,6 +12,8 @@ export const fileImportHooks = () => {
 
   async function uploadFile(file: FormData) {
     dispatch(setLoading(true));
+    // console.log(file);
+
     try {
       const res = await axiosInstance.post(postAPI().fileImport, file, {
         headers: {
@@ -28,7 +30,7 @@ export const fileImportHooks = () => {
         });
       }
     } catch (err: any) {
-      // console.log(err);
+      console.log(err);
       Swal.fire({
         icon: "error",
         title: "Error",

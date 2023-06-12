@@ -139,6 +139,7 @@ export default function InfoTable(prop: any) {
           };
         });
       });
+      setSearch({});
     }
   }, [isFilterCol]);
 

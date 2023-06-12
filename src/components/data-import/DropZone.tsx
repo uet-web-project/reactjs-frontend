@@ -147,8 +147,13 @@ export default function DropZone(props: any) {
       if (result.isConfirmed) {
         const formData = new FormData();
         myFiles.forEach((fileWithPath) => {
+          console.log(fileWithPath);
           formData.append("file", fileWithPath);
         });
+        for (var pair of formData.entries()) {
+          console.log(pair[0] + ", " + pair[1]);
+        }
+
         uploadFile(formData);
         setOpen(false);
         removeAll();

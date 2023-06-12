@@ -130,6 +130,8 @@ function OwnerInformation1() {
                 }
               }
             } catch (err: any) {
+              console.log(err);
+
               Swal.fire({
                 icon: "error",
                 title: "Create failed",
