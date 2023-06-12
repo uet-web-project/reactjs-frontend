@@ -19,6 +19,7 @@ function InfoPages() {
   const pathLocation = useLocation();
   const { infoChartController, carStatsForChart } = chartStatisticHook();
   const { getLocationCode, locationCode } = locationHook();
+
   const {
     setProvinceCodeState,
     setDistrictCodeState,

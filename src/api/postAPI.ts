@@ -18,5 +18,6 @@ export function postAPI() {
     //data for chart
     registeredCarData: "vehicle/get-vehicles-by-type-and-date-range",
     allRegisteredCarData: "vehicle/group-by-vehicle-type",
+    getVehicleByFilter: "vehicle/get-vehicle-by-filter",
   };
 }

@@ -30,6 +30,9 @@ export const chartStatisticHook = () => {
   const dispatch = useDispatch();
 
   const { location, districtCode, provinceCode, date, type } = loadingHook();
+  const { tableInfo } = useAppSelector(
+    (state: RootState) => state.tableStatistic
+  );
   const { isDepLogin, depProfile } = accountHook();
   const {
     totalOverviewChartData,
@@ -40,9 +43,6 @@ export const chartStatisticHook = () => {
     carStatsForChart,
     carPieChart,
   } = useAppSelector((state: RootState) => state.chartStatistic);
-  const { tableInfo } = useAppSelector(
-    (state: RootState) => state.tableStatistic
-  );
 
   function callClearAllData() {
     dispatch(clearAllData());
@@ -161,8 +161,6 @@ export const chartStatisticHook = () => {
       dispatch(setLoading(false));
     }
   }
-
-  //const
 
   async function getChartDataOfCar(date: [string, string], type = "all") {
     dispatch(setLoading(true));
@@ -288,19 +286,26 @@ export const chartStatisticHook = () => {
     dispatch(setLoading(true));
     const depId = depProfile._id;
     let reqUrl = "";
-    if (location === "car") {
-      if (isDepLogin) {
-        reqUrl = getAPI().getAllVehicleByDep;
-      } else {
-        reqUrl = getAPI().getAllVehicleByCenter;
-      }
+    if (location === "car" || location === "nearExpired") {
+      reqUrl = postAPI().getVehicleByFilter;
     } else if (location === "center") {
       reqUrl = getAPI("", depId).getCenterListById;
     } else if (location === "nearExpired") {
       reqUrl = getAPI().getAllNearExpiredVehicles;
     }
     try {
-      const res = await axiosInstance.get(reqUrl);
+      const res =
+        location === "center"
+          ? await axiosInstance.get(reqUrl)
+          : await axiosInstance.post(reqUrl, {
+              vehicleType: type === "all" ? null : type,
+              getNearExpired: location === "nearExpired" ? true : false,
+              startDate: date[0],
+              endDate: date[1],
+              provinceCode,
+              districtCode,
+            });
+
       if (res.status === 200) {
         const moddedData: ICarInfoTable[] = res.data.map(
           (item: IVehicle, index: number) => ({
@@ -320,6 +325,7 @@ export const chartStatisticHook = () => {
   function infoChartController() {
     getChartDataOfCar(date, type);
     getDataForCarPieChart();
+    getDataForDetailedTable();
   }
 
   return {

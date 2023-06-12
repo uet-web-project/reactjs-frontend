@@ -13,7 +13,11 @@ function MonthlySideInformation({ title }: { title: string }) {
     getDataForMonthlyComparison();
   }, []);
   const carRegisteredMonthlyComparisonPercent =
-    carRegisteredMonthlyComparison[1] && carRegisteredMonthlyComparison[0]
+    carRegisteredMonthlyComparison[0] &&
+    carRegisteredMonthlyComparison[1] &&
+    carRegisteredMonthlyComparison[0]?.value +
+      carRegisteredMonthlyComparison[1]?.value !=
+      0
       ? Math.round(
           (carRegisteredMonthlyComparison[1]?.value /
             (carRegisteredMonthlyComparison[1]?.value +
@@ -22,7 +26,7 @@ function MonthlySideInformation({ title }: { title: string }) {
         )
       : 0;
   return (
-    <div className="monthly-registey-car" style={{height:"100%"}}>
+    <div className="monthly-registey-car" style={{ height: "100%" }}>
       <h3
         className="secondary-font text-base text-gray-700 font-medium"
         style={{ textAlign: "center" }}
