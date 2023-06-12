@@ -19,7 +19,7 @@ import axios from "axios";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/reactjs-frontend",
     element: <Main />,
     children: [
       {
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/auth",
+    path: "reactjs-frontend/auth",
     element: <Login />,
     children: [
       {
