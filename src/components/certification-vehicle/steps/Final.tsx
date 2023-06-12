@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import CheckIcon from "@mui/icons-material/Check";
 import { useNavigate } from "react-router-dom";
 import { certificationStepHook } from "../../../redux/hooks/certificationStepHooks";
-import { certificateHook } from "../../../redux/hooks/certificateHooks";
 import { certificationHook } from "../../../redux/hooks/certificationHooks";
 
 function Final() {

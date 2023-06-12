@@ -23,6 +23,8 @@ const initialState: accountInterface = {
     centerId: "",
     password: "",
     registrationDep: "",
+    provinceCode: 0,
+    districtCode: 0,
     location: "",
     phoneNumber: "",
   },
@@ -54,6 +56,8 @@ export const accountSlice = createSlice({
         centerId: "",
         password: "",
         registrationDep: "",
+        provinceCode: 0,
+        districtCode: 0,
         location: "",
         phoneNumber: "",
       };
@@ -65,6 +69,8 @@ export const accountSlice = createSlice({
         centerId: "",
         password: "",
         registrationDep: "",
+        provinceCode: 0,
+        districtCode: 0,
         location: "",
         phoneNumber: "",
       };
