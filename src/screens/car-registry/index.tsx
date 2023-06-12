@@ -18,8 +18,7 @@ import { tableStatisticHook } from "../../redux/hooks/tableStatisticHook";
 
 function CarRegistry() {
   const pathLocation = useLocation();
-  const { infoChartController } = chartStatisticHook();
-  const { getLocationCode, locationCode } = locationHook();
+  const { infoChartController, getDataForDetailedTable } = chartStatisticHook();
   const {
     setProvinceCodeState,
     setDistrictCodeState,
