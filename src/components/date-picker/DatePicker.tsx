@@ -91,9 +91,6 @@ export default function DatePicker() {
     event: React.SyntheticEvent<Element, Event>
   ) => {
     if (value !== null) {
-      // const startDate = value[0].toISOString().split("T")[0];
-      // const endDate = value[1].toISOString().split("T")[0];
-      // console.log(  value[0].toLocaleDateString(),   value[1].toLocaleDateString());
       const dateStart = value[0].toLocaleDateString("en-GB", {
         year: "numeric",
         month: "2-digit",

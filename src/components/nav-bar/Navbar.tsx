@@ -59,11 +59,11 @@ function Navbar() {
   };
 
   const homeBtnAction = () => {
-    handleCloseNavMenu;
+    handleCloseNavMenu();
     navigagte("/landing-page");
   };
   const createAccountBtnAction = () => {
-    handleCloseNavMenu;
+    handleCloseNavMenu();
     navigagte("/create-account");
   };
 
@@ -83,23 +83,27 @@ function Navbar() {
   const openExpand = Boolean(anchorElExpand);
 
   const handleClose = () => {
+    setAnchorElExpand(null)
     setAnchorElStatistic(null);
   };
   //navigate function to 3 info stage
   function navigateToCarPage() {
     navigagte("/stats/cars");
     setLocationState("car");
-    handleClose();
+    handleClose()
+    handleCloseNavMenu();
   }
   function navigateToCenterPage() {
     navigagte("/stats/centers");
-    setLocationState("center")
+    setLocationState("center");
     handleClose();
+    handleCloseNavMenu();
   }
   function navigateToNearExpiredPage() {
     navigagte("/stats/expired");
     setLocationState("nearExpired");
     handleClose();
+    handleCloseNavMenu();
   }
 
   const handleExpandClose = () => {
@@ -163,7 +167,7 @@ function Navbar() {
               onClose={handleCloseNavMenu}
             >
               <MenuItem
-                onClick={handleCloseNavMenu}
+                onClick={homeBtnAction}
                 sx={{ marginBottom: "20px" }}
               >
                 <HomeIcon sx={{ color: "white" }} />

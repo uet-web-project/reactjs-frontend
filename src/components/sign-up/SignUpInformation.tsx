@@ -9,6 +9,7 @@ import "./styles.css";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
 import { accountHook } from "../../redux/hooks/accountHooks";
 import DropDownLocation from "../dropDown-location/DropDownLocation";
+import CheckIcon from "@mui/icons-material/Check";
 
 function SignUpInformation() {
   const { setProvinceCodeState, setDistrictCodeState } = loadingHook();
@@ -114,7 +115,7 @@ function SignUpInformation() {
   }
 
   let inputStyle: CSS.Properties = {
-    color: "grey",
+    color: "black",
     width: "65%",
     maxWidth: "450px",
   };
@@ -222,7 +223,22 @@ function SignUpInformation() {
             />
             <div style={inputStyle} className="input-container">
               <div className="field-name-container">
-                <span className="fieldName">Province and district</span>
+                <span className="fieldName">Location</span>
+                {correctIcon.districtCodeState &&
+                correctIcon.provinceCodeState ? (
+                  <span>
+                    <CheckIcon sx={{ color: "green" }} />
+                  </span>
+                ) : null}
+                {errorData.provinceCodeError?.length ? (
+                  <span className="error-name primary-font">
+                    {errorData.provinceCodeError}
+                  </span>
+                ) : errorData.districtCodeError?.length ? (
+                  <span className="error-name primary-font">
+                    {errorData.districtCodeError}
+                  </span>
+                ) : null}
               </div>
               <DropDownLocation
                 buttonId="province-district-selector"
@@ -234,7 +250,7 @@ function SignUpInformation() {
             </div>
             <TextInput
               value={signUpData.location}
-              fieldName="Location"
+              fieldName="Location details"
               style={inputStyle}
               type="text"
               onChange={(event) => {

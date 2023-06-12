@@ -202,7 +202,6 @@ export const chartStatisticHook = () => {
                 endDate: endDate,
               };
       }
-      console.log(requestedData);
       const chartData = await axiosInstance.post(
         postAPI().registeredCarData,
         requestedData
@@ -219,7 +218,6 @@ export const chartStatisticHook = () => {
   async function getDataForCarPieChart() {
     dispatch(setLoading(true));
     try {
-      console.log(districtCode);
       const districtCodeRequest: null | number =
         districtCode === 0 ? null : districtCode;
       const startDate = date[0];

@@ -186,13 +186,51 @@ export const accountHook = () => {
     }
   }
   function validateProvinceCode(
+    signUpData: {
+      centerId: string;
+      password: string;
+      name: string;
+      provinceCode: number;
+      districtCode: number;
+      location: string;
+      phoneNumber: string;
+    },
     showError: (errorField: string, errorMessage: string) => void,
     showIcon: (errorField: string, state: boolean) => void
-  ) {}
+  ) {
+    if (signUpData.provinceCode == 0) {
+      showError("provinceCodeError", "Province is required");
+      showIcon("provinceCodeState", false);
+      return false;
+    } else {
+      showError("provinceCodeError", "");
+      showIcon("provinceCodeState", true);
+      return true;
+    }
+  }
   function validateDistrictCode(
+    signUpData: {
+      centerId: string;
+      password: string;
+      name: string;
+      provinceCode: number;
+      districtCode: number;
+      location: string;
+      phoneNumber: string;
+    },
     showError: (errorField: string, errorMessage: string) => void,
     showIcon: (errorField: string, state: boolean) => void
-  ) {}
+  ) {
+    if (signUpData.districtCode == 0) {
+      showError("districtCodeError", "District is required");
+      showIcon("districtCodeState", false);
+      return false;
+    } else {
+      showError("districtCodeError", "");
+      showIcon("districtCodeState", true);
+      return true;
+    }
+  }
   function validateLocation(
     signUpData: {
       centerId: string;
@@ -322,8 +360,8 @@ export const accountHook = () => {
         validatePassword(signUpData, showError, showIcon);
         validateRePassword(signUpData, repassword, showError, showIcon);
         validateName(signUpData, showError, showIcon);
-        validateProvinceCode(showError, showIcon); // TODO
-        validateDistrictCode(showError, showIcon); // TODO
+        validateProvinceCode(signUpData, showError, showIcon);
+        validateDistrictCode(signUpData, showError, showIcon);
         validateLocation(signUpData, showError, showIcon);
         validatePhoneNumber(signUpData, showError, showIcon);
         if (
@@ -331,6 +369,8 @@ export const accountHook = () => {
           validatePassword(signUpData, showError, showIcon) &&
           validateRePassword(signUpData, repassword, showError, showIcon) &&
           validateName(signUpData, showError, showIcon) &&
+          validateProvinceCode(signUpData, showError, showIcon) &&
+          validateDistrictCode(signUpData, showError, showIcon) &&
           validateLocation(signUpData, showError, showIcon) &&
           validatePhoneNumber(signUpData, showError, showIcon)
         ) {

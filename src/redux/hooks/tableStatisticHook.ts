@@ -75,7 +75,6 @@ export const tableStatisticHook = () => {
           })
         );
         dispatch(setDataForTableInfo(moddedData));
-        console.log("center");
       }
     } catch (err) {
       console.log(err);

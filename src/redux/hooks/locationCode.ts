@@ -19,7 +19,6 @@ export const locationHook = () => {
       if (res.status === 200) {
         const moddedData: postalCode[] = res.data;
         dispatch(setDataForPostalCode(moddedData));
-        console.log(moddedData);
       }
     } catch (err) {
       console.log(err);
