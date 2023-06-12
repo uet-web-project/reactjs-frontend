@@ -17,8 +17,7 @@ import { locationHook } from "../../redux/hooks/locationCode";
 
 function CarRegistry() {
   const pathLocation = useLocation();
-  const { infoChartController } = chartStatisticHook();
-  const { getLocationCode, locationCode } = locationHook();
+  const { infoChartController, getDataForDetailedTable } = chartStatisticHook();
   const {
     setProvinceCodeState,
     setDistrictCodeState,
