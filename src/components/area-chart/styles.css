@@ -1,0 +1,21 @@
+.info-area-chart-container {
+  display: flex;
+  height: 100%;
+  background-color: #edf2ff;
+  border-radius: 20px;
+  padding: 20px;
+  flex: 3;
+  min-width: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .info-area-chart-container {
+    flex: 2;
+  }
+}
+
+/* @media screen and (max-width: 900px) {
+  .info-area-chart-container {
+    flex: 1;
+  }
+} */

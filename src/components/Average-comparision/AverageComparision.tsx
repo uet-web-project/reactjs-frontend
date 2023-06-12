@@ -7,13 +7,19 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Piechart from "../pie-chart/Piechart";
 import MonthlySideInformation from "../monthly-side-information/MonthlySideInformation";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { accountHook } from "../../redux/hooks/accountHooks";
 function MonthlyComparision() {
+  const { isDepLogin } = accountHook();
   const date = new Date();
   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
   const firstDayString = `${moment(firstDay).format("DD/MM/YYYY")}`;
   const today = `${moment(new Date()).format("DD/MM/YYYY")}`;
   return (
-    <div className="average-comparision">
+    <div
+      className={`average-comparision ${
+        isDepLogin ? "dep-login-responsive" : "center-login-responsive"
+      }`}
+    >
       <div className="monthly-descripsion">
         <h3 className="secondary-font monthly-average-text">Monthly Average</h3>
         <div className="monthly-date secondary-color">
@@ -32,7 +38,7 @@ function MonthlyComparision() {
           </div>
         </div>
       </div>
-      <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ width: "100%", height: "100%"  }} className="">
         <MonthlySideInformation title="Number of cars registerd" />
       </div>
     </div>

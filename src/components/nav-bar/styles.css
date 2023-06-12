@@ -2,9 +2,6 @@
   max-width: 100% !important;
 }
 
-.expand {
-  height: 100px;
-}
 .btn:hover {
   background-color: rgba(0, 0, 0, 0.04) !important;
 }
@@ -21,4 +18,9 @@
 .css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
   border-radius: 5px !important;
+}
+
+/* change background color of navbar's dropdown */
+.MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper {
+  background-color: #62b7d3;
 }

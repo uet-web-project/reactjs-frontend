@@ -6,16 +6,19 @@ function Button({
   style,
   content,
   className,
+  id,
 }: {
-  onClick: () => void;
+  onClick: (e?: React.MouseEvent<HTMLElement>) => void;
   style?: CSS.Properties;
   content: string;
   className?: string;
+  id?: string;
 }) {
   return (
     <button
       onClick={onClick}
       className={`button-style ${className ? className : ""}`}
+      id={id}
       type="button"
       style={style}
     >

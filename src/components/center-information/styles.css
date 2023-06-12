@@ -2,11 +2,17 @@
   display: flex;
   flex-direction: row;
 }
-
+.center-information-container:hover{
+  cursor: pointer;
+}
 .center-detail-information {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+hr{
+  margin: 3px !important;
 }

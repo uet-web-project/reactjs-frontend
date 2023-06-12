@@ -1,0 +1,17 @@
+@media (max-width: 1350px) {
+    .custom-certificate{
+        width: 60%;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .custom-certificate{
+        width: 80%;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .custom-certificate{
+        width: 100%;
+    }
+  }

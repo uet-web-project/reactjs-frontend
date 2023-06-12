@@ -1,10 +1,15 @@
-.recent-registered-table-container{
-    width: 75%;
-    border-radius:20px !important;
-    display: inline-block;
+.recent-registered-table-container {
+  border-radius: 20px !important;
+  display: inline-block;
 }
 
-.recent-registered-table{
-    border-radius: 20px !important;
-    background-color: white !important;
+.recent-registered-table {
+  border-radius: 20px !important;
+  background-color: white !important;
+}
+
+@media (max-width: 1200px) {
+  .width-responsive{
+    width: 100% !important;
+  }
 }

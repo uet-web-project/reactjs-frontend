@@ -1,0 +1,11 @@
+.car-pie-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  border-radius: 20px;
+  background-color: #edf2ff;
+  padding: 20px;
+  flex: 1;
+  min-width: 10px;
+}

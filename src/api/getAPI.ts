@@ -5,22 +5,24 @@ export function getAPI(token?: string, id?: string) {
     // registration dep
     getAllDeps: "registration-dep",
     getDepProfile: "registration-dep/profile",
-
+    getAllVehicleByDep: "vehicle/get-by-registration-dep",
+    //center
+    getCenterProfile: "registration-center/profile",
+    getAllVehicleByCenter: "vehicle/get-by-registration-center",
+    // registration center
+    getAllCenter: "registration-center/get-by-dep-id",
     // vehicle
-    getAllVehicles: "vehicle",
-
+    getAllVehiclesByDep: "vehicle/get-by-registration-dep",
+    getAllVehiclesByCenter: "vehicle/get-by-registration-center",
+    getAllNearExpiredVehicles: "vehicle/get-near-expired-vehicles",
     getCenterListById: `registration-center/get-by-dep-id/${id}`,
-
-    //Car Type
-    getWeekDataForCarTypeOverview: `vehicle/group-by-vehicle-type/filter-by-week`,
-
-    getMonthDataForCarTypeOverview: `vehicle/group-by-vehicle-type/filter-by-month`,
-
-    getYearDataForCarTypeOverview: `vehicle/group-by-vehicle-type/filter-by-year`,
 
     //TotalOverviewChart
     getWeekDataForTotalOverviewChart: `vehicle/get-registered-vehicles-count/filter-by-week`,
     getMonthDataForTotalOverviewChart: `vehicle/get-registered-vehicles-count/filter-by-month`,
     getYearDataForTotalOverviewChart: `vehicle/get-registered-vehicles-count/filter-by-year`,
+
+    //data for postal code
+    locationCode: "/provinces",
   };
 }

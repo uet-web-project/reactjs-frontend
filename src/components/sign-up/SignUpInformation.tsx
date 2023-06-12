@@ -6,16 +6,20 @@ import Button from "../button/Button";
 import axiosInstance from "../../utils/axios";
 import TextInput from "../input/text-input/TextInput";
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
+import { loadingHook } from "../../redux/hooks/loadingHooks";
 import { accountHook } from "../../redux/hooks/accountHooks";
+import DropDownLocation from "../dropDown-location/DropDownLocation";
+import CheckIcon from "@mui/icons-material/Check";
 
 function SignUpInformation() {
-  const navigate = useNavigate();
+  const { setProvinceCodeState, setDistrictCodeState } = loadingHook();
   const { createRegistrationCenter } = accountHook();
   const [signUpData, changeSignUpData] = useState({
     centerId: "",
     password: "",
     name: "",
+    provinceCode: 0,
+    districtCode: 0,
     location: "",
     phoneNumber: "",
   });
@@ -24,6 +28,8 @@ function SignUpInformation() {
     passwordError: "",
     repasswordError: "",
     centerNameError: "",
+    provinceCodeError: "",
+    districtCodeError: "",
     centerLocationError: "",
     phoneNumberError: "",
   });
@@ -33,9 +39,29 @@ function SignUpInformation() {
     passwordState: false,
     repasswordState: false,
     centerNameState: false,
+    provinceCodeState: false,
+    districtCodeState: false,
     centerLocationState: false,
     phoneNumberState: false,
   });
+
+  function setProvinceAndDistrict(
+    isDistrict: boolean,
+    cityName: string,
+    cityCode: number,
+    districtName?: string,
+    districtCode?: number
+  ) {
+    changeSignUpData((prev) => ({
+      ...prev,
+      provinceCode: cityCode,
+      districtCode: districtCode && isDistrict ? districtCode : 0,
+    }));
+    setProvinceCodeState(cityCode);
+    setDistrictCodeState(districtCode && isDistrict ? districtCode : 0);
+    showError("provinceCodeError", "");
+    showError("districtCodeError", "");
+  }
 
   function showIcon(fieldName: string, value: boolean) {
     setIconState((prev) => ({
@@ -89,7 +115,7 @@ function SignUpInformation() {
   }
 
   let inputStyle: CSS.Properties = {
-    color: "grey",
+    color: "black",
     width: "65%",
     maxWidth: "450px",
   };
@@ -100,6 +126,11 @@ function SignUpInformation() {
     maxWidth: "450px",
     width: "65%",
   };
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter") {
+      signUp();
+    }
+  };
 
   async function signUp() {
     createRegistrationCenter(signUpData, repassword, showError, showIcon);
@@ -107,7 +138,6 @@ function SignUpInformation() {
 
   async function getAllDeps() {
     const res = await axiosInstance.get(getAPI().getAllDeps);
-    console.log(res);
   }
 
   return (
@@ -118,10 +148,18 @@ function SignUpInformation() {
           alt="create account image"
         />
       </div>
-      <div className="signUp-section">
+      <div className="signUp-section" onKeyDown={handleKeyDown}>
         <div className="signUp-input">
           <div className="signUp-header">
-            <h3 style={{ marginBottom: "0px" }} className="secondary-font">
+            <h3
+              style={{
+                marginBottom: "0px",
+                marginTop: "10px",
+                fontSize: "25px",
+                fontWeight: "700",
+              }}
+              className="secondary-font "
+            >
               Create account
             </h3>
             <span
@@ -183,9 +221,36 @@ function SignUpInformation() {
               error={errorData.centerNameError}
               showIcon={correctIcon.centerNameState}
             />
+            <div style={inputStyle} className="input-container">
+              <div className="field-name-container">
+                <span className="fieldName">Location</span>
+                {correctIcon.districtCodeState &&
+                correctIcon.provinceCodeState ? (
+                  <span>
+                    <CheckIcon sx={{ color: "green" }} />
+                  </span>
+                ) : null}
+                {errorData.provinceCodeError?.length ? (
+                  <span className="error-name primary-font">
+                    {errorData.provinceCodeError}
+                  </span>
+                ) : errorData.districtCodeError?.length ? (
+                  <span className="error-name primary-font">
+                    {errorData.districtCodeError}
+                  </span>
+                ) : null}
+              </div>
+              <DropDownLocation
+                buttonId="province-district-selector"
+                setState={setProvinceAndDistrict}
+                placeholder="Select province and district"
+                containerStyle={{ width: "100%", marginBottom: "10px" }}
+                // containerClassName="input-container"
+              />
+            </div>
             <TextInput
               value={signUpData.location}
-              fieldName="Location"
+              fieldName="Location details"
               style={inputStyle}
               type="text"
               onChange={(event) => {

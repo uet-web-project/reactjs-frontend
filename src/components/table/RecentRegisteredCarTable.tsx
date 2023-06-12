@@ -6,6 +6,7 @@ import { getAPI } from "../../api/getAPI";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import moment from "moment";
 import "./styles.css";
+import { accountHook } from "../../redux/hooks/accountHooks";
 
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -21,9 +22,16 @@ function useWindowSize() {
 }
 
 export default function RecentRegisteredCarTable() {
+  const { isDepLogin } = accountHook();
   const { carInfoOverviewTable, getVehicleTableData } = chartStatisticHook();
   const [screenWidth, screenHeight] = useWindowSize();
-  const rowWidth = (screenWidth * 17) / 100;
+  let rowWidth = !isDepLogin
+    ? (screenWidth * 18) / 100
+    : (screenWidth * 14) / 100;
+
+  if (isDepLogin && screenWidth < 1200) {
+    rowWidth = (screenWidth * 18) / 100;
+  }
   const columns: GridColDef[] = [
     {
       field: "licensePlate",
@@ -32,6 +40,8 @@ export default function RecentRegisteredCarTable() {
       width: rowWidth,
       editable: false,
       align: "center",
+      flex: 1,
+      minWidth: 100,
     },
     {
       field: "vehicleType",
@@ -40,6 +50,8 @@ export default function RecentRegisteredCarTable() {
       width: rowWidth,
       editable: false,
       align: "center",
+      flex: 1,
+      minWidth: 100,
     },
     {
       field: "manufacturer",
@@ -48,6 +60,8 @@ export default function RecentRegisteredCarTable() {
       width: rowWidth,
       editable: false,
       align: "center",
+      flex: 1,
+      minWidth: 100,
     },
     {
       field: "registrationDate",
@@ -57,6 +71,21 @@ export default function RecentRegisteredCarTable() {
       headerAlign: "center",
       width: rowWidth,
       align: "center",
+      flex: 1,
+      minWidth: 100,
+      valueGetter: (params: GridValueGetterParams) =>
+        `${moment(params.value).format("DD/MM/YYYY")}`,
+    },
+    {
+      field: "registrationExpirationDate",
+      headerName: "Registration Expiration Date",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      headerAlign: "center",
+      width: rowWidth,
+      align: "center",
+      flex: 1,
+      minWidth: 100,
       valueGetter: (params: GridValueGetterParams) =>
         `${moment(params.value).format("DD/MM/YYYY")}`,
     },
@@ -67,7 +96,12 @@ export default function RecentRegisteredCarTable() {
   }, []);
 
   return (
-    <Box className="recent-registered-table-container">
+    <Box
+      className={`recent-registered-table-container ${
+        isDepLogin ? "width-responsive" : null
+      }`}
+      sx={isDepLogin ? { width: "75%" } : { width: "100%" }}
+    >
       <DataGrid
         className="recent-registered-table"
         rows={carInfoOverviewTable}
@@ -80,15 +114,8 @@ export default function RecentRegisteredCarTable() {
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
+        disableColumnSelector
       />
     </Box>
   );
-}
-function getCenterListData() {
-  throw new Error("Function not implemented.");
-}
-function getMonthDataForCarTypeOverview() {
-  throw new Error("Function not implemented.");
 }

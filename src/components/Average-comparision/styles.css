@@ -3,7 +3,7 @@
   display: inline-block;
   border-radius: 20px;
   background-color: white !important;
-  padding: 20px 20px 0px 20px;
+  padding: 20px 20px 20px 20px;
   margin-left: 20px;
   vertical-align: top;
 }
@@ -12,6 +12,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .monthly-date {
@@ -30,4 +32,63 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.monthly-average-text {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+@media (max-width: 1200px) {
+  .center-login-responsive {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .center-login-responsive {
+    display: none !important;
+  }
+  .dep-login-responsive {
+    display: flex !important;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 700px) {
+  .monthly-descripsion {
+    display: block !important;
+  }
+  .monthly-average-text {
+    text-align: center;
+  }
+  .monthly-date {
+    margin: 0 auto 0 auto;
+    width: 80%;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 530px) {
+  .date-range {
+    flex-direction: column !important;
+  }
+  .monthly-date {
+    width: 60%;
+  }
+}
+
+@media (max-width: 500px) {
+  .average-comparision {
+    display: none !important;
+  }
+  .center-list-container {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
 }

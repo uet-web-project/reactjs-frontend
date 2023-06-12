@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
 }
@@ -8,10 +12,6 @@
 .secondary-font {
   font-family: sans-serif;
 }
-.secondary-color {
-}
-.primary-color {
-}
 
 .secondary-color {
   background-color: #62b7d3;
@@ -20,7 +20,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #edf2ff;
+  background-color: #edf2ff !important;
 }
 
 #root {
@@ -30,6 +30,7 @@ body {
   font-family: "Roboto Mono", monospace;
   box-sizing: border-box;
   display: flex;
+  overflow-x: hidden;
 }
 .css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {
   background-color: #62b7d3 !important;
