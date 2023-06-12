@@ -55,8 +55,15 @@ function InfoPages() {
   };
 
   useEffect(() => {
-    infoChartController();
-  }, [timeOutIndex, isGetData]);
+    if (
+      location === "center" ||
+      location === "car" ||
+      location === "nearExpired"
+    ) {
+      infoChartController();
+      console.log("called when get data");
+    }
+  }, [timeOutIndex, isGetData, location]);
 
   useEffect(() => {
     if (!loading) {
