@@ -14,6 +14,7 @@ import DropDownLocation from "../../components/dropDown-location/DropDownLocatio
 import { Button } from "@mui/material";
 import { setLocation } from "../../redux/slices/loadingSlice";
 import { locationHook } from "../../redux/hooks/locationCode";
+import { tableStatisticHook } from "../../redux/hooks/tableStatisticHook";
 
 function CarRegistry() {
   const pathLocation = useLocation();
