@@ -10,7 +10,6 @@ import {
   GridValueGetterParams,
 } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-import { tableStatisticHook } from "../../redux/hooks/tableStatisticHook";
 import moment from "moment";
 import { Typography } from "@mui/material";
 import CarDialog from "../profile-dialog/CarDialog";
@@ -32,12 +31,7 @@ import Button from "../button/Button";
 
 export default function InfoTable(prop: any) {
   const { location } = loadingHook();
-  const {
-    getCarTableData,
-    getCenterTableData,
-    getNearExpiredCarTableData,
-    tableInfo,
-  } = tableStatisticHook();
+  const { tableInfo } = chartStatisticHook();
   const { getDataForDetailedTable } = chartStatisticHook();
   const [search, setSearch] = React.useState<Record<string, string[]>>({});
   const [searchAll, setSearchAll] = React.useState("");

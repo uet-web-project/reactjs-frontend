@@ -1,4 +1,4 @@
-import { ICarTypeOverviewChart } from "./../slices/chartsSlice";
+import { ICarTypeOverviewChart, infoChart } from "./../slices/chartsSlice";
 import {
   setDataForCarInfoOverviewTable,
   setDataForCarTypeOverview,
@@ -20,7 +20,11 @@ import { setLoading } from "../slices/loadingSlice";
 import { postAPI } from "../../api/postAPI";
 import { accountHook } from "./accountHooks";
 import { loadingHook } from "./loadingHooks";
-import { ICarInfoTable, setDataForTableInfo } from "../slices/tablesSlice";
+import {
+  ICarInfoTable,
+  setDataForTableInfo,
+  tableState,
+} from "../slices/tablesSlice";
 
 export const chartStatisticHook = () => {
   const dispatch = useDispatch();
@@ -36,6 +40,9 @@ export const chartStatisticHook = () => {
     carStatsForChart,
     carPieChart,
   } = useAppSelector((state: RootState) => state.chartStatistic);
+  const { tableInfo } = useAppSelector(
+    (state: RootState) => state.tableStatistic
+  );
 
   function callClearAllData() {
     dispatch(clearAllData());
@@ -206,8 +213,30 @@ export const chartStatisticHook = () => {
         postAPI().registeredCarData,
         requestedData
       );
+
       if (chartData.status === 200) {
-        dispatch(setDataForCarChart(chartData.data));
+        const newStartDateNumber = new Date(startDate).getTime();
+        const newEndDateNumber = new Date(endDate).getTime();
+        // get number of days between 2 variables
+        const timeDifference =
+          (newEndDateNumber - newStartDateNumber) / (1000 * 60 * 60 * 24);
+
+        if (timeDifference < 90) {
+          const tempData: infoChart[] = [];
+          let prevDate = null;
+          let prevIndex = -1;
+          for (let i = 0; i < chartData.data.length; i++) {
+            const currentDate = chartData.data[i].date;
+            if (currentDate === prevDate) {
+              tempData[prevIndex].vehicles++;
+            } else {
+              tempData.push({ ...chartData.data[i] });
+              prevIndex++;
+            }
+            prevDate = currentDate;
+          }
+          dispatch(setDataForCarChart(tempData));
+        } else dispatch(setDataForCarChart(chartData.data));
       }
     } catch (err) {
       console.log(err);
@@ -272,7 +301,6 @@ export const chartStatisticHook = () => {
     }
     try {
       const res = await axiosInstance.get(reqUrl);
-
       if (res.status === 200) {
         const moddedData: ICarInfoTable[] = res.data.map(
           (item: IVehicle, index: number) => ({
@@ -302,6 +330,7 @@ export const chartStatisticHook = () => {
     totalOverviewChartData,
     carStatsForChart,
     carPieChart,
+    tableInfo,
     getDataForTotalOverviewChart,
     getVehicleTableData,
     getDataForMonthlyComparison,

@@ -7,11 +7,8 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
-import { format, parseISO, subDays } from "date-fns";
 import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import "./styles.css";
-import { curveCardinal } from "d3-shape";
-import { useEffect } from "react";
 import { AxisInterval } from "recharts/types/util/types";
 
 export default function InfoAreaChart() {

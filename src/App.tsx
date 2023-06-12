@@ -14,9 +14,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/store";
 import RegistrationCertificate from "../src/screens/registration-certificate";
 import ProfileScreen from "./screens/profile-screen";
-import CarRegistry from "./screens/car-registry";
-import RegistryCenter from "./screens/registry-center/RegistryCenter";
-import ExpiredCar from "./screens/expired-car/ExpiredCar";
+import InfoPages from "./screens/info-pages";
 import axios from "axios";
 
 const router = createBrowserRouter([
@@ -62,15 +60,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "cars",
-        element: <CarRegistry />,
+        element: <InfoPages />,
       },
       {
         path: "centers",
-        element: <CarRegistry />,
+        element: <InfoPages />,
       },
       {
         path: "expired",
-        element: <CarRegistry />,
+        element: <InfoPages />,
       },
     ],
   },
