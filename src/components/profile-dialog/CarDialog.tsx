@@ -193,19 +193,19 @@ export default function CarDialog(props: any) {
                     {location !== "center" &&
                       (data.vehicleType === "car" ? (
                         <img
-                          src="/src/assets/images/CarDialog/carImage.jpg"
+                          src="../../assets/images/CarDialog/carImage.jpg"
                           alt=""
                           className="info-image"
                         />
                       ) : data.vehicleType === "truck" ? (
                         <img
-                          src="/src/assets/images/CarDialog/truckImage.jpg"
+                          src="../../assets/images/CarDialog/truckImage.jpg"
                           alt=""
                           className="info-image"
                         />
                       ) : (
                         <img
-                          src="/src/assets/images/CarDialog/busImage.jpg"
+                          src="../../assets/images/CarDialog/busImage.jpg"
                           alt=""
                           className="info-image"
                         />

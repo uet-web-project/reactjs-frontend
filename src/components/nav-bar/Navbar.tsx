@@ -24,11 +24,10 @@ import { chartStatisticHook } from "../../redux/hooks/chartStatisticHook";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ProfileScreen from "../../screens/profile-screen";
 import { loadingHook } from "../../redux/hooks/loadingHooks";
+import logoImg from "../../assets/icons/MyProject1.png";
 
 function Navbar() {
-  const {
-    setLocationState,
-  } = loadingHook();
+  const { setLocationState } = loadingHook();
   const { callClearAllData } = chartStatisticHook();
   const { isDepLogin, setDepLogin, clearAllData } = accountHook();
   const navigagte = useNavigate();
@@ -83,14 +82,14 @@ function Navbar() {
   const openExpand = Boolean(anchorElExpand);
 
   const handleClose = () => {
-    setAnchorElExpand(null)
+    setAnchorElExpand(null);
     setAnchorElStatistic(null);
   };
   //navigate function to 3 info stage
   function navigateToCarPage() {
     navigagte("/stats/cars");
     setLocationState("car");
-    handleClose()
+    handleClose();
     handleCloseNavMenu();
   }
   function navigateToCenterPage() {
@@ -125,11 +124,16 @@ function Navbar() {
   };
   return (
     <AppBar position="static">
-      <Container className="secondary-color nav-container">
+      <Container
+        sx={{
+          maxWidth: "none !important",
+        }}
+        className="secondary-color nav-container"
+      >
         <ProfileScreen open={openProfile} onClose={handleClickProfile} />
         <Toolbar disableGutters>
           <img
-            src="/src/assets/icons/Myproject1.png"
+            src={logoImg}
             alt="logo-image"
             style={{ width: "100px", marginLeft: "0px" }}
           />
@@ -152,6 +156,12 @@ function Navbar() {
               <MenuIcon />
             </IconButton>
             <Menu
+              sx={{
+                "& .MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper":
+                  {
+                    backgroundColor: "#62b7d3 !important",
+                  },
+              }}
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -166,10 +176,7 @@ function Navbar() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
             >
-              <MenuItem
-                onClick={homeBtnAction}
-                sx={{ marginBottom: "20px" }}
-              >
+              <MenuItem onClick={homeBtnAction} sx={{ marginBottom: "20px" }}>
                 <HomeIcon sx={{ color: "white" }} />
                 <Typography
                   sx={{
@@ -249,7 +256,15 @@ function Navbar() {
               </MenuItem>
             </Menu>
             <Menu
-              sx={{ marginTop: "8px", marginLeft: "0px", borderRadius: "0px"! }}
+              sx={{
+                marginTop: "8px",
+                marginLeft: "0px",
+                borderRadius: "0px",
+                "& .MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper":
+                  {
+                    backgroundColor: "#62b7d3 !important",
+                  },
+              }}
               open={openExpand}
               id="Expand-Menu"
               anchorEl={anchorElExpand}
@@ -297,6 +312,11 @@ function Navbar() {
               flexGrow: 1,
               display: { xs: "none", sm: "flex" },
               justifyContent: "center",
+
+              "& .MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper":
+                {
+                  backgroundColor: "#62b7d3 !important",
+                },
             }}
           >
             <MenuItem
@@ -358,6 +378,12 @@ function Navbar() {
             </MenuItem>
 
             <Menu
+              sx={{
+                "& .MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper":
+                  {
+                    backgroundColor: "#62b7d3 !important",
+                  },
+              }}
               className="no-shadow"
               open={open}
               id="Statistics-Menu"
@@ -407,6 +433,10 @@ function Navbar() {
             <Menu
               sx={{
                 mt: "45px",
+                "& .MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper":
+                  {
+                    backgroundColor: "#62b7d3 !important",
+                  },
               }}
               id="menu-appbar"
               anchorEl={anchorElUser}

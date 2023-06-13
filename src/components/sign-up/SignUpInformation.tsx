@@ -10,6 +10,7 @@ import { loadingHook } from "../../redux/hooks/loadingHooks";
 import { accountHook } from "../../redux/hooks/accountHooks";
 import DropDownLocation from "../dropDown-location/DropDownLocation";
 import CheckIcon from "@mui/icons-material/Check";
+import signupImage from "../../assets/images/create-accountImg.png";
 
 function SignUpInformation() {
   const { setProvinceCodeState, setDistrictCodeState } = loadingHook();
@@ -143,10 +144,7 @@ function SignUpInformation() {
   return (
     <div className="signUp-container">
       <div className="side-image">
-        <img
-          src="src\assets\images\create-accountImg.png"
-          alt="create account image"
-        />
+        <img src={signupImage} alt="create account image" />
       </div>
       <div className="signUp-section" onKeyDown={handleKeyDown}>
         <div className="signUp-input">

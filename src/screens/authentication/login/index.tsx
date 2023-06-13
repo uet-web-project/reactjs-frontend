@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles.css";
 import SignUpInformation from "../../../components/sign-up/SignUpInformation";
 import { Outlet } from "react-router-dom";
-import LoginInformation from "../../../components/login/LoginInformation";
+import logoImage from "../../../assets/icons/MyProject1.png";
 function Login() {
   return (
     <div className="login-container">
@@ -14,13 +14,9 @@ function Login() {
             work and learning from failure
           </blockquote>
         </div>
-        <img
-          className="logo"
-          src={"/src/assets/icons/Myproject1.png"}
-          alt="logo"
-        />
+        <img className="logo" src={logoImage} alt="logo" />
       </div>
-      <Outlet/>
+      <Outlet />
     </div>
   );
 }
