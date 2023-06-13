@@ -427,14 +427,6 @@ const centerColumns: GridColDef[] = [
     align: "left",
   },
   {
-    field: "password",
-    headerName: "Password",
-    headerAlign: "left",
-    minWidth: 200,
-    flex: 2,
-    align: "left",
-  },
-  {
     field: "name",
     headerName: "Name",
     headerAlign: "left",

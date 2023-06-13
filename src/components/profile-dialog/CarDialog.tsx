@@ -238,6 +238,7 @@ export default function CarDialog(props: any) {
                       "__v",
                       "vehicleType",
                       "manufacturer",
+                      "password",
                     ].includes(key)
                   ) {
                     return null;
